@@ -3,7 +3,6 @@
 #include <memory>
 #include <source_location>
 #include <string>
-#include <vector>
 
 #include "shift/logger/Log.hpp"
 #include "shift/utilities/Pimpl.hpp"
@@ -21,7 +20,12 @@ struct Record
 class Sink
 {
 public:
+    Sink() = default;
+    Sink(const Sink&) = default;
+    Sink(Sink&&) noexcept = default;
     virtual ~Sink() = default;
+    auto operator=(const Sink&) -> Sink& = default;
+    auto operator=(Sink&&) noexcept -> Sink& = default;
 
     virtual auto write(const Record& record) -> void = 0;
 };
