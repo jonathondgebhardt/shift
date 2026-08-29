@@ -1,37 +1,95 @@
+#include <memory>
+#include <vector>
+
 #include "shift/logger/Log.hpp"
 
 #include <catch2/catch_test_macros.hpp>
 
-TEST_CASE("Log does the logging", "[core][Log]")
+#include "LogTesting.hpp"
+
+namespace
 {
-    SECTION("trace")
+
+struct TestSink final : public shift::log::testing::Sink
+{
+    auto write(const shift::log::testing::Record& record) -> void override
     {
-        auto msg = shift::log::trace();
-        msg.append("hello {}", "trace");
+        records.push_back(record);
     }
-    SECTION("debug")
-    {
-        auto msg = shift::log::debug();
-        msg.append("hello {}", "debug");
-    }
-    SECTION("info")
-    {
-        auto msg = shift::log::info();
-        msg.append("hello {}", "info");
-    }
-    SECTION("warning")
-    {
-        auto msg = shift::log::warning();
-        msg.append("hello {}", "warning");
-    }
-    SECTION("error")
-    {
-        auto msg = shift::log::error();
-        msg.append("hello {}", "error");
-    }
-    SECTION("critical")
-    {
-        auto msg = shift::log::critical();
-        msg.append("hello {}", "critical");
-    }
+
+    std::vector<shift::log::testing::Record> records;
+};
+
+}  // namespace
+
+TEST_CASE("Log trace", "[logger]")
+{
+    auto sink = std::make_shared<TestSink>();
+    const auto scoped_sink = shift::log::testing::ScopedSink{sink};
+
+    shift::log::trace().append("Something went wrong");
+
+    REQUIRE(sink->records.size() == 1);
+    CHECK(sink->records[0].level == shift::log::Level::trace);
+    CHECK(sink->records[0].message == "Something went wrong");
+}
+
+TEST_CASE("Log debug", "[logger]")
+{
+    auto sink = std::make_shared<TestSink>();
+    const auto scoped_sink = shift::log::testing::ScopedSink{sink};
+
+    shift::log::debug().append("Something went wrong");
+
+    REQUIRE(sink->records.size() == 1);
+    CHECK(sink->records[0].level == shift::log::Level::debug);
+    CHECK(sink->records[0].message == "Something went wrong");
+}
+
+TEST_CASE("Log info", "[logger]")
+{
+    auto sink = std::make_shared<TestSink>();
+    const auto scoped_sink = shift::log::testing::ScopedSink{sink};
+
+    shift::log::info().append("Something went wrong");
+
+    REQUIRE(sink->records.size() == 1);
+    CHECK(sink->records[0].level == shift::log::Level::info);
+    CHECK(sink->records[0].message == "Something went wrong");
+}
+
+TEST_CASE("Log warning", "[logger]")
+{
+    auto sink = std::make_shared<TestSink>();
+    const auto scoped_sink = shift::log::testing::ScopedSink{sink};
+
+    shift::log::warning().append("Something went wrong");
+
+    REQUIRE(sink->records.size() == 1);
+    CHECK(sink->records[0].level == shift::log::Level::warning);
+    CHECK(sink->records[0].message == "Something went wrong");
+}
+
+TEST_CASE("Log error", "[logger]")
+{
+    auto sink = std::make_shared<TestSink>();
+    const auto scoped_sink = shift::log::testing::ScopedSink{sink};
+
+    shift::log::error().append("Something went wrong");
+
+    REQUIRE(sink->records.size() == 1);
+    CHECK(sink->records[0].level == shift::log::Level::error);
+    CHECK(sink->records[0].message == "Something went wrong");
+}
+
+TEST_CASE("Log critical", "[logger]")
+{
+    auto sink = std::make_shared<TestSink>();
+    const auto scoped_sink = shift::log::testing::ScopedSink{sink};
+
+    shift::log::critical().append("Something went wrong");
+
+    REQUIRE(sink->records.size() == 1);
+    CHECK(sink->records[0].level == shift::log::Level::critical);
+    CHECK(sink->records[0].message == "Something went wrong");
 }

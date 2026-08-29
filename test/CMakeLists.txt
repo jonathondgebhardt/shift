@@ -25,6 +25,7 @@ shift_add_test(core
 shift_add_test(logger
   SOURCES
   source/logger/Log_test.cpp
+  source/logger/LogTesting.cpp
   LINKS
   logger
 )
