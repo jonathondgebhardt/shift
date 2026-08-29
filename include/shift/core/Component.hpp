@@ -25,7 +25,7 @@ public:
 
     auto set_name(std::string name) -> void;
 
-    auto name() -> std::string_view { return m_name; }
+    auto name() const -> std::string_view { return m_name; }
 
 private:
     SHIFT_SUPPRESS_C4251
