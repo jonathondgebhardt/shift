@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "shift/logger/Log.hpp"
+#include "shift/utilities/Pimpl.hpp"
 
 namespace shift::log::testing
 {
@@ -40,8 +41,7 @@ public:
 
 private:
     struct Impl;
-
-    std::unique_ptr<Impl> m_impl;
+    Pimpl<Impl> m_impl;
 };
 
 }  // namespace shift::log::testing

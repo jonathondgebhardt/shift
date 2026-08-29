@@ -49,10 +49,8 @@ struct ScopedSink::Impl
 };
 
 ScopedSink::ScopedSink(std::shared_ptr<Sink> sink)
-    : m_impl(std::make_unique<Impl>())
 {
     auto output = std::make_shared<TestOutput>(std::move(sink));
-
     m_impl->previous = detail::backend().set_output(std::move(output));
 }
 
