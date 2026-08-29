@@ -93,3 +93,17 @@ TEST_CASE("Log critical", "[logger]")
     CHECK(sink->records[0].level == shift::log::Level::CRITICAL);
     CHECK(sink->records[0].message == "Something went wrong");
 }
+
+TEST_CASE("Log multiple messages", "[logger]")
+{
+    auto sink = std::make_shared<TestSink>();
+    const auto scoped_sink = shift::log::testing::ScopedSink{sink};
+
+    {
+        auto critical = shift::log::critical();
+        critical.append("Something went wrong");
+        critical.append("Something else went wrong");
+    }
+
+    CHECK(sink->records.size() == 2);
+}
