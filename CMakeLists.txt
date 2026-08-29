@@ -18,6 +18,7 @@ find_package(fmt REQUIRED)
 include(cmake/shift-project.cmake)
 shift_add_library(core
   SOURCES
+  source/core/Object.cpp
   source/core/UUID.cpp
   LINKS
   fmt::fmt

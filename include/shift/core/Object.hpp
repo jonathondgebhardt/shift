@@ -12,7 +12,14 @@ namespace shift
 class SHIFT_CORE_EXPORT Object
 {
 public:
-    auto type() const -> const char* { return "Object"; }
+    Object() = default;
+    Object(const Object&) = default;
+    Object(Object&&) noexcept = default;
+    virtual ~Object() = default;
+    auto operator=(const Object&) -> Object& = default;
+    auto operator=(Object&&) noexcept -> Object& = default;
+
+    virtual auto type() const -> const char* { return "Object"; }
 
     auto uuid() const -> UUID;
 
