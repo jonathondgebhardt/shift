@@ -1,0 +1,19 @@
+{
+  "name": "yasf-ubuntu",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "remoteUser": "root",
+  "runArgs": ["--userns=keep-id"],
+  "customizations": {
+    "vscode": {
+      "extensions": ["llvm-vs-code-extensions.vscode-clangd"]
+    }
+  },
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspace/yasf,type=bind",
+    "source=${localEnv:VCPKG_ROOT},target=/opt/vcpkg,type=bind",
+  ],
+  "postCreateCommand": "cd /opt/vcpkg && ./bootstrap-vcpkg.sh",
+  "workspaceFolder": "/workspace/yasf"
+}
