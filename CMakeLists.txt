@@ -20,6 +20,7 @@ include(cmake/shift-project.cmake)
 shift_add_library(logger
   SOURCES
   source/logger/Log.cpp
+  source/logger/LogBackend.cpp
   LINKS
   spdlog::spdlog
 )

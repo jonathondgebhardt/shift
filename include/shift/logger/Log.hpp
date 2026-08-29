@@ -6,8 +6,6 @@
 #include <source_location>
 #include <string_view>
 
-#include "shift/log/shift_log_export.hpp"
-
 namespace shift::log
 {
 
@@ -37,7 +35,8 @@ public:
 
     auto submit() -> void;
 
-    [[nodiscard]] auto enabled() const noexcept -> bool;
+    [[nodiscard]]
+    auto enabled() const noexcept -> bool;
 
 private:
     struct Impl;
@@ -49,24 +48,13 @@ private:
 
     std::unique_ptr<Impl> m_impl;
 
-    friend auto trace(std::source_location location) -> Message;
-    friend auto debug(std::source_location location) -> Message;
-    friend auto info(std::source_location location) -> Message;
-    friend auto warning(std::source_location location) -> Message;
-    friend auto error(std::source_location location) -> Message;
-    friend auto critical(std::source_location location) -> Message;
+    friend auto trace(std::source_location) -> Message;
+    friend auto debug(std::source_location) -> Message;
+    friend auto info(std::source_location) -> Message;
+    friend auto warning(std::source_location) -> Message;
+    friend auto error(std::source_location) -> Message;
+    friend auto critical(std::source_location) -> Message;
 };
-
-template<typename... Args>
-inline auto Message::append(std::format_string<Args...> format, Args&&... args)
-    -> Message&
-{
-    if (m_impl && enabled()) {
-        append_formatted(format.get(), std::make_format_args(args...));
-    }
-
-    return *this;
-}
 
 auto trace(std::source_location location = std::source_location::current())
     -> Message;
@@ -85,5 +73,16 @@ auto error(std::source_location location = std::source_location::current())
 
 auto critical(std::source_location location = std::source_location::current())
     -> Message;
+
+template<typename... Args>
+auto Message::append(std::format_string<Args...> format, Args&&... args)
+    -> Message&
+{
+    if (m_impl && enabled()) {
+        append_formatted(format.get(), std::make_format_args(args...));
+    }
+
+    return *this;
+}
 
 }  // namespace shift::log
