@@ -14,6 +14,7 @@ include(Catch)
 
 shift_add_test(core
   SOURCES
+  source/core/Object_test.cpp
   source/core/UUID_test.cpp
   LINKS
   core
