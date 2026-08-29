@@ -4,12 +4,12 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-TEST_CASE("UUID is unique from build", "[core][uuid]")
+TEST_CASE("UUID is unique from build", "[core][UUID]")
 {
     REQUIRE(shift::UUID::build() != shift::UUID::build());
 }
 
-TEST_CASE("UUID to_string", "[core][uuid]")
+TEST_CASE("UUID to_string", "[core][UUID]")
 {
     const auto uuid_str = shift::UUID::build().to_string();
     REQUIRE(!uuid_str.empty());
