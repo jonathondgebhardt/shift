@@ -1,8 +1,7 @@
+#include <format>
 #include <random>
 
 #include "shift/core/UUID.hpp"
-
-#include <fmt/format.h>
 
 namespace shift
 {
@@ -32,7 +31,7 @@ auto UUID::build() -> UUID
 
 auto UUID::to_string() const -> std::string
 {
-    return fmt::format(
+    return std::format(
         "{:08x}-{:04x}-{:04x}-{:04x}-{:012x}",
         static_cast<std::uint32_t>(m_first >> 32),
         static_cast<std::uint16_t>((m_first >> 16) & 0xFFFF),
