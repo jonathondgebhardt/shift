@@ -6,6 +6,8 @@
 #include <source_location>
 #include <string_view>
 
+#include "shift/log/shift_log_export.hpp"
+
 namespace shift::log
 {
 
@@ -55,6 +57,17 @@ private:
     friend auto critical(std::source_location location) -> Message;
 };
 
+template<typename... Args>
+inline auto Message::append(std::format_string<Args...> format, Args&&... args)
+    -> Message&
+{
+    if (m_impl && enabled()) {
+        append_formatted(format.get(), std::make_format_args(args...));
+    }
+
+    return *this;
+}
+
 auto trace(std::source_location location = std::source_location::current())
     -> Message;
 
@@ -72,20 +85,5 @@ auto error(std::source_location location = std::source_location::current())
 
 auto critical(std::source_location location = std::source_location::current())
     -> Message;
-
-// ------------------------------------------------------------
-// Template implementation
-// ------------------------------------------------------------
-
-template<typename... Args>
-auto Message::append(std::format_string<Args...> format, Args&&... args)
-    -> Message&
-{
-    if (m_impl && enabled()) {
-        append_formatted(format.get(), std::make_format_args(args...));
-    }
-
-    return *this;
-}
 
 }  // namespace shift::log

@@ -22,5 +22,11 @@ shift_add_test(core
   LINKS
   core
 )
+shift_add_test(logger
+  SOURCES
+  source/logger/Log_test.cpp
+  LINKS
+  logger
+)
 
 add_folders(Test)

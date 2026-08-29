@@ -17,16 +17,20 @@ find_package(spdlog CONFIG REQUIRED)
 find_package(Boost REQUIRED CONFIG COMPONENTS uuid serialization)
 
 include(cmake/shift-project.cmake)
+shift_add_library(logger
+  SOURCES
+  source/logger/Log.cpp
+  LINKS
+  spdlog::spdlog
+)
 shift_add_library(core
   SOURCES
   source/core/Clock.cpp
   source/core/Component.cpp
-  source/core/Log.cpp
   source/core/Object.cpp
   source/core/UUID.cpp
   LINKS
   Boost::uuid
-  spdlog::spdlog
 )
 
 # ---- Install rules ----

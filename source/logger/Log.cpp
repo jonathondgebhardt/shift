@@ -5,7 +5,7 @@
 #include <string>
 #include <string_view>
 
-#include "shift/core/Log.hpp"
+#include "shift/logger/Log.hpp"
 
 #include <spdlog/common.h>
 #include <spdlog/logger.h>
