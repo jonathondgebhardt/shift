@@ -48,12 +48,12 @@ private:
 
     std::unique_ptr<Impl> m_impl;
 
-    friend auto trace(std::source_location) -> Message;
-    friend auto debug(std::source_location) -> Message;
-    friend auto info(std::source_location) -> Message;
-    friend auto warning(std::source_location) -> Message;
-    friend auto error(std::source_location) -> Message;
-    friend auto critical(std::source_location) -> Message;
+    friend auto trace(std::source_location location) -> Message;
+    friend auto debug(std::source_location location) -> Message;
+    friend auto info(std::source_location location) -> Message;
+    friend auto warning(std::source_location location) -> Message;
+    friend auto error(std::source_location location) -> Message;
+    friend auto critical(std::source_location location) -> Message;
 };
 
 auto trace(std::source_location location = std::source_location::current())

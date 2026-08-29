@@ -15,7 +15,12 @@ public:
     class Output
     {
     public:
+        Output() = default;
+        Output(const Output&) = default;
+        Output(Output&&) noexcept = default;
         virtual ~Output() = default;
+        auto operator=(const Output&) -> Output& = default;
+        auto operator=(Output&&) noexcept -> Output& = default;
 
         virtual auto enabled(Level level) const noexcept -> bool = 0;
 

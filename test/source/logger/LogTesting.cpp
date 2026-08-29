@@ -1,9 +1,12 @@
 #include <memory>
+#include <source_location>
 #include <string>
+#include <string_view>
 #include <utility>
 
 #include "LogTesting.hpp"
 
+#include "shift/logger/Log.hpp"
 #include "shift/logger/LogBackend.hpp"
 
 namespace shift::log::testing

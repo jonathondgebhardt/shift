@@ -1,6 +1,9 @@
 #include <format>
+#include <iterator>
 #include <memory>
+#include <source_location>
 #include <string>
+#include <string_view>
 
 #include "shift/logger/Log.hpp"
 
