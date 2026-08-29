@@ -14,9 +14,9 @@ namespace shift::log
 
 struct Message::Impl
 {
-    Impl(Level level, std::source_location location)
-        : level(level)
-        , location(location)
+    Impl(Level lev, std::source_location loc)
+        : level{lev}
+        , location{loc}
     {
     }
 
@@ -27,7 +27,7 @@ struct Message::Impl
 };
 
 Message::Message(Level level, std::source_location location)
-    : m_impl(std::make_unique<Impl>(level, location))
+    : m_impl{std::make_unique<Impl>(level, location)}
 {
 }
 
