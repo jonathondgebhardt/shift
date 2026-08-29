@@ -16,6 +16,7 @@ shift_add_test(core
   SOURCES
   source/core/Component_test.cpp
   source/core/Object_test.cpp
+  source/core/TimeConvert_test.cpp
   source/core/UUID_test.cpp
   LINKS
   core
