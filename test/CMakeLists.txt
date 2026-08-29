@@ -14,6 +14,7 @@ include(Catch)
 
 shift_add_test(core
   SOURCES
+  source/core/Clock_test.cpp
   source/core/Component_test.cpp
   source/core/Object_test.cpp
   source/core/TimeConvert_test.cpp
