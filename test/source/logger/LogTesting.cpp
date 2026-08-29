@@ -20,7 +20,10 @@ public:
     {
     }
 
-    auto enabled(Level) const noexcept -> bool override { return true; }
+    auto enabled([[maybe_unused]] Level level) const noexcept -> bool override
+    {
+        return true;
+    }
 
     auto write(Level level,
                std::string_view message,
