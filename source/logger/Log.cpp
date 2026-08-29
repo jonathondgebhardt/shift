@@ -69,32 +69,32 @@ auto Message::enabled() const noexcept -> bool
 
 auto trace(std::source_location location) -> Message
 {
-    return Message{Level::trace, location};
+    return Message{Level::TRACE, location};
 }
 
 auto debug(std::source_location location) -> Message
 {
-    return Message{Level::debug, location};
+    return Message{Level::DEBUG, location};
 }
 
 auto info(std::source_location location) -> Message
 {
-    return Message{Level::info, location};
+    return Message{Level::INFO, location};
 }
 
 auto warning(std::source_location location) -> Message
 {
-    return Message{Level::warning, location};
+    return Message{Level::WARNING, location};
 }
 
 auto error(std::source_location location) -> Message
 {
-    return Message{Level::error, location};
+    return Message{Level::ERROR, location};
 }
 
 auto critical(std::source_location location) -> Message
 {
-    return Message{Level::critical, location};
+    return Message{Level::CRITICAL, location};
 }
 
 }  // namespace shift::log

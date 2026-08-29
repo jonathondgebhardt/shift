@@ -11,12 +11,12 @@ namespace shift::log
 
 enum class Level : std::uint8_t
 {
-    trace,
-    debug,
-    info,
-    warning,
-    error,
-    critical
+    TRACE,
+    DEBUG,
+    INFO,
+    WARNING,
+    ERROR,
+    CRITICAL
 };
 
 class Message

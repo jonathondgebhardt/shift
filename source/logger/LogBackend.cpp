@@ -21,22 +21,22 @@ namespace
 auto to_spdlog_level(Level level) noexcept -> spdlog::level::level_enum
 {
     switch (level) {
-        case Level::trace:
+        case Level::TRACE:
             return spdlog::level::trace;
 
-        case Level::debug:
+        case Level::DEBUG:
             return spdlog::level::debug;
 
-        case Level::info:
+        case Level::INFO:
             return spdlog::level::info;
 
-        case Level::warning:
+        case Level::WARNING:
             return spdlog::level::warn;
 
-        case Level::error:
+        case Level::ERROR:
             return spdlog::level::err;
 
-        case Level::critical:
+        case Level::CRITICAL:
             return spdlog::level::critical;
     }
 
