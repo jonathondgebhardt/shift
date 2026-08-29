@@ -75,7 +75,9 @@ auto critical(std::source_location location = std::source_location::current())
     -> Message;
 
 template<typename... Args>
-auto Message::append(std::format_string<Args...> format, Args&&... args)
+auto Message::append(
+    std::format_string<Args...> format,
+    Args&&... args)  // NOLINT(cppcoreguidelines-missing-std-forward)
     -> Message&
 {
     if (m_impl && enabled()) {
