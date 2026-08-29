@@ -18,7 +18,8 @@ namespace shift::log::detail
 namespace
 {
 
-auto to_spdlog_level(Level level) noexcept -> spdlog::level::level_enum
+constexpr auto to_spdlog_level(Level level) noexcept
+    -> spdlog::level::level_enum
 {
     switch (level) {
         case Level::TRACE:
