@@ -14,7 +14,7 @@ include(cmake/project-is-top-level.cmake)
 include(cmake/variables.cmake)
 
 find_package(spdlog CONFIG REQUIRED)
-find_package(Boost REQUIRED CONFIG COMPONENTS uuid serialization)
+find_package(Boost REQUIRED CONFIG COMPONENTS serialization)
 
 include(cmake/shift-project.cmake)
 shift_add_library(logger
@@ -30,7 +30,6 @@ shift_add_library(core
   source/core/Object.cpp
   source/core/UUID.cpp
   LINKS
-  Boost::uuid
 )
 
 # ---- Install rules ----
