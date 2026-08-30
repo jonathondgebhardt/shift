@@ -53,9 +53,11 @@ class SpdlogOutput final : public Backend::Output
 public:
     SpdlogOutput()
     {
+        // todo: should be able to configure sink externally
         auto sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
 
         m_logger = std::make_shared<spdlog::logger>("shift", std::move(sink));
+        // todo: should be able to configure level externally
         m_logger->set_level(spdlog::level::trace);
         m_logger->set_pattern("[%Y-%m-%d %H:%M:%S.%e] [%^%l%$] %v");
     }
