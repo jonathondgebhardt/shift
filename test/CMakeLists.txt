@@ -19,6 +19,7 @@ shift_add_test(
   source/core/Entity_test.cpp
   source/core/FixedTimeUpdater_test.cpp
   source/core/RealTimeUpdater_test.cpp
+  source/core/SimulationRunner_test.cpp
   source/core/TimeConvert_test.cpp
   source/core/Timer_test.cpp
   source/core/UUID_test.cpp
