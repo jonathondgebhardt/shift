@@ -28,3 +28,8 @@ TEST_CASE("SimulationRunner run", "[core][SimulationRunner]")
     CHECK(clock.time() == delta);
     CHECK(clock.delta() == delta);
 }
+
+TEST_CASE("SimulationRunner no updater", "[core][SimulationRunner]")
+{
+    CHECK_THROWS(shift::SimulationRunner{nullptr});
+}
