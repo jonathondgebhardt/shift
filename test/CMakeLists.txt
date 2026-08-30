@@ -23,6 +23,7 @@ shift_add_test(
   source/core/TimeConvert_test.cpp
   source/core/Timer_test.cpp
   source/core/UUID_test.cpp
+  source/core/World_test.cpp
   LINKS
   shift::core
 )
