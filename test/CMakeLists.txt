@@ -22,7 +22,7 @@ shift_add_test(
   source/core/Timer_test.cpp
   source/core/UUID_test.cpp
   LINKS
-  core
+  shift::core
 )
 shift_add_test(
   logger
@@ -30,7 +30,7 @@ shift_add_test(
   source/logger/Log_test.cpp
   source/logger/LogTesting.cpp
   LINKS
-  logger
+  shift::logger
 )
 
 add_folders(Test)

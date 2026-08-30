@@ -56,7 +56,6 @@ function(shift_add_test TEST_NAME)
 
 	target_link_libraries(
 		shift_${TEST_NAME}_test PRIVATE
-		shift::${ARG_LINKS}
 		Catch2::Catch2WithMain
 	)
 
@@ -65,11 +64,12 @@ function(shift_add_test TEST_NAME)
 			find_package(${item} REQUIRED)
 		endforeach()
 
-		target_link_libraries(
-			shift_${TEST_NAME}_test PRIVATE
-			shift::${ARG_LINKS}
-		)
 	endif()
+
+	target_link_libraries(
+		shift_${TEST_NAME}_test PRIVATE
+		${ARG_LINKS}
+	)
 
 	catch_discover_tests(shift_${TEST_NAME}_test)
 endfunction()
