@@ -39,7 +39,7 @@ Message::~Message()
 auto Message::append_formatted(std::string_view format, std::format_args args)
     -> void
 {
-    if (!m_impl || m_impl->submitted) {
+    if (m_impl->submitted) {
         return;
     }
 
@@ -48,7 +48,7 @@ auto Message::append_formatted(std::string_view format, std::format_args args)
 
 auto Message::submit() -> void
 {
-    if (!m_impl || m_impl->submitted) {
+    if (m_impl->submitted) {
         return;
     }
 
@@ -59,7 +59,7 @@ auto Message::submit() -> void
 
 auto Message::enabled() const noexcept -> bool
 {
-    if (!m_impl || m_impl->submitted) {
+    if (m_impl->submitted) {
         return false;
     }
 

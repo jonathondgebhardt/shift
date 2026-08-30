@@ -40,13 +40,12 @@ public:
 
 private:
     struct Impl;
+    std::unique_ptr<Impl> m_impl;
 
     explicit Message(Level level, std::source_location location);
 
     auto append_formatted(std::string_view format, std::format_args args)
         -> void;
-
-    std::unique_ptr<Impl> m_impl;
 
     friend auto trace(std::source_location location) -> Message;
     friend auto debug(std::source_location location) -> Message;
@@ -80,7 +79,7 @@ auto Message::append(
     Args&&... args)  // NOLINT(cppcoreguidelines-missing-std-forward)
     -> Message&
 {
-    if (m_impl && enabled()) {
+    if (enabled()) {
         append_formatted(format.get(), std::make_format_args(args...));
     }
 
