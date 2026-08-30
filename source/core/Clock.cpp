@@ -42,6 +42,10 @@ auto Clock::tick() -> TickFrame
         throw std::runtime_error("cannot tick without updater");
     }
 
+    // todo: how would something like this work when the updater needs to
+    // determine the next time based on the simulations that are being run?
+    // the current interface assumes the time updater is completely
+    // self-contained.
     const auto next_time = updater->next_time();
     m_delta = next_time - m_time;
     m_time = next_time;

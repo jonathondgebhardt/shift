@@ -7,6 +7,7 @@ namespace shift
 
 RealTimeUpdater::RealTimeUpdater()
 {
+    // todo: delay until startup?
     m_timer.reset();
 }
 
