@@ -16,8 +16,6 @@ namespace shift
 class SHIFT_CORE_EXPORT Entity
 {
 public:
-    auto type() const -> const char* { return "Entity"; }
-
     auto uuid() const -> UUID;
 
     auto set_name(std::string name) -> void;

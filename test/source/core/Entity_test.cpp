@@ -7,11 +7,6 @@
 
 #include "shift/core/Component.hpp"
 
-TEST_CASE("Entity type", "[core][Entity]")
-{
-    REQUIRE(std::string{shift::Entity{}.type()} == "Entity");
-}
-
 TEST_CASE("Entity uuid", "[core][Entity]")
 {
     REQUIRE(!shift::Entity{}.uuid().empty());
