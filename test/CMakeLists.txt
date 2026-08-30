@@ -12,17 +12,20 @@ endif()
 find_package(Catch2 REQUIRED)
 include(Catch)
 
-shift_add_test(core
+shift_add_test(
+  core
   SOURCES
   source/core/Clock_test.cpp
   source/core/Component_test.cpp
   source/core/Object_test.cpp
   source/core/TimeConvert_test.cpp
+  source/core/Timer_test.cpp
   source/core/UUID_test.cpp
   LINKS
   core
 )
-shift_add_test(logger
+shift_add_test(
+  logger
   SOURCES
   source/logger/Log_test.cpp
   source/logger/LogTesting.cpp
