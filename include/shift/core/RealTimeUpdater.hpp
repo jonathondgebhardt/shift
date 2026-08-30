@@ -15,9 +15,7 @@ class SHIFT_CORE_EXPORT RealTimeUpdater : public TimeUpdater
 public:
     RealTimeUpdater();
 
-    auto type() const -> const char* override { return "RealTimeUpdater"; }
-
-    auto next_time() -> time::Microseconds override;
+    auto update_impl(Clock& clock) -> void override;
 
 private:
     Timer<time::Microseconds, std::chrono::high_resolution_clock> m_timer;

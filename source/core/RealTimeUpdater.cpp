@@ -1,19 +1,19 @@
 #include "shift/core/RealTimeUpdater.hpp"
 
-#include "shift/core/TimeTypes.hpp"
+#include "shift/core/Clock.hpp"
 
 namespace shift
 {
 
 RealTimeUpdater::RealTimeUpdater()
 {
-    // todo: delay until startup?
+    // todo: this is probably too early and should wait until startup
     m_timer.reset();
 }
 
-auto RealTimeUpdater::next_time() -> time::Microseconds
+auto RealTimeUpdater::update_impl(Clock& clock) -> void
 {
-    return m_timer.elapsed();
+    update_delta(clock, m_timer.tick());
 }
 
 }  // namespace shift
