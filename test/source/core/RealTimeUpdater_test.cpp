@@ -6,7 +6,7 @@
 
 #include "shift/core/TimeTypes.hpp"
 
-TEST_CASE("RealTimeUpdater next_time", "[core][RealTimeUpdater]")
+TEST_CASE("RealTimeUpdater update", "[core][RealTimeUpdater]")
 {
     auto clock = shift::Clock{};
     REQUIRE(clock.time() == shift::time::Microseconds{});
