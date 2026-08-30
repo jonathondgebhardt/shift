@@ -17,6 +17,7 @@ shift_add_test(
   SOURCES
   source/core/Component_test.cpp
   source/core/Entity_test.cpp
+  source/core/FixedTimeUpdater_test.cpp
   source/core/RealTimeUpdater_test.cpp
   source/core/TimeConvert_test.cpp
   source/core/Timer_test.cpp
