@@ -1,3 +1,6 @@
+#include <memory>
+#include <utility>
+
 #include "shift/core/Simulation.hpp"
 
 #include <catch2/catch_test_macros.hpp>
@@ -13,14 +16,14 @@ TEST_CASE("SimulationRunner run", "[core][SimulationRunner]")
     auto updater =
         std::make_unique<shift::FixedTimeUpdater<shift::time::Microseconds>>(
             delta);
-    auto runner =
-        shift::SimulationRunner{shift::Simulation{}, std::move(updater)};
+    auto runner = shift::SimulationRunner{std::move(updater)};
 
-    auto& clock = runner.simulation().clock();
+    auto simulation = shift::Simulation{};
+    auto& clock = simulation.clock();
     REQUIRE(clock.time() == shift::time::Microseconds{});
     REQUIRE(clock.delta() == shift::time::Microseconds{});
 
-    runner.run();
+    runner.run(simulation);
 
     CHECK(clock.time() == delta);
     CHECK(clock.delta() == delta);

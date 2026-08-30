@@ -10,15 +10,11 @@ namespace shift
 class SHIFT_CORE_EXPORT SimulationRunner
 {
 public:
-    SimulationRunner(Simulation simulation,
-                     std::unique_ptr<TimeUpdater> updater);
+    explicit SimulationRunner(std::unique_ptr<TimeUpdater> updater);
 
-    auto run() -> void;
-
-    auto simulation() -> Simulation& { return m_simulation; }
+    auto run(Simulation& simulation) -> void;
 
 private:
-    Simulation m_simulation;
     std::unique_ptr<TimeUpdater> m_updater;
 };
 

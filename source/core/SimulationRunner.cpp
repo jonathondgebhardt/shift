@@ -11,21 +11,20 @@
 namespace shift
 {
 
-SimulationRunner::SimulationRunner(Simulation simulation,
-                                   std::unique_ptr<TimeUpdater> updater)
-    : m_simulation{simulation}
-    , m_updater{std::move(updater)}
+SimulationRunner::SimulationRunner(std::unique_ptr<TimeUpdater> updater)
+    : m_updater{std::move(updater)}
 {
+    // todo: check for null updater?
 }
 
-auto SimulationRunner::run() -> void
+auto SimulationRunner::run(Simulation& simulation) -> void
 {
     if (m_updater == nullptr) {
         throw std::runtime_error("cannot run simulation without updater");
     }
 
     // todo: run until end condition is met
-    auto& clock = m_simulation.clock();
+    auto& clock = simulation.clock();
     m_updater->update(clock);
 }
 
