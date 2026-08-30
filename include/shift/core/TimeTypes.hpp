@@ -29,4 +29,10 @@ template<typename T>
 concept TimeType =
     is_any_of<T, Microseconds, Milliseconds, Seconds, Minutes, Hours, Days>;
 
+template<typename T>
+concept ClockType = is_any_of<T,
+                              std::chrono::high_resolution_clock,
+                              std::chrono::steady_clock,
+                              std::chrono::system_clock>;
+
 }  // namespace shift::time
