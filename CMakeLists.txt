@@ -17,14 +17,16 @@ find_package(spdlog CONFIG REQUIRED)
 find_package(Boost REQUIRED CONFIG COMPONENTS serialization)
 
 include(cmake/shift-project.cmake)
-shift_add_library(logger
+shift_add_library(
+  logger
   SOURCES
   source/logger/Log.cpp
   source/logger/LogBackend.cpp
   LINKS
   spdlog::spdlog
 )
-shift_add_library(core
+shift_add_library(
+  core
   SOURCES
   source/core/Clock.cpp
   source/core/Component.cpp
