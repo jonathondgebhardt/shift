@@ -1,7 +1,5 @@
 #pragma once
 
-#include <memory>
-
 #include "shift/core/TimeConvert.hpp"
 #include "shift/core/TimeTypes.hpp"
 #include "shift/core/TimeUpdater.hpp"
@@ -13,20 +11,16 @@ namespace shift
 class SHIFT_CORE_EXPORT Clock
 {
 public:
-    auto type() const -> const char* { return "Clock"; }
-
-    auto set_updater(std::unique_ptr<TimeUpdater> updater);
-
-    auto updater() const -> TimeUpdater* { return m_updater.get(); }
-
-    // todo: return m_time and m_delta?
-    struct TickFrame
+    struct TimeStep
     {
         time::Microseconds time;
         time::Microseconds delta;
     };
 
-    auto tick() -> TickFrame;
+    auto time_step() const -> TimeStep
+    {
+        return TimeStep{.time = time(), .delta = delta()};
+    }
 
     template<time::TimeType T = time::Microseconds>
     auto time() const -> T
@@ -41,7 +35,11 @@ public:
     }
 
 private:
-    std::unique_ptr<TimeUpdater> m_updater;
+    friend class TimeUpdater;
+
+    auto set_time(time::Microseconds time) -> void;
+    auto advance(time::Microseconds delta) -> void;
+
     time::Microseconds m_time{};
     time::Microseconds m_delta{};
 };

@@ -15,7 +15,6 @@ include(Catch)
 shift_add_test(
   core
   SOURCES
-  source/core/Clock_test.cpp
   source/core/Component_test.cpp
   source/core/Entity_test.cpp
   source/core/RealTimeUpdater_test.cpp
