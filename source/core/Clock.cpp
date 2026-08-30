@@ -11,7 +11,7 @@ auto Clock::set_time(time::Microseconds time) -> void
     m_time = time;
 }
 
-auto Clock::advance(time::Microseconds delta) -> void
+auto Clock::set_delta(time::Microseconds delta) -> void
 {
     m_delta = delta;
     m_time += delta;

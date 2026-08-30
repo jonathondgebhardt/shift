@@ -2,11 +2,12 @@
 
 #include "shift/core/TimeConvert.hpp"
 #include "shift/core/TimeTypes.hpp"
-#include "shift/core/TimeUpdater.hpp"
 #include "shift/core/shift_core_export.hpp"
 
 namespace shift
 {
+
+class TimeUpdater;
 
 class SHIFT_CORE_EXPORT Clock
 {
@@ -38,7 +39,7 @@ private:
     friend class TimeUpdater;
 
     auto set_time(time::Microseconds time) -> void;
-    auto advance(time::Microseconds delta) -> void;
+    auto set_delta(time::Microseconds delta) -> void;
 
     time::Microseconds m_time{};
     time::Microseconds m_delta{};
