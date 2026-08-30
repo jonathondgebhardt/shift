@@ -120,11 +120,6 @@ auto Backend::set_output(std::shared_ptr<Output> output)
     return previous;
 }
 
-// auto Backend::output() const -> std::shared_ptr<Output>
-// {
-//     return m_output;
-// }
-//
 auto backend() -> Backend&
 {
     static Backend instance;
