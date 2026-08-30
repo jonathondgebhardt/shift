@@ -30,7 +30,7 @@ shift_add_library(
   SOURCES
   source/core/Clock.cpp
   source/core/Component.cpp
-  source/core/Object.cpp
+  source/core/Entity.cpp
   source/core/RealTimeUpdater.cpp
   source/core/UUID.cpp
   LINKS

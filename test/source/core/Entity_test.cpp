@@ -1,26 +1,26 @@
 #include <memory>
 #include <utility>
 
-#include "shift/core/Object.hpp"
+#include "shift/core/Entity.hpp"
 
 #include <catch2/catch_test_macros.hpp>
 
 #include "shift/core/Component.hpp"
 
-TEST_CASE("Object type", "[core][Object]")
+TEST_CASE("Entity type", "[core][Entity]")
 {
-    REQUIRE(std::string{shift::Object{}.type()} == "Object");
+    REQUIRE(std::string{shift::Entity{}.type()} == "Entity");
 }
 
-TEST_CASE("Object uuid", "[core][Object]")
+TEST_CASE("Entity uuid", "[core][Entity]")
 {
-    REQUIRE(!shift::Object{}.uuid().empty());
-    REQUIRE(shift::Object{}.uuid() != shift::Object{}.uuid());
+    REQUIRE(!shift::Entity{}.uuid().empty());
+    REQUIRE(shift::Entity{}.uuid() != shift::Entity{}.uuid());
 }
 
-TEST_CASE("Object name", "[core][Object]")
+TEST_CASE("Entity name", "[core][Entity]")
 {
-    auto object = shift::Object{};
+    auto object = shift::Entity{};
 
     SECTION("empty on construction")
     {
@@ -35,9 +35,9 @@ TEST_CASE("Object name", "[core][Object]")
     }
 }
 
-TEST_CASE("Object add_component", "[core][Object]")
+TEST_CASE("Entity add_component", "[core][Entity]")
 {
-    auto object = shift::Object{};
+    auto object = shift::Entity{};
 
     SECTION("pass component")
     {
@@ -50,9 +50,9 @@ TEST_CASE("Object add_component", "[core][Object]")
     }
 }
 
-TEST_CASE("Object has_component", "[core][Object]")
+TEST_CASE("Entity has_component", "[core][Entity]")
 {
-    auto object = shift::Object{};
+    auto object = shift::Entity{};
     auto component = std::make_unique<shift::Component>();
     REQUIRE(component);
 
@@ -74,9 +74,9 @@ TEST_CASE("Object has_component", "[core][Object]")
     }
 }
 
-TEST_CASE("Object get_component", "[core][Object]")
+TEST_CASE("Entity get_component", "[core][Entity]")
 {
-    auto object = shift::Object{};
+    auto object = shift::Entity{};
     auto component = std::make_unique<shift::Component>();
     REQUIRE(component);
 
