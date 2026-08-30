@@ -31,6 +31,7 @@ shift_add_library(
   source/core/Clock.cpp
   source/core/Component.cpp
   source/core/Object.cpp
+  source/core/RealTimeUpdater.cpp
   source/core/UUID.cpp
   LINKS
 )
