@@ -12,7 +12,7 @@ RealTimeUpdater::RealTimeUpdater()
 
 auto RealTimeUpdater::next_time() -> time::Microseconds
 {
-    return m_timer.tick();
+    return m_timer.elapsed();
 }
 
 }  // namespace shift
