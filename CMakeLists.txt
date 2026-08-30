@@ -34,6 +34,7 @@ shift_add_library(
   source/core/RealTimeUpdater.cpp
   source/core/SimulationRunner.cpp
   source/core/UUID.cpp
+  source/core/World.cpp
   LINKS
 )
 
