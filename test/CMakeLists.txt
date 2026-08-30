@@ -18,6 +18,7 @@ shift_add_test(
   source/core/Clock_test.cpp
   source/core/Component_test.cpp
   source/core/Object_test.cpp
+  source/core/RealTimeUpdater_test.cpp
   source/core/TimeConvert_test.cpp
   source/core/Timer_test.cpp
   source/core/UUID_test.cpp
