@@ -114,7 +114,7 @@ private:
     }
 
     std::vector<std::unique_ptr<ObservationConcept>> m_observations;
-    TelemetryRecorder& m_recorder;
+    std::reference_wrapper<TelemetryRecorder> m_recorder;
 };
 
 }  // namespace shift::telemetry

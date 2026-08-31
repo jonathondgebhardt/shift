@@ -1,3 +1,6 @@
+#include <memory>
+#include <utility>
+
 #include "shift/telemetry/Telemetry.hpp"
 
 #include <catch2/catch_test_macros.hpp>
@@ -25,11 +28,11 @@ TEST_CASE("Telemetry record Entity position", "[telemetry][Telemetry]")
     auto telemetry = shift::telemetry::Telemetry{recorder};
 
     // todo: TelemetryRecord only contains double, so Vec3 is incompatible
-    // telemetry.observe(shift::telemetry::EntityPosition);
+    // telemetry.observe(shift::telemetry::entity_position);
 
-    telemetry.observe(shift::telemetry::EntityPositionX);
-    telemetry.observe(shift::telemetry::EntityPositionY);
-    telemetry.observe(shift::telemetry::EntityPositionZ);
+    telemetry.observe(shift::telemetry::entity_position_x);
+    telemetry.observe(shift::telemetry::entity_position_y);
+    telemetry.observe(shift::telemetry::entity_position_z);
 
     simulation.world().add_entity(shift::Entity{});
 
