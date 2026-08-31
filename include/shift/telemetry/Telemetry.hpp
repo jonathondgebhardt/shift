@@ -31,10 +31,16 @@ public:
     }
 
 private:
-    // todo: violates cppcoreguidlines naming rules
-    struct IObservation
+    struct ObservationConcept
     {
-        virtual ~IObservation() = default;
+        ObservationConcept() = default;
+        ObservationConcept(const ObservationConcept&) = default;
+        ObservationConcept(ObservationConcept&&) noexcept = default;
+        virtual ~ObservationConcept() = default;
+        auto operator=(const ObservationConcept&)
+            -> ObservationConcept& = default;
+        auto operator=(ObservationConcept&&) noexcept
+            -> ObservationConcept& = default;
 
         virtual auto sample(time::Microseconds,
                             const World&,
@@ -43,7 +49,7 @@ private:
 
     // todo: can template args be constrained?
     template<typename Owner, typename Value>
-    class Observation : public IObservation
+    class Observation : public ObservationConcept
     {
     public:
         explicit Observation(const DataDefinition<Owner, Value>& definition)
@@ -107,7 +113,7 @@ private:
                          .value = value.z});
     }
 
-    std::vector<std::unique_ptr<IObservation>> m_observations;
+    std::vector<std::unique_ptr<ObservationConcept>> m_observations;
     TelemetryRecorder& m_recorder;
 };
 
