@@ -26,6 +26,8 @@ auto SimulationRunner::run(Simulation& simulation) -> void
         throw std::runtime_error("cannot run Simulation without TimeUpdater");
     }
 
+    m_updater->startup();
+
     // todo: run until end condition is met
     auto& clock = simulation.clock();
     auto time_step = m_updater->update(clock);
