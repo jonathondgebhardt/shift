@@ -28,7 +28,11 @@ auto SimulationRunner::run(Simulation& simulation) -> void
 
     // todo: run until end condition is met
     auto& clock = simulation.clock();
-    m_updater->update(clock);
+    auto time_step = m_updater->update(clock);
+
+    if (m_telemetry != nullptr) {
+        m_telemetry->sample(time_step.time, simulation.world());
+    }
 }
 
 }  // namespace shift

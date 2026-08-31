@@ -10,6 +10,14 @@
 #include "shift/core/UUID.hpp"
 #include "shift/core/shift_core_export.hpp"
 
+// todo: move this somewhere better
+struct Vec3
+{
+    double x{};
+    double y{};
+    double z{};
+};
+
 namespace shift
 {
 
@@ -44,11 +52,14 @@ public:
 
     auto get_component(std::string_view name) const -> Component*;
 
+    auto position() const -> Vec3 { return m_position; }
+
 private:
     SHIFT_SUPPRESS_C4251
     std::string m_name;
     std::vector<std::unique_ptr<Component>> m_components;
     UUID m_uuid{UUID::build()};
+    Vec3 m_position;
 };
 
 }  // namespace shift

@@ -35,5 +35,12 @@ shift_add_test(
   LINKS
   shift::logger
 )
+shift_add_test(
+  telemetry
+  SOURCES
+  source/telemetry/Telemetry_test.cpp
+  LINKS
+  shift::core
+)
 
 add_folders(Test)
