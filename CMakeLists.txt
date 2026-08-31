@@ -35,6 +35,9 @@ shift_add_library(
   source/core/SimulationRunner.cpp
   source/core/UUID.cpp
   source/core/World.cpp
+  # todo: should these be in their own library?
+  source/telemetry/ConsoleTelemetryRecorder.cpp
+  source/telemetry/MemoryTelemetryRecorder.cpp
   LINKS
 )
 

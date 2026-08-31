@@ -8,8 +8,8 @@
 #include "shift/core/FixedTimeUpdater.hpp"
 #include "shift/core/Simulation.hpp"
 #include "shift/core/SimulationRunner.hpp"
+#include "shift/telemetry/ConsoleTelemetryRecorder.hpp"
 #include "shift/telemetry/EntityDataDefinitions.hpp"
-#include "shift/telemetry/TelemetryRecorder.hpp"
 
 TEST_CASE("Telemetry record Entity position", "[telemetry][Telemetry]")
 {
