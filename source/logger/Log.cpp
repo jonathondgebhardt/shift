@@ -36,8 +36,8 @@ Message::~Message()
     submit();
 }
 
-auto Message::append_formatted(std::string_view format, std::format_args args)
-    -> void
+auto Message::append_formatted(std::string_view format,
+                               std::format_args args) -> void
 {
     if (m_impl->submitted) {
         return;

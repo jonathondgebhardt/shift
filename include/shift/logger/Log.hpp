@@ -44,8 +44,8 @@ private:
 
     explicit Message(Level level, std::source_location location);
 
-    auto append_formatted(std::string_view format, std::format_args args)
-        -> void;
+    auto append_formatted(std::string_view format,
+                          std::format_args args) -> void;
 
     friend auto trace(std::source_location location) -> Message;
     friend auto debug(std::source_location location) -> Message;
