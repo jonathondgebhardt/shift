@@ -41,6 +41,15 @@ shift_add_library(
   LINKS
 )
 
+# ---- Examples ----
+
+if(PROJECT_IS_TOP_LEVEL)
+  option(BUILD_EXAMPLES "Build examples tree." "${shift_DEVELOPER_MODE}")
+  if(BUILD_EXAMPLES)
+    add_subdirectory(example)
+  endif()
+endif()
+
 # ---- Install rules ----
 
 if(NOT CMAKE_SKIP_INSTALL_RULES)
