@@ -16,6 +16,8 @@ public:
     auto operator=(const TimeUpdater&) -> TimeUpdater& = default;
     auto operator=(TimeUpdater&&) noexcept -> TimeUpdater& = default;
 
+    virtual auto startup() -> void {}
+
     virtual auto update(Clock& clock) -> Clock::TimeStep
     {
         update_impl(clock);

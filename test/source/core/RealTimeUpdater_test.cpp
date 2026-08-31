@@ -13,6 +13,7 @@ TEST_CASE("RealTimeUpdater update", "[core][RealTimeUpdater]")
     REQUIRE(clock.delta() == shift::time::Microseconds{});
 
     auto updater = shift::RealTimeUpdater{};
+    updater.startup();
 
     constexpr auto wait_time = shift::time::Milliseconds{10};
     std::this_thread::sleep_for(wait_time);

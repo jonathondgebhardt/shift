@@ -5,9 +5,8 @@
 namespace shift
 {
 
-RealTimeUpdater::RealTimeUpdater()
+auto RealTimeUpdater::startup() -> void
 {
-    // todo: this is probably too early and should wait until startup
     m_timer.reset();
 }
 

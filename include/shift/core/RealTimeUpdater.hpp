@@ -13,7 +13,7 @@ namespace shift
 class SHIFT_CORE_EXPORT RealTimeUpdater : public TimeUpdater
 {
 public:
-    RealTimeUpdater();
+    auto startup() -> void override;
 
     auto update_impl(Clock& clock) -> void override;
 
