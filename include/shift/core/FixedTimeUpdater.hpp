@@ -1,5 +1,6 @@
 #pragma once
 
+#include "shift/core/TimeConvert.hpp"
 #include "shift/core/TimeUpdater.hpp"
 #include "shift/core/shift_core_export.hpp"
 
@@ -18,7 +19,8 @@ public:
 
     auto update_impl(Clock& clock) -> void override
     {
-        update_delta(clock, m_delta);
+        update_delta(clock,
+                     time::convert::time_cast<time::Microseconds>(m_delta));
     }
 
 private:
