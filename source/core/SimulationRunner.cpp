@@ -28,6 +28,11 @@ auto SimulationRunner::run(Simulation& simulation) -> void
 
     m_updater->startup();
 
+    // record zero frame
+    if (m_telemetry != nullptr) {
+        m_telemetry->sample({}, simulation.world());
+    }
+
     // todo: run until end condition is met
     auto& clock = simulation.clock();
     auto time_step = m_updater->update(clock);
