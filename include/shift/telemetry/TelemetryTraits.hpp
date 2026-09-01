@@ -10,57 +10,10 @@
 namespace shift::telemetry
 {
 
-// template<typename T>
-//     requires std::is_convertible_v<T, std::string>
-// struct TelemetryTraits
-// {
-// };
-
 template<typename T>
-struct TelemetryTraits;
-
-// todo: can I do something like this?
-// template<typename T>
-//     requires std::is_convertible_v<T, std::string>
-// struct TelemetryTraits
-// {
-//     static auto to_string(double value) -> std::string
-//     {
-//         return std::to_string(value);
-//     }
-// };
-
-template<>
-struct TelemetryTraits<double>
+struct TelemetryTraits
 {
-    static auto to_string(double value) -> std::string
-    {
-        return std::to_string(value);
-    }
-};
-
-template<>
-struct TelemetryTraits<float>
-{
-    static auto to_string(float value) -> std::string
-    {
-        return std::to_string(value);
-    }
-};
-
-template<>
-struct TelemetryTraits<int>
-{
-    static auto to_string(int value) -> std::string
-    {
-        return std::to_string(value);
-    }
-};
-
-template<>
-struct TelemetryTraits<std::int64_t>
-{
-    static auto to_string(std::int64_t value) -> std::string
+    static auto to_string(const T& value) -> std::string
     {
         return std::to_string(value);
     }
