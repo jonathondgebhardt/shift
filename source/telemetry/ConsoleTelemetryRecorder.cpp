@@ -18,8 +18,8 @@ auto ConsoleTelemetryRecorder::record(const TelemetryRecord& record) -> void
 
     std::cout << "t=" << record.time.count()
               << " entity=" << record.uuid.to_string()
-              << " channel=" << record.channel << " value=" << record.value
-              << '\n';
+              << " channel=" << record.channel
+              << " value=" << record.value.to_string() << '\n';
 }
 
 }  // namespace shift::telemetry

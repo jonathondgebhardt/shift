@@ -4,16 +4,17 @@
 
 #include "shift/core/TimeTypes.hpp"
 #include "shift/core/UUID.hpp"
+#include "shift/telemetry/TelemetryValue.hpp"
 
 namespace shift::telemetry
 {
 
 struct TelemetryRecord
 {
-    time::Microseconds time;
+    time::Microseconds time{};
     UUID uuid;
     std::string_view channel;
-    double value;
+    TelemetryValue value;
 };
 
 }  // namespace shift::telemetry

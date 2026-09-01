@@ -88,7 +88,7 @@ private:
         recorder.record({.time = time,
                          .uuid = entity.uuid(),
                          .channel = channel,
-                         .value = value});
+                         .value = TelemetryValue{value}});
     }
 
     static void record_value(TelemetryRecorder& recorder,
@@ -100,17 +100,7 @@ private:
         recorder.record({.time = time,
                          .uuid = entity.uuid(),
                          .channel = channel,
-                         .value = value.x});
-
-        recorder.record({.time = time,
-                         .uuid = entity.uuid(),
-                         .channel = channel,
-                         .value = value.y});
-
-        recorder.record({.time = time,
-                         .uuid = entity.uuid(),
-                         .channel = channel,
-                         .value = value.z});
+                         .value = TelemetryValue{value}});
     }
 
     std::vector<std::unique_ptr<ObservationConcept>> m_observations;

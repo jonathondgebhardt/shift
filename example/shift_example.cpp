@@ -22,9 +22,10 @@ auto main() -> int
 
     auto recorder = shift::telemetry::ConsoleTelemetryRecorder{};
     auto telemetry = shift::telemetry::Telemetry{recorder};
-    telemetry.observe(shift::telemetry::entity_position_x);
-    telemetry.observe(shift::telemetry::entity_position_y);
-    telemetry.observe(shift::telemetry::entity_position_z);
+    telemetry.observe(shift::telemetry::entity_position);
+    // telemetry.observe(shift::telemetry::entity_position_x);
+    // telemetry.observe(shift::telemetry::entity_position_y);
+    // telemetry.observe(shift::telemetry::entity_position_z);
 
     runner.set_telemetry(&telemetry);
 
