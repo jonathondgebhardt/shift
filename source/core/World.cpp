@@ -1,6 +1,4 @@
 #include <algorithm>
-#include <functional>
-#include <optional>
 #include <string_view>
 #include <vector>
 
@@ -19,7 +17,7 @@ auto World::find_entity(UUID uuid) -> OptionalEntityReference
                                             [&](const Entity& entity)
                                             { return entity.uuid() == uuid; });
     if (found != m_entities.end()) {
-        return OptionalEntityReference{std::optional{std::ref(*found)}};
+        return OptionalEntityReference{*found};
     }
 
     return {};
@@ -31,7 +29,7 @@ auto World::find_entity(std::string_view name) -> OptionalEntityReference
                                             [&](const Entity& entity)
                                             { return entity.name() == name; });
     if (found != m_entities.end()) {
-        return OptionalEntityReference{std::optional{std::ref(*found)}};
+        return OptionalEntityReference{*found};
     }
 
     return {};

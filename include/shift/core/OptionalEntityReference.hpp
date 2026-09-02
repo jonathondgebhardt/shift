@@ -14,8 +14,8 @@ public:
     // c++26 adds std::optional<T&>
     using OER = std::optional<std::reference_wrapper<Entity>>;
 
-    explicit OptionalEntityReference(OER entity)
-        : m_entity{entity}
+    explicit OptionalEntityReference(shift::Entity& entity)
+        : m_entity{std::ref(entity)}
     {
     }
 
