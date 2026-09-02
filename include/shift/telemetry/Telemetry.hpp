@@ -1,5 +1,7 @@
 #pragma once
 
+#include <utility>
+
 #include "shift/core/TimeTypes.hpp"
 #include "shift/core/World.hpp"
 #include "shift/telemetry/DataDefinition.hpp"
@@ -8,11 +10,12 @@
 namespace shift::telemetry
 {
 
+// todo: this class can be defined in a cpp if Observer is external
 class Telemetry
 {
 public:
-    explicit Telemetry(TelemetryRecorder& recorder)
-        : m_recorder{recorder}
+    explicit Telemetry(std::unique_ptr<TelemetryRecorder> recorder)
+        : m_recorder{std::move(recorder)}
     {
     }
 
@@ -25,8 +28,12 @@ public:
 
     auto sample(time::Microseconds time, const World& world) -> void
     {
+        if (m_recorder == nullptr) {
+            throw std::runtime_error("recorder cannot be null");
+        }
+
         for (const auto& observation : m_observations) {
-            observation->sample(time, world, m_recorder);
+            observation->sample(time, world, *m_recorder);
         }
     }
 
@@ -37,10 +44,10 @@ private:
         ObservationConcept(const ObservationConcept&) = default;
         ObservationConcept(ObservationConcept&&) noexcept = default;
         virtual ~ObservationConcept() = default;
-        auto operator=(const ObservationConcept&) -> ObservationConcept& =
-                                                         default;
-        auto operator=(ObservationConcept&&) noexcept -> ObservationConcept& =
-                                                             default;
+        auto operator=(const ObservationConcept&)
+            -> ObservationConcept& = default;
+        auto operator=(ObservationConcept&&) noexcept
+            -> ObservationConcept& = default;
 
         virtual auto sample(time::Microseconds,
                             const World&,
@@ -104,7 +111,7 @@ private:
     }
 
     std::vector<std::unique_ptr<ObservationConcept>> m_observations;
-    std::reference_wrapper<TelemetryRecorder> m_recorder;
+    std::unique_ptr<TelemetryRecorder> m_recorder;
 };
 
 }  // namespace shift::telemetry
