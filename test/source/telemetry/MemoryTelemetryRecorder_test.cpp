@@ -29,7 +29,7 @@ TEST_CASE("MemoryTelemetryRecorder contains records",
     auto telemetry = shift::telemetry::Telemetry{recorder};
     telemetry.observe(shift::telemetry::entity_position);
 
-    simulation.world().add_entity(shift::Entity{});
+    simulation.world().add_entity();
 
     runner.set_telemetry(&telemetry);
     runner.run(simulation);

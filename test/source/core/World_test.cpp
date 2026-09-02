@@ -11,22 +11,21 @@ TEST_CASE("World add_entity", "[core][World]")
 {
     auto world = shift::World{};
     REQUIRE(world.entities().empty());
-    CHECK_NOTHROW(world.add_entity(shift::Entity{}));
+    CHECK_NOTHROW(world.add_entity());
     CHECK(world.entities().size() == 1u);
 }
 
 TEST_CASE("World find_entity", "[core][World]")
 {
-    auto entity = shift::Entity{};
+    auto world = shift::World{};
+    auto& entity = world.add_entity();
+
     const auto uuid = entity.uuid();
     constexpr auto name = "name";
     entity.set_name(name);
 
     REQUIRE(!uuid.empty());
     REQUIRE(!entity.name().empty());
-
-    auto world = shift::World{};
-    CHECK_NOTHROW(world.add_entity(std::move(entity)));
 
     SECTION("UUID")
     {
@@ -47,16 +46,15 @@ TEST_CASE("World find_entity", "[core][World]")
 
 TEST_CASE("World remove_entity", "[core][World]")
 {
-    auto entity = shift::Entity{};
+    auto world = shift::World{};
+    auto& entity = world.add_entity();
+
     const auto uuid = entity.uuid();
     constexpr auto name = "name";
     entity.set_name(name);
 
     REQUIRE(!uuid.empty());
     REQUIRE(!entity.name().empty());
-
-    auto world = shift::World{};
-    CHECK_NOTHROW(world.add_entity(std::move(entity)));
 
     SECTION("UUID")
     {

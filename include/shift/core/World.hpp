@@ -24,7 +24,7 @@ public:
 
     auto entities() const -> std::span<const Entity> { return m_entities; }
 
-    auto add_entity(Entity entity) -> void;
+    auto add_entity() -> Entity&;
 
     auto remove_entity(UUID uuid) -> bool;
     auto remove_entity(std::string_view name) -> bool;

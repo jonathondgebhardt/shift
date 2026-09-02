@@ -2,7 +2,6 @@
 #include <functional>
 #include <optional>
 #include <string_view>
-#include <utility>
 #include <vector>
 
 #include "shift/core/World.hpp"
@@ -31,9 +30,11 @@ auto World::find_entity(std::string_view name) -> OptionalEntityReference
                                      : std::nullopt;
 }
 
-auto World::add_entity(Entity entity) -> void
+auto World::add_entity() -> Entity&
 {
-    m_entities.push_back(std::move(entity));
+    // todo: use something other than uuid?
+    m_entities.emplace_back();
+    return m_entities.back();
 }
 
 auto World::remove_entity(UUID uuid) -> bool
