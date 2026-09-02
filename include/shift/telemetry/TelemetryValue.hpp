@@ -82,8 +82,8 @@ private:
     template<typename T>
     struct Value final : Concept
     {
-        explicit Value(T value)
-            : value{std::move(value)}
+        explicit Value(T val)
+            : value{std::move(val)}
         {
         }
 
