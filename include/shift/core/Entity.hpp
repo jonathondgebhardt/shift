@@ -54,6 +54,10 @@ public:
 
     auto position() const -> Vec3 { return m_position; }
 
+    auto position() -> Vec3& { return m_position; }
+
+    auto set_position(Vec3 position) -> void { m_position = position; }
+
 private:
     SHIFT_SUPPRESS_C4251
     std::string m_name;
