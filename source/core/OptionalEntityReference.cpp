@@ -1,5 +1,4 @@
-#include <exception>
-#include <optional>
+#include <stdexcept>
 
 #include "shift/core/OptionalEntityReference.hpp"
 
@@ -10,11 +9,13 @@ namespace shift
 
 auto OptionalEntityReference::unwrap() -> Entity&
 {
+    // NOLINTNEXTLINE(bugprone-unchecked-optional-access)
     return m_entity.value().get();
 }
 
 auto OptionalEntityReference::unwrap() const -> const Entity&
 {
+    // NOLINTNEXTLINE(bugprone-unchecked-optional-access)
     return m_entity.value().get();
 }
 
@@ -24,6 +25,7 @@ auto OptionalEntityReference::try_unwrap() -> Entity&
         throw std::runtime_error("does not contain entity");
     }
 
+    // NOLINTNEXTLINE(bugprone-unchecked-optional-access)
     return m_entity.value().get();
 }
 
@@ -33,6 +35,7 @@ auto OptionalEntityReference::try_unwrap() const -> const Entity&
         throw std::runtime_error("does not contain entity");
     }
 
+    // NOLINTNEXTLINE(bugprone-unchecked-optional-access)
     return m_entity.value().get();
 }
 
