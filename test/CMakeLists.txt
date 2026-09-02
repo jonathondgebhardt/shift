@@ -38,6 +38,7 @@ shift_add_test(
 shift_add_test(
   telemetry
   SOURCES
+  source/telemetry/MemoryTelemetryRecorder_test.cpp
   source/telemetry/TelemetryValue_test.cpp
   LINKS
   shift::core
