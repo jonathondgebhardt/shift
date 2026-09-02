@@ -7,6 +7,7 @@
 #include "shift/core/World.hpp"
 
 #include "shift/core/Entity.hpp"
+#include "shift/core/OptionalEntityReference.hpp"
 #include "shift/core/UUID.hpp"
 
 namespace shift
@@ -17,8 +18,11 @@ auto World::find_entity(UUID uuid) -> OptionalEntityReference
     const auto found = std::ranges::find_if(m_entities,
                                             [&](const Entity& entity)
                                             { return entity.uuid() == uuid; });
-    return found != m_entities.end() ? std::optional{std::ref(*found)}
-                                     : std::nullopt;
+    if (found != m_entities.end()) {
+        return OptionalEntityReference{std::optional{std::ref(*found)}};
+    }
+
+    return {};
 }
 
 auto World::find_entity(std::string_view name) -> OptionalEntityReference
@@ -26,8 +30,11 @@ auto World::find_entity(std::string_view name) -> OptionalEntityReference
     const auto found = std::ranges::find_if(m_entities,
                                             [&](const Entity& entity)
                                             { return entity.name() == name; });
-    return found != m_entities.end() ? std::optional{std::ref(*found)}
-                                     : std::nullopt;
+    if (found != m_entities.end()) {
+        return OptionalEntityReference{std::optional{std::ref(*found)}};
+    }
+
+    return {};
 }
 
 auto World::add_entity() -> Entity&

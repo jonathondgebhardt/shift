@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "shift/core/Entity.hpp"
+#include "shift/core/OptionalEntityReference.hpp"
 #include "shift/core/UUID.hpp"
 #include "shift/core/shift_core_export.hpp"
 
@@ -14,11 +15,6 @@ namespace shift
 class SHIFT_CORE_EXPORT World
 {
 public:
-    // c++26 adds std::optional<T&>
-    // todo: interacting with OptionalEntityReference is cumbersome, add
-    // convenience OptionalReference?
-    using OptionalEntityReference =
-        std::optional<std::reference_wrapper<Entity>>;
     auto find_entity(UUID uuid) -> OptionalEntityReference;
     auto find_entity(std::string_view name) -> OptionalEntityReference;
 

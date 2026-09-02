@@ -31,6 +31,7 @@ shift_add_library(
   source/core/Clock.cpp
   source/core/Component.cpp
   source/core/Entity.cpp
+  source/core/OptionalEntityReference.cpp
   source/core/RealTimeUpdater.cpp
   source/core/SimulationRunner.cpp
   source/core/UUID.cpp

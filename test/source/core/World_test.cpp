@@ -30,17 +30,17 @@ TEST_CASE("World find_entity", "[core][World]")
     SECTION("UUID")
     {
         const auto entity_ref = world.find_entity(uuid);
-        REQUIRE(entity_ref.has_value());
+        REQUIRE(!entity_ref.empty());
         // NOLINTNEXTLINE(bugprone-unchecked-optional-access)
-        CHECK(entity_ref.value().get().uuid() == uuid);
+        CHECK(entity_ref.unwrap().uuid() == uuid);
     }
 
     SECTION("name")
     {
         const auto entity_ref = world.find_entity(name);
-        REQUIRE(entity_ref.has_value());
+        REQUIRE(!entity_ref.empty());
         // NOLINTNEXTLINE(bugprone-unchecked-optional-access)
-        CHECK(entity_ref.value().get().name() == name);
+        CHECK(entity_ref.unwrap().name() == name);
     }
 }
 
