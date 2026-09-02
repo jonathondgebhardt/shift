@@ -13,8 +13,8 @@ public:
     TelemetryRecorder(TelemetryRecorder&&) noexcept = default;
     virtual ~TelemetryRecorder() = default;
     auto operator=(const TelemetryRecorder&) -> TelemetryRecorder& = default;
-    auto operator=(TelemetryRecorder&&) noexcept
-        -> TelemetryRecorder& = default;
+    auto operator=(TelemetryRecorder&&) noexcept -> TelemetryRecorder& =
+                                                        default;
 
     virtual auto record(const TelemetryRecord& record) -> void = 0;
 };
