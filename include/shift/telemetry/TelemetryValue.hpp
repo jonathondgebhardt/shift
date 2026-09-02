@@ -1,7 +1,6 @@
 #pragma once
 
 #include <memory>
-#include <type_traits>
 #include <typeindex>
 #include <utility>
 
@@ -14,7 +13,6 @@ class TelemetryValue
 {
 public:
     template<typename T>
-    // requires std::is_copy_constructible_v<T>
     explicit TelemetryValue(T value)
         : m_value{std::make_unique<Value<T>>(std::move(value))}
     {
