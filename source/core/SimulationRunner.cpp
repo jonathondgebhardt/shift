@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <memory>
 #include <stdexcept>
 #include <utility>
@@ -6,6 +7,7 @@
 
 #include "shift/core/Clock.hpp"
 #include "shift/core/SimulationRunner.hpp"
+#include "shift/core/System.hpp"
 #include "shift/core/TimeUpdater.hpp"
 
 namespace shift
@@ -28,6 +30,9 @@ auto SimulationRunner::run(Simulation& simulation) -> void
 
     m_updater->startup();
 
+    std::ranges::for_each(simulation.systems(),
+                          [](System& system) { system.startup(); });
+
     // record zero frame
     if (m_telemetry != nullptr) {
         m_telemetry->sample({}, simulation.world());
@@ -36,6 +41,10 @@ auto SimulationRunner::run(Simulation& simulation) -> void
     // todo: run until end condition is met
     auto& clock = simulation.clock();
     auto time_step = m_updater->update(clock);
+
+    std::ranges::for_each(simulation.systems(),
+                          [&](System& system)
+                          { system.process(simulation.world(), time_step); });
 
     if (m_telemetry != nullptr) {
         m_telemetry->sample(time_step.time, simulation.world());
