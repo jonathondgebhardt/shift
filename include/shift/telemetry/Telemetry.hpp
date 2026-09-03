@@ -2,6 +2,7 @@
 
 #include <utility>
 
+#include "shift/core/SimulationTime.hpp"
 #include "shift/core/TimeTypes.hpp"
 #include "shift/core/World.hpp"
 #include "shift/telemetry/DataDefinition.hpp"
@@ -26,7 +27,7 @@ public:
             std::make_unique<Observation<Owner, Value>>(definition));
     }
 
-    auto sample(time::Microseconds time, const World& world) -> void
+    auto sample(time::SimulationTime time, const World& world) -> void
     {
         if (m_recorder == nullptr) {
             throw std::runtime_error("recorder cannot be null");
@@ -44,12 +45,12 @@ private:
         ObservationConcept(const ObservationConcept&) = default;
         ObservationConcept(ObservationConcept&&) noexcept = default;
         virtual ~ObservationConcept() = default;
-        auto operator=(const ObservationConcept&) -> ObservationConcept& =
-                                                         default;
-        auto operator=(ObservationConcept&&) noexcept -> ObservationConcept& =
-                                                             default;
+        auto operator=(const ObservationConcept&)
+            -> ObservationConcept& = default;
+        auto operator=(ObservationConcept&&) noexcept
+            -> ObservationConcept& = default;
 
-        virtual auto sample(time::Microseconds,
+        virtual auto sample(time::SimulationTime,
                             const World&,
                             TelemetryRecorder&) const -> void = 0;
     };
@@ -64,7 +65,7 @@ private:
         {
         }
 
-        auto sample(time::Microseconds time,
+        auto sample(time::SimulationTime time,
                     const World& world,
                     TelemetryRecorder& recorder) const -> void override
         {
@@ -87,7 +88,7 @@ private:
     // todo: may want to move these out into some other file or delegate to a
     // class
     static void record_value(TelemetryRecorder& recorder,
-                             time::Microseconds time,
+                             time::SimulationTime time,
                              const Entity& entity,
                              std::string_view channel,
                              double value)
@@ -99,7 +100,7 @@ private:
     }
 
     static void record_value(TelemetryRecorder& recorder,
-                             time::Microseconds time,
+                             time::SimulationTime time,
                              const Entity& entity,
                              std::string_view channel,
                              const Vec3& value)

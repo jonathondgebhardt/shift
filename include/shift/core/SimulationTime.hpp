@@ -18,6 +18,8 @@ public:
     ~SimulationTime() = default;
     auto operator=(const SimulationTime&) -> SimulationTime& = default;
     auto operator=(SimulationTime&&) noexcept -> SimulationTime& = default;
+    auto operator<=>(const SimulationTime&) const = default;
+    auto operator==(const SimulationTime&) const -> bool = default;
 
     template<TimeType T>
     explicit SimulationTime(T time)
@@ -44,8 +46,8 @@ public:
         return lhs;
     }
 
-    friend auto operator+(SimulationTime lhs,
-                          SimulationTime rhs) -> SimulationTime
+    friend auto operator+(SimulationTime lhs, SimulationTime rhs)
+        -> SimulationTime
     {
         lhs += rhs;
         return lhs;
@@ -70,8 +72,8 @@ public:
         return lhs;
     }
 
-    friend auto operator-(SimulationTime lhs,
-                          SimulationTime rhs) -> SimulationTime
+    friend auto operator-(SimulationTime lhs, SimulationTime rhs)
+        -> SimulationTime
     {
         lhs -= rhs;
         return lhs;
@@ -87,6 +89,11 @@ public:
     {
         m_time -= sim_time.m_time;
         return *this;
+    }
+
+    auto to_string() const -> std::string
+    {
+        return std::to_string(m_time.count());
     }
 
 private:

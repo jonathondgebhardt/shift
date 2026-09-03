@@ -16,7 +16,7 @@ auto ConsoleTelemetryRecorder::record(const TelemetryRecord& record) -> void
     //              record.channel,
     //              record.value);
 
-    std::cout << "t=" << record.time.count()
+    std::cout << "t=" << record.time.to_string()
               << " entity=" << record.uuid.to_string()
               << " channel=" << record.channel
               << " value=" << record.value.to_string() << '\n';

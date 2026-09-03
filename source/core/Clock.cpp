@@ -1,13 +1,14 @@
 #include "shift/core/Clock.hpp"
 
+#include "shift/core/SimulationTime.hpp"
 #include "shift/core/TimeTypes.hpp"
 
 namespace shift
 {
 
-auto Clock::set_time(time::Microseconds time) -> void
+auto Clock::set_time(time::SimulationTime time) -> void
 {
-    m_delta = time - m_time;
+    m_delta = (time - m_time).as<time::Microseconds>();
     m_time = time;
 }
 

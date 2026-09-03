@@ -4,12 +4,13 @@
 
 #include <catch2/catch_test_macros.hpp>
 
+#include "shift/core/SimulationTime.hpp"
 #include "shift/core/TimeTypes.hpp"
 
 TEST_CASE("RealTimeUpdater update", "[core][RealTimeUpdater]")
 {
     auto clock = shift::Clock{};
-    REQUIRE(clock.time() == shift::time::Microseconds{});
+    REQUIRE(clock.time() == shift::time::SimulationTime{});
     REQUIRE(clock.delta() == shift::time::Microseconds{});
 
     auto updater = shift::RealTimeUpdater{};
@@ -20,6 +21,6 @@ TEST_CASE("RealTimeUpdater update", "[core][RealTimeUpdater]")
 
     updater.update(clock);
 
-    CHECK(clock.time() >= wait_time);
+    CHECK(clock.time() >= shift::time::SimulationTime{wait_time});
     CHECK(clock.delta() >= wait_time);
 }

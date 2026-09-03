@@ -1,6 +1,7 @@
 #pragma once
 
 #include "shift/core/Clock.hpp"
+#include "shift/core/SimulationTime.hpp"
 #include "shift/core/TimeTypes.hpp"
 
 namespace shift
@@ -25,7 +26,7 @@ public:
     }
 
 protected:
-    static auto update_time(Clock& clock, time::Microseconds time) -> void
+    static auto update_time(Clock& clock, time::SimulationTime time) -> void
     {
         clock.set_time(time);
     }
