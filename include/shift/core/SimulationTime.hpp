@@ -12,6 +12,13 @@ class SHIFT_CORE_EXPORT SimulationTime
 public:
     using SimulationTimeType = Microseconds;
 
+    SimulationTime() = default;
+    SimulationTime(const SimulationTime&) = default;
+    SimulationTime(SimulationTime&&) noexcept = default;
+    ~SimulationTime() = default;
+    auto operator=(const SimulationTime&) -> SimulationTime& = default;
+    auto operator=(SimulationTime&&) noexcept -> SimulationTime& = default;
+
     template<TimeType T>
     explicit SimulationTime(T time)
         : m_time{convert::time_cast<SimulationTimeType>(time)}
