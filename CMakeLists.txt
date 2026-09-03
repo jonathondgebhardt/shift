@@ -40,6 +40,7 @@ shift_add_library(
   source/telemetry/ConsoleTelemetryRecorder.cpp
   source/telemetry/MemoryTelemetryRecorder.cpp
   LINKS
+  shift_logger
 )
 
 # ---- Examples ----
