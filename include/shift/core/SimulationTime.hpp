@@ -4,33 +4,33 @@
 #include "shift/core/TimeTypes.hpp"
 #include "shift/core/shift_core_export.hpp"
 
-namespace shift
+namespace shift::time
 {
 
 class SHIFT_CORE_EXPORT SimulationTime
 {
 public:
-    using SimulationTimeType = time::Microseconds;
+    using SimulationTimeType = Microseconds;
 
-    template<time::TimeType T>
+    template<TimeType T>
     explicit SimulationTime(T time)
-        : m_time{time::convert::time_cast<SimulationTimeType>(time)}
+        : m_time{convert::time_cast<SimulationTimeType>(time)}
     {
     }
 
-    template<time::TimeType T>
+    template<TimeType T>
     auto operator==(T time) const -> bool
     {
-        return m_time == time::convert::time_cast<SimulationTimeType>(time);
+        return m_time == convert::time_cast<SimulationTimeType>(time);
     }
 
-    template<time::TimeType T>
+    template<TimeType T>
     auto as() const -> T
     {
-        return time::convert::time_cast<T>(m_time);
+        return convert::time_cast<T>(m_time);
     }
 
-    template<time::TimeType T>
+    template<TimeType T>
     friend auto operator+(SimulationTime lhs, T rhs) -> SimulationTime
     {
         lhs += rhs;
@@ -44,7 +44,7 @@ public:
         return lhs;
     }
 
-    template<time::TimeType T>
+    template<TimeType T>
     auto operator+=(T time) -> SimulationTime&
     {
         return operator+=(SimulationTime{time});
@@ -56,7 +56,7 @@ public:
         return *this;
     }
 
-    template<time::TimeType T>
+    template<TimeType T>
     friend auto operator-(SimulationTime lhs, T rhs) -> SimulationTime
     {
         lhs -= rhs;
@@ -70,7 +70,7 @@ public:
         return lhs;
     }
 
-    template<time::TimeType T>
+    template<TimeType T>
     auto operator-=(T time) -> SimulationTime&
     {
         return operator-=(SimulationTime{time});
@@ -86,4 +86,4 @@ private:
     SimulationTimeType m_time{};
 };
 
-}  // namespace shift
+}  // namespace shift::time

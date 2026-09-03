@@ -8,7 +8,7 @@
 TEST_CASE("SimulationTime as", "[core][SimulationTime]")
 {
     const auto time = shift::time::Seconds{1};
-    const auto sim_time = shift::SimulationTime{shift::time::Seconds{1}};
+    const auto sim_time = shift::time::SimulationTime{shift::time::Seconds{1}};
 
     namespace tc = shift::time::convert;
 
@@ -28,7 +28,7 @@ TEST_CASE("SimulationTime as", "[core][SimulationTime]")
 TEST_CASE("SimulationTime operator==", "[core][SimulationTime]")
 {
     const auto time = shift::time::Seconds{1};
-    const auto sim_time = shift::SimulationTime{shift::time::Seconds{1}};
+    const auto sim_time = shift::time::SimulationTime{shift::time::Seconds{1}};
 
     namespace tc = shift::time::convert;
 
@@ -42,12 +42,12 @@ TEST_CASE("SimulationTime operator==", "[core][SimulationTime]")
 
 TEST_CASE("SimulationTime operator+", "[core][SimulationTime]")
 {
-    const auto sim_time = shift::SimulationTime{shift::time::Seconds{0}};
+    const auto sim_time = shift::time::SimulationTime{shift::time::Seconds{0}};
 
     SECTION("SimulationTime")
     {
         const auto next_sim_time =
-            sim_time + shift::SimulationTime{shift::time::Seconds{1}};
+            sim_time + shift::time::SimulationTime{shift::time::Seconds{1}};
         CHECK(next_sim_time.as<shift::time::Seconds>()
               == shift::time::Seconds{1});
     }
@@ -62,11 +62,11 @@ TEST_CASE("SimulationTime operator+", "[core][SimulationTime]")
 
 TEST_CASE("SimulationTime operator+=", "[core][SimulationTime]")
 {
-    auto sim_time = shift::SimulationTime{shift::time::Seconds{0}};
+    auto sim_time = shift::time::SimulationTime{shift::time::Seconds{0}};
 
     SECTION("SimulationTime")
     {
-        sim_time += shift::SimulationTime{shift::time::Seconds{1}};
+        sim_time += shift::time::SimulationTime{shift::time::Seconds{1}};
         CHECK(sim_time.as<shift::time::Seconds>() == shift::time::Seconds{1});
     }
 
@@ -79,12 +79,12 @@ TEST_CASE("SimulationTime operator+=", "[core][SimulationTime]")
 
 TEST_CASE("SimulationTime operator-", "[core][SimulationTime]")
 {
-    const auto sim_time = shift::SimulationTime{shift::time::Seconds{1}};
+    const auto sim_time = shift::time::SimulationTime{shift::time::Seconds{1}};
 
     SECTION("SimulationTime")
     {
         const auto next_sim_time =
-            sim_time - shift::SimulationTime{shift::time::Seconds{1}};
+            sim_time - shift::time::SimulationTime{shift::time::Seconds{1}};
         CHECK(next_sim_time.as<shift::time::Seconds>()
               == shift::time::Seconds{0});
     }
@@ -99,11 +99,11 @@ TEST_CASE("SimulationTime operator-", "[core][SimulationTime]")
 
 TEST_CASE("SimulationTime operator-=", "[core][SimulationTime]")
 {
-    auto sim_time = shift::SimulationTime{shift::time::Seconds{1}};
+    auto sim_time = shift::time::SimulationTime{shift::time::Seconds{1}};
 
     SECTION("SimulationTime")
     {
-        sim_time -= shift::SimulationTime{shift::time::Seconds{1}};
+        sim_time -= shift::time::SimulationTime{shift::time::Seconds{1}};
         CHECK(sim_time.as<shift::time::Seconds>() == shift::time::Seconds{0});
     }
 
