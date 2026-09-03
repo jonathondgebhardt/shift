@@ -37,8 +37,8 @@ public:
         return lhs;
     }
 
-    friend auto operator+(SimulationTime lhs, SimulationTime rhs)
-        -> SimulationTime
+    friend auto operator+(SimulationTime lhs,
+                          SimulationTime rhs) -> SimulationTime
     {
         lhs += rhs;
         return lhs;
@@ -63,8 +63,8 @@ public:
         return lhs;
     }
 
-    friend auto operator-(SimulationTime lhs, SimulationTime rhs)
-        -> SimulationTime
+    friend auto operator-(SimulationTime lhs,
+                          SimulationTime rhs) -> SimulationTime
     {
         lhs -= rhs;
         return lhs;
