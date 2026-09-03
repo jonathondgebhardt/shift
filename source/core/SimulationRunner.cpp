@@ -9,6 +9,7 @@
 #include "shift/core/SimulationRunner.hpp"
 #include "shift/core/System.hpp"
 #include "shift/core/TimeUpdater.hpp"
+#include "shift/logger/Log.hpp"
 
 namespace shift
 {
@@ -33,10 +34,11 @@ auto SimulationRunner::run(Simulation& simulation) -> void
     std::ranges::for_each(simulation.systems(),
                           [](System& system) { system.startup(); });
 
+    shift::log::warning().append("not running zero frame");
     // record zero frame
-    if (m_telemetry != nullptr) {
-        m_telemetry->sample({}, simulation.world());
-    }
+    // if (m_telemetry != nullptr) {
+    //     m_telemetry->sample({}, simulation.world());
+    // }
 
     // todo: run until end condition is met
     auto& clock = simulation.clock();
