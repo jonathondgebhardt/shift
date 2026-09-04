@@ -8,7 +8,6 @@
 #include "shift/core/SimulationRunner.hpp"
 #include "shift/core/System.hpp"
 #include "shift/core/TimeTypes.hpp"
-#include "shift/core/UUID.hpp"
 #include "shift/core/World.hpp"
 #include "shift/logger/Log.hpp"
 #include "shift/telemetry/ConsoleTelemetryRecorder.hpp"
@@ -20,15 +19,15 @@ namespace
 
 struct OrbitSystem : shift::System
 {
-    explicit OrbitSystem(shift::UUID uid)
-        : uuid{uid}
+    explicit OrbitSystem(shift::EntityUID uid)
+        : uid{uid}
     {
     }
 
     auto startup() -> void override
     {
-        if (uuid.empty()) {
-            throw std::runtime_error("uuid cannot be empty");
+        if (uid == shift::EntityUID{}) {
+            throw std::runtime_error("uid cannot be empty");
         }
 
         const auto double_equal = [](const double lhs, const double rhs)
@@ -49,7 +48,7 @@ struct OrbitSystem : shift::System
         -> void override
     {
         // todo: consider abstracting OptionalEntityReference to add unwrap
-        auto& entity = world.find_entity(uuid).try_unwrap();
+        auto& entity = world.find_entity(uid).try_unwrap();
         entity.position().x = radius * std::cos(angle);
         entity.position().y = radius * std::sin(angle);
 
@@ -61,7 +60,7 @@ struct OrbitSystem : shift::System
         }
     }
 
-    shift::UUID uuid;
+    shift::EntityUID uid;
 
     double angle{};
     double speed{};
@@ -87,7 +86,7 @@ auto main() -> int
 
     runner.set_telemetry(&telemetry);
 
-    auto system = OrbitSystem{entity.uuid()};
+    auto system = OrbitSystem{entity.uid()};
     system.speed = 1.0;
     system.radius = 10u;
     simulation.add_system(system);
