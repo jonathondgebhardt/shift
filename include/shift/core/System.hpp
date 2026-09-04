@@ -16,6 +16,10 @@ public:
     auto operator=(const System&) -> System& = default;
     auto operator=(System&&) noexcept -> System& = default;
 
+    // todo: maybe systems should "schedule" their next update. that would
+    // potentially be a complete shift away from other time updaters unless they
+    // just ignored scheduling.
+
     virtual auto startup() -> void {}
 
     virtual auto process(World& world, Clock::TimeStep time_step) -> void = 0;
