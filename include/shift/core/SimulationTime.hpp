@@ -39,6 +39,10 @@ public:
         return convert::time_cast<T>(m_time);
     }
 
+    auto get() const -> SimulationTimeType { return m_time; }
+
+    auto data() const -> std::int64_t { return m_time.count(); }
+
     template<TimeType T>
     friend auto operator+(SimulationTime lhs, T rhs) -> SimulationTime
     {
