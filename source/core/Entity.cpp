@@ -13,9 +13,9 @@
 namespace shift
 {
 
-auto Entity::uuid() const -> UUID
+auto Entity::uid() const -> EntityUID
 {
-    return m_uuid;
+    return m_uid;
 }
 
 auto Entity::set_name(std::string name) -> void

@@ -7,10 +7,9 @@
 
 #include "shift/core/Component.hpp"
 
-TEST_CASE("Entity uuid", "[core][Entity]")
+TEST_CASE("Entity uid zero on ctor", "[core][Entity]")
 {
-    REQUIRE(!shift::Entity{}.uuid().empty());
-    REQUIRE(shift::Entity{}.uuid() != shift::Entity{}.uuid());
+    CHECK(shift::Entity{}.uid() == shift::EntityUID{});
 }
 
 TEST_CASE("Entity name", "[core][Entity]")

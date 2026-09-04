@@ -3,7 +3,6 @@
 #include <utility>
 
 #include "shift/core/SimulationTime.hpp"
-#include "shift/core/TimeTypes.hpp"
 #include "shift/core/World.hpp"
 #include "shift/telemetry/DataDefinition.hpp"
 #include "shift/telemetry/TelemetryRecorder.hpp"
@@ -87,6 +86,7 @@ private:
 
     // todo: may want to move these out into some other file or delegate to a
     // class
+    // todo: TelemetryValue type erases, can we just use T?
     static void record_value(TelemetryRecorder& recorder,
                              time::SimulationTime time,
                              const Entity& entity,
@@ -94,7 +94,7 @@ private:
                              double value)
     {
         recorder.record({.time = time,
-                         .uuid = entity.uuid(),
+                         .uid = entity.uid(),
                          .channel = channel,
                          .value = TelemetryValue{value}});
     }
@@ -106,7 +106,7 @@ private:
                              const Vec3& value)
     {
         recorder.record({.time = time,
-                         .uuid = entity.uuid(),
+                         .uid = entity.uid(),
                          .channel = channel,
                          .value = TelemetryValue{value}});
     }

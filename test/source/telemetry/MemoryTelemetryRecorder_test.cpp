@@ -2,7 +2,7 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include "shift/core/UUID.hpp"
+#include "shift/core/Entity.hpp"
 #include "shift/telemetry/TelemetryValue.hpp"
 
 TEST_CASE("MemoryTelemetryRecorder contains records",
@@ -10,7 +10,7 @@ TEST_CASE("MemoryTelemetryRecorder contains records",
 {
     auto recorder = shift::telemetry::MemoryTelemetryRecorder{};
     recorder.record({.time = {},
-                     .uuid = shift::UUID::build(),
+                     .uid = shift::EntityUID{},
                      .channel = "",
                      .value = shift::telemetry::TelemetryValue{1.0}});
     CHECK(recorder.records().size() == 1);

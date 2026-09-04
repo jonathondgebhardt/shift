@@ -3,7 +3,6 @@
 #include <catch2/catch_test_macros.hpp>
 
 #include "shift/core/Entity.hpp"
-#include "shift/core/UUID.hpp"
 
 TEST_CASE("World add_entity", "[core][World]")
 {
@@ -18,19 +17,19 @@ TEST_CASE("World find_entity", "[core][World]")
     auto world = shift::World{};
     auto& entity = world.add_entity();
 
-    const auto uuid = entity.uuid();
+    const auto uid = entity.uid();
     constexpr auto name = "name";
     entity.set_name(name);
 
-    REQUIRE(!uuid.empty());
+    REQUIRE(uid != shift::EntityUID{});
     REQUIRE(!entity.name().empty());
 
-    SECTION("UUID")
+    SECTION("uid")
     {
-        const auto entity_ref = world.find_entity(uuid);
+        const auto entity_ref = world.find_entity(uid);
         REQUIRE(!entity_ref.empty());
         // NOLINTNEXTLINE(bugprone-unchecked-optional-access)
-        CHECK(entity_ref.unwrap().uuid() == uuid);
+        CHECK(entity_ref.unwrap().uid() == uid);
     }
 
     SECTION("name")
@@ -47,16 +46,16 @@ TEST_CASE("World remove_entity", "[core][World]")
     auto world = shift::World{};
     auto& entity = world.add_entity();
 
-    const auto uuid = entity.uuid();
+    const auto uid = entity.uid();
     constexpr auto name = "name";
     entity.set_name(name);
 
-    REQUIRE(!uuid.empty());
+    REQUIRE(uid != shift::EntityUID{});
     REQUIRE(!entity.name().empty());
 
-    SECTION("UUID")
+    SECTION("uid")
     {
-        CHECK(world.remove_entity(uuid));
+        CHECK(world.remove_entity(uid));
     }
 
     SECTION("name")

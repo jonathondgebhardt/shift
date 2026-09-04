@@ -7,7 +7,6 @@
 #include <vector>
 
 #include "shift/core/Component.hpp"
-#include "shift/core/UUID.hpp"
 #include "shift/core/shift_core_export.hpp"
 
 // todo: move this somewhere better
@@ -21,10 +20,19 @@ struct Vec3
 namespace shift
 {
 
+using EntityUID = std::uint64_t;
+
 class SHIFT_CORE_EXPORT Entity
 {
 public:
-    auto uuid() const -> UUID;
+    explicit Entity(EntityUID uid)
+        : m_uid{uid}
+    {
+    }
+
+    Entity() = default;
+
+    auto uid() const -> EntityUID;
 
     auto set_name(std::string name) -> void;
 
@@ -62,8 +70,8 @@ private:
     SHIFT_SUPPRESS_C4251
     std::string m_name;
     std::vector<std::unique_ptr<Component>> m_components;
-    UUID m_uuid{UUID::build()};
     Vec3 m_position;
+    EntityUID m_uid{};
 };
 
 }  // namespace shift

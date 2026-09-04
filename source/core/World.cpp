@@ -1,21 +1,20 @@
 #include <algorithm>
 #include <string_view>
+#include <utility>
 #include <vector>
 
 #include "shift/core/World.hpp"
 
 #include "shift/core/Entity.hpp"
 #include "shift/core/OptionalEntityReference.hpp"
-#include "shift/core/UUID.hpp"
 
 namespace shift
 {
 
-auto World::find_entity(UUID uuid) -> OptionalEntityReference
+auto World::find_entity(EntityUID uid) -> OptionalEntityReference
 {
-    const auto found = std::ranges::find_if(m_entities,
-                                            [&](const Entity& entity)
-                                            { return entity.uuid() == uuid; });
+    const auto found = std::ranges::find_if(
+        m_entities, [&](const Entity& entity) { return entity.uid() == uid; });
     if (found != m_entities.end()) {
         return OptionalEntityReference{*found};
     }
@@ -37,16 +36,17 @@ auto World::find_entity(std::string_view name) -> OptionalEntityReference
 
 auto World::add_entity() -> Entity&
 {
-    // todo: use something other than uuid?
-    m_entities.emplace_back();
+    static auto uid = EntityUID{};
+    auto entity = Entity{++uid};
+    m_entities.push_back(std::move(entity));
     return m_entities.back();
 }
 
-auto World::remove_entity(UUID uuid) -> bool
+auto World::remove_entity(EntityUID uid) -> bool
 {
     return std::erase_if(m_entities,
                          [&](const Entity& entity)
-                         { return entity.uuid() == uuid; })
+                         { return entity.uid() == uid; })
         > 0;
 }
 

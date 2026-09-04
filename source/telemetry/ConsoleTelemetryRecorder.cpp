@@ -2,7 +2,6 @@
 
 #include "shift/telemetry/ConsoleTelemetryRecorder.hpp"
 
-#include "shift/core/UUID.hpp"
 #include "shift/telemetry/TelemetryRecord.hpp"
 
 namespace shift::telemetry
@@ -16,8 +15,7 @@ auto ConsoleTelemetryRecorder::record(const TelemetryRecord& record) -> void
     //              record.channel,
     //              record.value);
 
-    std::cout << "t=" << record.time.to_string()
-              << " entity=" << record.uuid.to_string()
+    std::cout << "t=" << record.time.to_string() << " entity=" << record.uid
               << " channel=" << record.channel
               << " value=" << record.value.to_string() << '\n';
 }

@@ -21,6 +21,7 @@ public:
 
     virtual auto type() const -> const char* { return "Component"; }
 
+    // todo: do we really need uuid?
     auto uuid() const -> UUID;
 
     auto set_name(std::string name) -> void;
