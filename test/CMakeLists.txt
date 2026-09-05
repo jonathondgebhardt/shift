@@ -20,6 +20,7 @@ shift_add_test(
   source/core/OptionalEntityReference_test.cpp
   source/core/SimulationRunner_test.cpp
   source/core/UUID_test.cpp
+  source/core/UpdateScheduler_test.cpp
   source/core/World_test.cpp
   LINKS
   shift::core
