@@ -7,8 +7,6 @@
 namespace shift::time
 {
 
-class TimeUpdater;
-
 class SHIFT_TIME_EXPORT Clock
 {
 public:
@@ -27,12 +25,11 @@ public:
 
     auto delta() const -> Duration { return m_duration; }
 
-private:
-    friend class TimeUpdater;
-
+    // todo: restrict who can call these
     auto set_time(SimulationTime time) -> void;
     auto set_delta(Duration duration) -> void;
 
+private:
     SimulationTime m_time;
     Duration m_duration;
 };
