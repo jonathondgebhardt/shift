@@ -33,6 +33,8 @@ public:
 
     virtual auto startup() -> void {}
 
+    virtual auto first_update() -> UpdateResult = 0;
+
     virtual auto process(World& world, time::Clock::TimeStep time_step)
         -> UpdateResult = 0;
 
