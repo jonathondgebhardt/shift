@@ -11,8 +11,8 @@
 namespace shift
 {
 
-auto UpdateScheduler::schedule(const System& system, time::SimulationTime time)
-    -> void
+auto UpdateScheduler::schedule(const System& system,
+                               time::SimulationTime time) -> void
 {
     if (system.uid() == shift::SystemUID{}) {
         throw std::runtime_error("cannot schedule system with invalid UID");

@@ -44,10 +44,10 @@ private:
         ObservationConcept(const ObservationConcept&) = default;
         ObservationConcept(ObservationConcept&&) noexcept = default;
         virtual ~ObservationConcept() = default;
-        auto operator=(const ObservationConcept&)
-            -> ObservationConcept& = default;
-        auto operator=(ObservationConcept&&) noexcept
-            -> ObservationConcept& = default;
+        auto operator=(const ObservationConcept&) -> ObservationConcept& =
+                                                         default;
+        auto operator=(ObservationConcept&&) noexcept -> ObservationConcept& =
+                                                             default;
 
         virtual auto sample(time::SimulationTime,
                             const World&,

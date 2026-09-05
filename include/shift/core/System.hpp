@@ -35,8 +35,8 @@ public:
 
     virtual auto first_update() -> UpdateResult = 0;
 
-    virtual auto process(World& world, time::Clock::TimeStep time_step)
-        -> UpdateResult = 0;
+    virtual auto process(World& world,
+                         time::Clock::TimeStep time_step) -> UpdateResult = 0;
 
 private:
     SystemUID m_uid{};
