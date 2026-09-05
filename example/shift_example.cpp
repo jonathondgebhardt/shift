@@ -20,7 +20,8 @@ namespace
 struct OrbitSystem : shift::System
 {
     explicit OrbitSystem(shift::EntityUID uid)
-        : uid{uid}
+        : shift::System(shift::SystemUID{1})
+        , uid{uid}
     {
     }
 
@@ -44,9 +45,17 @@ struct OrbitSystem : shift::System
         }
     }
 
-    auto process(shift::World& world, shift::time::Clock::TimeStep time_step)
-        -> void override
+    auto first_update() -> shift::UpdateResult override
     {
+        return shift::UpdateResult::schedule_now();
+    }
+
+    auto process(shift::World& world, shift::time::Clock::TimeStep time_step)
+        -> shift::UpdateResult override
+    {
+        static auto update_count = 0u;
+        update_count++;
+
         // todo: consider abstracting OptionalEntityReference to add unwrap
         auto& entity = world.find_entity(uid).try_unwrap();
         entity.position().x = radius * std::cos(angle);
@@ -58,6 +67,14 @@ struct OrbitSystem : shift::System
         if (angle > two_pi) {
             angle -= two_pi;
         }
+
+        constexpr auto max_updates = 5;
+        if (update_count < max_updates) {
+            return shift::UpdateResult::schedule_after(
+                shift::time::Duration{shift::time::Milliseconds{16}});
+        }
+
+        return shift::UpdateResult::stop();
     }
 
     shift::EntityUID uid;
@@ -71,14 +88,10 @@ struct OrbitSystem : shift::System
 
 auto main() -> int
 {
-    shift::log::info().append("hello from shift_example");
-
     auto simulation = shift::Simulation{};
     auto& entity = simulation.world().add_entity();
 
-    auto runner =
-        shift::SimulationRunner{std::make_unique<shift::time::FixedTimeUpdater>(
-            shift::time::Duration{shift::time::Milliseconds{16}})};
+    auto runner = shift::SimulationRunner{};
 
     auto telemetry = shift::telemetry::Telemetry{
         std::make_unique<shift::telemetry::ConsoleTelemetryRecorder>()};
@@ -86,15 +99,11 @@ auto main() -> int
 
     runner.set_telemetry(&telemetry);
 
-    auto system = OrbitSystem{entity.uid()};
-    system.speed = 1.0;
-    system.radius = 10u;
-    simulation.add_system(system);
+    auto system = std::make_unique<OrbitSystem>(entity.uid());
+    system->speed = 1.0;
+    system->radius = 10u;
+    simulation.add_system(std::move(system));
 
-    runner.run(simulation);
-    runner.run(simulation);
-    runner.run(simulation);
-    runner.run(simulation);
     runner.run(simulation);
 
     return 0;
