@@ -1,65 +1,83 @@
 #include <algorithm>
+#include <format>
 #include <memory>
 #include <stdexcept>
-#include <utility>
 
 #include "shift/core/Simulation.hpp"
 
 #include "shift/core/SimulationRunner.hpp"
 #include "shift/core/System.hpp"
+#include "shift/core/UpdateResult.hpp"
 #include "shift/logger/Log.hpp"
 #include "shift/time/Clock.hpp"
-#include "shift/time/TimeUpdater.hpp"
 
 namespace shift
 {
 
-SimulationRunner::SimulationRunner(std::unique_ptr<time::TimeUpdater> updater)
-    : m_updater{std::move(updater)}
-{
-    if (m_updater == nullptr) {
-        throw std::runtime_error(
-            "SimulationRunner must have valid TimeUpdater");
-    }
-}
-
 auto SimulationRunner::run(Simulation& simulation) -> void
 {
-    if (m_updater == nullptr) {
-        throw std::runtime_error("cannot run Simulation without TimeUpdater");
+    shift::log::trace().append("starting up systems");
+    std::ranges::for_each(simulation.systems(),
+                          [](const std::unique_ptr<System>& system)
+                          { system->startup(); });
+
+    shift::log::trace().append("sampling initial world state");
+    if (m_telemetry != nullptr) {
+        m_telemetry->sample({}, simulation.world());
     }
 
-    shift::log::trace().append("starting up time updater");
-    m_updater->startup();
+    auto& clock = simulation.clock();
 
-    shift::log::trace().append("starting up systems");
+    shift::log::trace().append("scheduling first update");
     std::ranges::for_each(
         simulation.systems(),
-        // todo: pass entire simulation? maybe world and services?
-        [](System& system) { system.startup(); });
+        [&](const std::unique_ptr<System>& system)
+        {
+            const auto result = system->first_update();
+            if (const auto next_update = result.next_time(clock.time());
+                next_update)
+            {
+                m_scheduler.schedule(*system, *next_update);
+            }
+        });
 
-    shift::log::warning().append("not running zero frame");
-    shift::log::trace().append("sampling world");
-    // record zero frame
-    // if (m_telemetry != nullptr) {
-    //     m_telemetry->sample({}, simulation.world());
-    // }
+    auto first_update = m_scheduler.top();
+    if (!first_update) {
+        throw std::runtime_error("no systems scheduled a first update");
+    }
 
     shift::log::trace().append("running simulation");
-    auto& clock = simulation.clock();
-    auto time_step = m_updater->update(clock);
+    clock.set_time(first_update->time);
 
-    std::ranges::for_each(
-        simulation.systems(),
-        [&](System& system)
-        // todo: pass entire simulation? maybe world and services?
-        { system.process(simulation.world(), time_step); });
+    // todo: check end condition before processing updates
+    while (!m_scheduler.empty()) {
+        const auto current_update = m_scheduler.top();
+        m_scheduler.pop();
 
-    if (m_telemetry != nullptr) {
-        m_telemetry->sample(time_step.time, simulation.world());
+        clock.set_time(current_update->time);
+        const auto time_step = clock.time_step();
+
+        auto found_it = std::ranges::find_if(
+            simulation.systems(),
+            [&](const std::unique_ptr<System>& system)
+            { return system->uid() == current_update->uid; });
+        if (found_it == simulation.systems().end()) {
+            throw std::runtime_error(std::format(
+                "failed to find system with uid {}", current_update->uid));
+        }
+
+        const auto& system = *found_it;
+        const auto result = system->process(simulation.world(), time_step);
+        if (const auto next_update = result.next_time(clock.time());
+            next_update)
+        {
+            m_scheduler.schedule(*system, *next_update);
+        }
+
+        if (m_telemetry != nullptr) {
+            m_telemetry->sample(time_step.time, simulation.world());
+        }
     }
-
-    // todo: run until end condition is met
 
     shift::log::trace().append("shutting down simulation");
 }
