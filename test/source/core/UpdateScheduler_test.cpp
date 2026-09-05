@@ -3,6 +3,7 @@
 #include <catch2/catch_test_macros.hpp>
 
 #include "shift/core/System.hpp"
+#include "shift/core/UpdateResult.hpp"
 #include "shift/core/World.hpp"
 #include "shift/time/Clock.hpp"
 #include "shift/time/SimulationTime.hpp"
@@ -23,10 +24,17 @@ public:
         return TestSystem{shift::SystemUID{1}};
     }
 
+    auto first_update() -> shift::UpdateResult override
+    {
+        return shift::UpdateResult::schedule_now();
+    }
+
     auto process([[maybe_unused]] shift::World& world,
                  [[maybe_unused]] shift::time::Clock::TimeStep time_step)
-        -> void override
+        -> shift::UpdateResult override
     {
+        return shift::UpdateResult::schedule_after(
+            shift::time::Duration{shift::time::Seconds{1}});
     }
 
 private:
