@@ -1,5 +1,6 @@
 #pragma once
 
+#include "shift/core/UpdateResult.hpp"
 #include "shift/core/World.hpp"
 #include "shift/time/Clock.hpp"
 
@@ -33,7 +34,7 @@ public:
     virtual auto startup() -> void {}
 
     virtual auto process(World& world, time::Clock::TimeStep time_step)
-        -> void = 0;
+        -> UpdateResult = 0;
 
 private:
     SystemUID m_uid{};
