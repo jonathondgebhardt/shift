@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <vector>
 
 #include "shift/core/System.hpp"
@@ -17,9 +18,12 @@ public:
 
     auto world() -> World& { return m_world; }
 
-    auto add_system(System& system) { m_systems.emplace_back(system); }
+    auto add_system(std::unique_ptr<System> system)
+    {
+        m_systems.push_back(std::move(system));
+    }
 
-    auto systems() const -> std::vector<std::reference_wrapper<System>>
+    auto systems() const -> std::span<const std::unique_ptr<System>>
     {
         return m_systems;
     }
@@ -32,7 +36,7 @@ private:
     // simulation's progression; perform some operation on simulation state
     // - What work needs to happen as the simulation advances?
     // - e.g.: physics, collision, simulation models
-    std::vector<std::reference_wrapper<System>> m_systems;
+    std::vector<std::unique_ptr<System>> m_systems;
 
     // services: provides capabilities used by the simulation but does not
     // itself constitute a simulation process
