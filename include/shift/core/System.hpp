@@ -6,9 +6,17 @@
 namespace shift
 {
 
+using SystemUID = std::uint64_t;
+
 class System
 {
 public:
+    // todo: or a friend function
+    explicit constexpr System(SystemUID uid)
+        : m_uid{uid}
+    {
+    }
+
     System() = default;
     System(const System&) = default;
     System(System&&) noexcept = default;
@@ -20,12 +28,15 @@ public:
     // potentially be a complete shift away from other time updaters unless they
     // just ignored scheduling.
 
+    auto uid() const { return m_uid; }
+
     virtual auto startup() -> void {}
 
     virtual auto process(World& world, time::Clock::TimeStep time_step)
         -> void = 0;
 
 private:
+    SystemUID m_uid{};
 };
 
 }  // namespace shift
