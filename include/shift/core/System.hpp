@@ -1,7 +1,7 @@
 #pragma once
 
-#include "shift/core/Clock.hpp"
 #include "shift/core/World.hpp"
+#include "shift/time/Clock.hpp"
 
 namespace shift
 {
@@ -22,7 +22,8 @@ public:
 
     virtual auto startup() -> void {}
 
-    virtual auto process(World& world, Clock::TimeStep time_step) -> void = 0;
+    virtual auto process(World& world, time::Clock::TimeStep time_step)
+        -> void = 0;
 
 private:
 };

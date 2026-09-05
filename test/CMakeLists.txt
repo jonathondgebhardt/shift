@@ -17,17 +17,23 @@ shift_add_test(
   SOURCES
   source/core/Component_test.cpp
   source/core/Entity_test.cpp
-  source/core/FixedTimeUpdater_test.cpp
   source/core/OptionalEntityReference_test.cpp
-  source/core/RealTimeUpdater_test.cpp
   source/core/SimulationRunner_test.cpp
-  source/core/SimulationTime_test.cpp
-  source/core/TimeConvert_test.cpp
-  source/core/Timer_test.cpp
   source/core/UUID_test.cpp
   source/core/World_test.cpp
   LINKS
   shift::core
+)
+shift_add_test(
+  time
+  SOURCES
+  source/time/RealTimeUpdater_test.cpp
+  source/time/FixedTimeUpdater_test.cpp
+  source/time/SimulationTime_test.cpp
+  source/time/TimeOperators_test.cpp
+  source/time/Timer_test.cpp
+  LINKS
+  shift::time
 )
 shift_add_test(
   logger

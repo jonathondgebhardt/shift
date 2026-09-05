@@ -1,18 +1,18 @@
 #include <cmath>
 #include <memory>
 
-#include "shift/core/Clock.hpp"
 #include "shift/core/Entity.hpp"
-#include "shift/core/FixedTimeUpdater.hpp"
 #include "shift/core/Simulation.hpp"
 #include "shift/core/SimulationRunner.hpp"
 #include "shift/core/System.hpp"
-#include "shift/core/TimeTypes.hpp"
 #include "shift/core/World.hpp"
 #include "shift/logger/Log.hpp"
 #include "shift/telemetry/ConsoleTelemetryRecorder.hpp"
 #include "shift/telemetry/EntityDataDefinitions.hpp"
 #include "shift/telemetry/Telemetry.hpp"
+#include "shift/time/Clock.hpp"
+#include "shift/time/FixedTimeUpdater.hpp"
+#include "shift/time/TimeTypes.hpp"
 
 namespace
 {
@@ -44,7 +44,7 @@ struct OrbitSystem : shift::System
         }
     }
 
-    auto process(shift::World& world, shift::Clock::TimeStep time_step)
+    auto process(shift::World& world, shift::time::Clock::TimeStep time_step)
         -> void override
     {
         // todo: consider abstracting OptionalEntityReference to add unwrap
@@ -52,7 +52,7 @@ struct OrbitSystem : shift::System
         entity.position().x = radius * std::cos(angle);
         entity.position().y = radius * std::sin(angle);
 
-        angle += speed * static_cast<double>(time_step.delta.count());
+        angle += speed * static_cast<double>(time_step.delta.data());
 
         constexpr auto two_pi = 2 * std::numbers::pi;
         if (angle > two_pi) {
@@ -76,9 +76,9 @@ auto main() -> int
     auto simulation = shift::Simulation{};
     auto& entity = simulation.world().add_entity();
 
-    auto runner = shift::SimulationRunner{
-        std::make_unique<shift::FixedTimeUpdater<shift::time::Milliseconds>>(
-            shift::time::Milliseconds{16})};
+    auto runner =
+        shift::SimulationRunner{std::make_unique<shift::time::FixedTimeUpdater>(
+            shift::time::Duration{shift::time::Milliseconds{16}})};
 
     auto telemetry = shift::telemetry::Telemetry{
         std::make_unique<shift::telemetry::ConsoleTelemetryRecorder>()};

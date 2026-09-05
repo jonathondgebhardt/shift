@@ -1,8 +1,8 @@
-#include "shift/core/RealTimeUpdater.hpp"
+#include "shift/time/RealTimeUpdater.hpp"
 
-#include "shift/core/Clock.hpp"
+#include "shift/time/Clock.hpp"
 
-namespace shift
+namespace shift::time
 {
 
 auto RealTimeUpdater::startup() -> void
@@ -15,4 +15,4 @@ auto RealTimeUpdater::update_impl(Clock& clock) -> void
     update_delta(clock, m_timer.tick());
 }
 
-}  // namespace shift
+}  // namespace shift::time

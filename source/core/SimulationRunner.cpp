@@ -5,16 +5,16 @@
 
 #include "shift/core/Simulation.hpp"
 
-#include "shift/core/Clock.hpp"
 #include "shift/core/SimulationRunner.hpp"
 #include "shift/core/System.hpp"
-#include "shift/core/TimeUpdater.hpp"
 #include "shift/logger/Log.hpp"
+#include "shift/time/Clock.hpp"
+#include "shift/time/TimeUpdater.hpp"
 
 namespace shift
 {
 
-SimulationRunner::SimulationRunner(std::unique_ptr<TimeUpdater> updater)
+SimulationRunner::SimulationRunner(std::unique_ptr<time::TimeUpdater> updater)
     : m_updater{std::move(updater)}
 {
     if (m_updater == nullptr) {

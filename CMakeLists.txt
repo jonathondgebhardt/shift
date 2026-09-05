@@ -25,13 +25,17 @@ shift_add_library(
   spdlog::spdlog
 )
 shift_add_library(
+  time
+  SOURCES
+  source/time/Clock.cpp
+  source/time/RealTimeUpdater.cpp
+)
+shift_add_library(
   core
   SOURCES
-  source/core/Clock.cpp
   source/core/Component.cpp
   source/core/Entity.cpp
   source/core/OptionalEntityReference.cpp
-  source/core/RealTimeUpdater.cpp
   source/core/SimulationRunner.cpp
   source/core/UUID.cpp
   source/core/World.cpp
@@ -40,6 +44,7 @@ shift_add_library(
   source/telemetry/MemoryTelemetryRecorder.cpp
   LINKS
   shift_logger
+  shift_time
 )
 
 # ---- Examples ----

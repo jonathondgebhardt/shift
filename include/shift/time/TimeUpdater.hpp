@@ -1,10 +1,10 @@
 #pragma once
 
-#include "shift/core/Clock.hpp"
-#include "shift/core/SimulationTime.hpp"
-#include "shift/core/TimeTypes.hpp"
+#include "shift/time/Clock.hpp"
+#include "shift/time/Duration.hpp"
+#include "shift/time/SimulationTime.hpp"
 
-namespace shift
+namespace shift::time
 {
 
 class TimeUpdater
@@ -26,12 +26,12 @@ public:
     }
 
 protected:
-    static auto update_time(Clock& clock, time::SimulationTime time) -> void
+    static auto update_time(Clock& clock, SimulationTime time) -> void
     {
         clock.set_time(time);
     }
 
-    static auto update_delta(Clock& clock, time::Microseconds delta) -> void
+    static auto update_delta(Clock& clock, Duration delta) -> void
     {
         clock.set_delta(delta);
     }
@@ -40,4 +40,4 @@ private:
     virtual auto update_impl(Clock& clock) -> void = 0;
 };
 
-}  // namespace shift
+}  // namespace shift::time

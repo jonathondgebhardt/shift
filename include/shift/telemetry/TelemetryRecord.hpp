@@ -3,8 +3,8 @@
 #include <string_view>
 
 #include "shift/core/Entity.hpp"
-#include "shift/core/SimulationTime.hpp"
 #include "shift/telemetry/TelemetryValue.hpp"
+#include "shift/time/SimulationTime.hpp"
 
 namespace shift::telemetry
 {
