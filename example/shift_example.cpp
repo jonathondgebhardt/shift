@@ -56,7 +56,6 @@ struct OrbitSystem : shift::System
         static auto update_count = 0u;
         update_count++;
 
-        // todo: consider abstracting OptionalEntityReference to add unwrap
         auto& entity = world.find_entity(uid).try_unwrap();
         entity.position().x = radius * std::cos(angle);
         entity.position().y = radius * std::sin(angle);
