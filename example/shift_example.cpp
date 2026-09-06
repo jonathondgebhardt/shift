@@ -5,6 +5,7 @@
 #include "shift/core/Simulation.hpp"
 #include "shift/core/SimulationRunner.hpp"
 #include "shift/core/System.hpp"
+#include "shift/core/Systems.hpp"
 #include "shift/core/World.hpp"
 #include "shift/logger/Log.hpp"
 #include "shift/telemetry/ConsoleTelemetryRecorder.hpp"
@@ -101,7 +102,7 @@ auto main() -> int
     auto system = std::make_unique<OrbitSystem>(entity.uid());
     system->speed = 1.0;
     system->radius = 10u;
-    simulation.add_system(std::move(system));
+    simulation.systems().add_system(std::move(system));
 
     runner.run(simulation);
 

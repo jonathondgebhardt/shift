@@ -17,9 +17,7 @@ namespace shift
 auto SimulationRunner::run(Simulation& simulation) -> void
 {
     shift::log::trace().append("starting up systems");
-    std::ranges::for_each(simulation.systems(),
-                          [](const std::unique_ptr<System>& system)
-                          { system->startup(); });
+    simulation.systems().startup();
 
     shift::log::trace().append("sampling initial world state");
     if (m_telemetry != nullptr) {
@@ -29,8 +27,10 @@ auto SimulationRunner::run(Simulation& simulation) -> void
     auto& clock = simulation.clock();
 
     shift::log::trace().append("scheduling first update");
+    // todo: systems().systems() is kinda gross. can scheduling the first update
+    // be encapsulated?
     std::ranges::for_each(
-        simulation.systems(),
+        simulation.systems().systems(),
         [&](const std::unique_ptr<System>& system)
         {
             const auto result = system->first_update();
@@ -57,16 +57,14 @@ auto SimulationRunner::run(Simulation& simulation) -> void
         clock.set_time(current_update->time);
         const auto time_step = clock.time_step();
 
-        auto found_it = std::ranges::find_if(
-            simulation.systems(),
-            [&](const std::unique_ptr<System>& system)
-            { return system->uid() == current_update->uid; });
-        if (found_it == simulation.systems().end()) {
+        // todo: i thought about encapsulating updating a system into Systems,
+        // but that introduce a coupling between Systems and UpdateScheduler.
+        auto* system = simulation.systems().find_system(current_update->uid);
+        if (system == nullptr) {
             throw std::runtime_error(std::format(
                 "failed to find system with uid {}", current_update->uid));
         }
 
-        const auto& system = *found_it;
         const auto result = system->process(simulation.world(), time_step);
         if (const auto next_update = result.next_time(clock.time());
             next_update)

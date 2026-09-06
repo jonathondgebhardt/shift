@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "shift/core/System.hpp"
+#include "shift/core/Systems.hpp"
 #include "shift/core/World.hpp"
 #include "shift/core/shift_core_export.hpp"
 #include "shift/time/Clock.hpp"
@@ -18,12 +19,7 @@ public:
 
     auto world() -> World& { return m_world; }
 
-    auto add_system(std::unique_ptr<System> system) -> void;
-
-    auto systems() const -> std::span<const std::unique_ptr<System>>
-    {
-        return m_systems;
-    }
+    auto systems() -> Systems& { return m_systems; }
 
 private:
     time::Clock m_clock;
@@ -33,7 +29,7 @@ private:
     // simulation's progression; perform some operation on simulation state
     // - What work needs to happen as the simulation advances?
     // - e.g.: physics, collision, simulation models
-    std::vector<std::unique_ptr<System>> m_systems;
+    Systems m_systems;
 
     // services: provides capabilities used by the simulation but does not
     // itself constitute a simulation process

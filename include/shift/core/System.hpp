@@ -34,6 +34,7 @@ public:
 
     virtual auto first_update() -> UpdateResult = 0;
 
+    // todo: rename to update?
     virtual auto process(World& world,
                          time::Clock::TimeStep time_step) -> UpdateResult = 0;
 

@@ -7,6 +7,7 @@
 
 #include "shift/core/SimulationRunner.hpp"
 #include "shift/core/System.hpp"
+#include "shift/core/Systems.hpp"
 #include "shift/core/UpdateResult.hpp"
 #include "shift/core/World.hpp"
 #include "shift/time/Clock.hpp"
@@ -60,7 +61,7 @@ TEST_CASE("SimulationRunner run", "[core][SimulationRunner]")
 
     constexpr auto duration = shift::time::Duration{shift::time::Seconds{1}};
     auto system = std::make_unique<TestSystem>(duration);
-    simulation.add_system(std::move(system));
+    simulation.systems().add_system(std::move(system));
 
     runner.run(simulation);
 
