@@ -46,8 +46,8 @@ private:
 
     explicit Message(Level level, std::source_location location);
 
-    auto append_formatted(std::string_view format, std::format_args args)
-        -> void;
+    auto append_formatted(std::string_view format,
+                          std::format_args args) -> void;
 
     friend auto trace(std::source_location location) -> Message;
     friend auto debug(std::source_location location) -> Message;
@@ -57,23 +57,23 @@ private:
     friend auto critical(std::source_location location) -> Message;
 };
 
-SHIFT_LOGGER_EXPORT auto trace(std::source_location location = std::source_location::current())
-    -> Message;
+SHIFT_LOGGER_EXPORT auto trace(
+    std::source_location location = std::source_location::current()) -> Message;
 
-SHIFT_LOGGER_EXPORT auto debug(std::source_location location = std::source_location::current())
-    -> Message;
+SHIFT_LOGGER_EXPORT auto debug(
+    std::source_location location = std::source_location::current()) -> Message;
 
-SHIFT_LOGGER_EXPORT auto info(std::source_location location = std::source_location::current())
-    -> Message;
+SHIFT_LOGGER_EXPORT auto info(
+    std::source_location location = std::source_location::current()) -> Message;
 
-SHIFT_LOGGER_EXPORT auto warning(std::source_location location = std::source_location::current())
-    -> Message;
+SHIFT_LOGGER_EXPORT auto warning(
+    std::source_location location = std::source_location::current()) -> Message;
 
-SHIFT_LOGGER_EXPORT auto error(std::source_location location = std::source_location::current())
-    -> Message;
+SHIFT_LOGGER_EXPORT auto error(
+    std::source_location location = std::source_location::current()) -> Message;
 
-SHIFT_LOGGER_EXPORT auto critical(std::source_location location = std::source_location::current())
-    -> Message;
+SHIFT_LOGGER_EXPORT auto critical(
+    std::source_location location = std::source_location::current()) -> Message;
 
 template<typename... Args>
 auto Message::append(
