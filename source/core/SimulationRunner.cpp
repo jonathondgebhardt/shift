@@ -50,6 +50,8 @@ auto SimulationRunner::run(Simulation& simulation) -> void
     clock.set_time(first_update->time);
 
     // todo: check end condition before processing updates
+    // todo: this API is kind of annoying: make sure scheduler is not empty, get
+    // first next update event, then make sure it's not nullopt
     while (!m_scheduler.empty()) {
         const auto current_update = m_scheduler.top();
         m_scheduler.pop();
