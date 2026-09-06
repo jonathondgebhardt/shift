@@ -27,8 +27,8 @@ auto SimulationRunner::run(Simulation& simulation) -> void
     auto& clock = simulation.clock();
 
     shift::log::trace().append("scheduling first update");
-    // todo: systems().systems() is kinda gross. can scheduling the first update
-    // be encapsulated?
+    // todo: systems().systems() is gross. can scheduling the first update be
+    // encapsulated?
     std::ranges::for_each(
         simulation.systems().systems(),
         [&](const std::unique_ptr<System>& system)
