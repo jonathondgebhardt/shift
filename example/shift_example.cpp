@@ -1,34 +1,38 @@
 #include <cmath>
+#include <cstdint>
+#include <limits>
 #include <memory>
+#include <numbers>
+#include <stdexcept>
+#include <utility>
 
 #include "shift/core/Entity.hpp"
 #include "shift/core/Simulation.hpp"
 #include "shift/core/SimulationRunner.hpp"
 #include "shift/core/System.hpp"
 #include "shift/core/Systems.hpp"
+#include "shift/core/UpdateResult.hpp"
 #include "shift/core/World.hpp"
-#include "shift/logger/Log.hpp"
 #include "shift/telemetry/ConsoleTelemetryRecorder.hpp"
 #include "shift/telemetry/EntityDataDefinitions.hpp"
 #include "shift/telemetry/Telemetry.hpp"
 #include "shift/time/Clock.hpp"
-#include "shift/time/FixedTimeUpdater.hpp"
 #include "shift/time/TimeTypes.hpp"
 
 namespace
 {
 
-struct OrbitSystem : shift::System
+class OrbitSystem : public shift::System
 {
+public:
     explicit OrbitSystem(shift::EntityUID uid)
-        : shift::System(shift::SystemUID{1})
-        , uid{uid}
+        : m_uid{uid}
     {
     }
 
     auto startup() -> void override
     {
-        if (uid == shift::EntityUID{}) {
+        if (m_uid == shift::EntityUID{}) {
             throw std::runtime_error("uid cannot be empty");
         }
 
@@ -37,11 +41,11 @@ struct OrbitSystem : shift::System
             return std::abs(lhs - rhs) < std::numeric_limits<double>::epsilon();
         };
 
-        if (double_equal(radius, 0.0)) {
+        if (double_equal(m_radius, 0.0)) {
             throw std::runtime_error("radius cannot be zero");
         }
 
-        if (double_equal(speed, 0.0)) {
+        if (double_equal(m_speed, 0.0)) {
             throw std::runtime_error("speed cannot be zero");
         }
     }
@@ -57,31 +61,33 @@ struct OrbitSystem : shift::System
         static auto update_count = 0u;
         update_count++;
 
-        auto& entity = world.find_entity(uid).try_unwrap();
-        entity.position().x = radius * std::cos(angle);
-        entity.position().y = radius * std::sin(angle);
+        auto& entity = world.find_entity(m_uid).try_unwrap();
+        entity.position().x = m_radius * std::cos(m_angle);
+        entity.position().y = m_radius * std::sin(m_angle);
 
-        angle += speed * static_cast<double>(time_step.delta.data());
+        m_angle += m_speed * static_cast<double>(time_step.delta.data());
 
         constexpr auto two_pi = 2 * std::numbers::pi;
-        if (angle > two_pi) {
-            angle -= two_pi;
+        if (m_angle > two_pi) {
+            m_angle -= two_pi;
         }
 
         constexpr auto max_updates = 5;
         if (update_count < max_updates) {
+            using namespace std::chrono_literals;
             return shift::UpdateResult::schedule_after(
-                shift::time::Duration{shift::time::Milliseconds{16}});
+                shift::time::Duration{16ms});
         }
 
         return shift::UpdateResult::stop();
     }
 
-    shift::EntityUID uid;
+private:
+    shift::EntityUID m_uid;
 
-    double angle{};
-    double speed{};
-    std::uint8_t radius{};
+    double m_angle{};
+    double m_speed{1.0};
+    std::uint8_t m_radius{10u};
 };
 
 }  // namespace
@@ -100,8 +106,6 @@ auto main() -> int
     runner.set_telemetry(&telemetry);
 
     auto system = std::make_unique<OrbitSystem>(entity.uid());
-    system->speed = 1.0;
-    system->radius = 10u;
     simulation.systems().add_system(std::move(system));
 
     runner.run(simulation);
