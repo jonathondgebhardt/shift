@@ -54,6 +54,7 @@ public:
     SpdlogOutput()
     {
         // todo: should be able to configure sink externally
+        // todo: log file
         auto sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
 
         m_logger = std::make_shared<spdlog::logger>("shift", std::move(sink));
