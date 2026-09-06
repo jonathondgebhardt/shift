@@ -25,18 +25,17 @@ public:
     auto operator=(const System&) -> System& = default;
     auto operator=(System&&) noexcept -> System& = default;
 
-    // todo: maybe systems should "schedule" their next update. that would
-    // potentially be a complete shift away from other time updaters unless they
-    // just ignored scheduling.
-
     auto uid() const { return m_uid; }
+
+    // todo: friend function
+    auto set_uid(SystemUID uid) { m_uid = uid; }
 
     virtual auto startup() -> void {}
 
     virtual auto first_update() -> UpdateResult = 0;
 
-    virtual auto process(World& world,
-                         time::Clock::TimeStep time_step) -> UpdateResult = 0;
+    virtual auto process(World& world, time::Clock::TimeStep time_step)
+        -> UpdateResult = 0;
 
 private:
     SystemUID m_uid{};

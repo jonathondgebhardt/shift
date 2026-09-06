@@ -18,10 +18,7 @@ public:
 
     auto world() -> World& { return m_world; }
 
-    auto add_system(std::unique_ptr<System> system)
-    {
-        m_systems.push_back(std::move(system));
-    }
+    auto add_system(std::unique_ptr<System> system) -> void;
 
     auto systems() const -> std::span<const std::unique_ptr<System>>
     {
