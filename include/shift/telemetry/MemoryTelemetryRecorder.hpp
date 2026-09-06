@@ -3,13 +3,14 @@
 #include <span>
 #include <vector>
 
+#include "shift/core/shift_core_export.hpp"
 #include "shift/telemetry/TelemetryRecord.hpp"
 #include "shift/telemetry/TelemetryRecorder.hpp"
 
 namespace shift::telemetry
 {
 
-class MemoryTelemetryRecorder : public TelemetryRecorder
+class SHIFT_CORE_EXPORT MemoryTelemetryRecorder : public TelemetryRecorder
 {
 public:
     auto record(const TelemetryRecord& record) -> void override;

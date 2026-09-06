@@ -6,6 +6,8 @@
 #include <source_location>
 #include <string_view>
 
+#include "shift/logger/shift_logger_export.hpp"
+
 namespace shift::log
 {
 
@@ -19,7 +21,7 @@ enum class Level : std::uint8_t
     CRITICAL
 };
 
-class Message
+class SHIFT_LOGGER_EXPORT Message
 {
 public:
     Message(const Message&) = delete;
@@ -44,8 +46,8 @@ private:
 
     explicit Message(Level level, std::source_location location);
 
-    auto append_formatted(std::string_view format,
-                          std::format_args args) -> void;
+    auto append_formatted(std::string_view format, std::format_args args)
+        -> void;
 
     friend auto trace(std::source_location location) -> Message;
     friend auto debug(std::source_location location) -> Message;
@@ -55,22 +57,22 @@ private:
     friend auto critical(std::source_location location) -> Message;
 };
 
-auto trace(std::source_location location = std::source_location::current())
+SHIFT_LOGGER_EXPORT auto trace(std::source_location location = std::source_location::current())
     -> Message;
 
-auto debug(std::source_location location = std::source_location::current())
+SHIFT_LOGGER_EXPORT auto debug(std::source_location location = std::source_location::current())
     -> Message;
 
-auto info(std::source_location location = std::source_location::current())
+SHIFT_LOGGER_EXPORT auto info(std::source_location location = std::source_location::current())
     -> Message;
 
-auto warning(std::source_location location = std::source_location::current())
+SHIFT_LOGGER_EXPORT auto warning(std::source_location location = std::source_location::current())
     -> Message;
 
-auto error(std::source_location location = std::source_location::current())
+SHIFT_LOGGER_EXPORT auto error(std::source_location location = std::source_location::current())
     -> Message;
 
-auto critical(std::source_location location = std::source_location::current())
+SHIFT_LOGGER_EXPORT auto critical(std::source_location location = std::source_location::current())
     -> Message;
 
 template<typename... Args>

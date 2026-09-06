@@ -5,11 +5,12 @@
 #include <string_view>
 
 #include "shift/logger/Log.hpp"
+#include "shift/logger/shift_logger_export.hpp"
 
 namespace shift::log::detail
 {
 
-class Backend
+class SHIFT_LOGGER_EXPORT Backend
 {
 public:
     class Output
@@ -50,6 +51,6 @@ private:
     std::shared_ptr<Output> m_output;
 };
 
-auto backend() -> Backend&;
+SHIFT_LOGGER_EXPORT auto backend() -> Backend&;
 
 }  // namespace shift::log::detail
