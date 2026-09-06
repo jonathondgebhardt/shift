@@ -67,7 +67,7 @@ auto SimulationRunner::run(Simulation& simulation) -> void
                 "failed to find system with uid {}", current_update->uid));
         }
 
-        const auto result = system->process(simulation.world(), time_step);
+        const auto result = system->update(simulation.world(), time_step);
         if (const auto next_update = result.next_time(clock.time());
             next_update)
         {

@@ -55,7 +55,7 @@ public:
         return shift::UpdateResult::schedule_now();
     }
 
-    auto process(shift::World& world, shift::time::Clock::TimeStep time_step)
+    auto update(shift::World& world, shift::time::Clock::TimeStep time_step)
         -> shift::UpdateResult override
     {
         static auto update_count = 0u;
