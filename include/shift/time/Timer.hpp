@@ -35,6 +35,7 @@ public:
     }
 
 private:
+    SHIFT_SUPPRESS_C4251
     T::time_point m_start;
     T::time_point m_last_tick;
 };

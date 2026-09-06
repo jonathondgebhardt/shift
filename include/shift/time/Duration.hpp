@@ -64,6 +64,7 @@ public:
     auto to_string() const -> std::string { return std::to_string(data()); }
 
 private:
+    SHIFT_SUPPRESS_C4251
     DurationType m_duration{};
 };
 

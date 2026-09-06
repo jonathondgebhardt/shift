@@ -17,6 +17,7 @@ public:
     auto update_impl(Clock& clock) -> void override;
 
 private:
+    SHIFT_SUPPRESS_C4251
     Timer<std::chrono::high_resolution_clock> m_timer;
 };
 

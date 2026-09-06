@@ -48,6 +48,7 @@ public:
     auto set_output(std::shared_ptr<Output> output) -> std::shared_ptr<Output>;
 
 private:
+    SHIFT_SUPPRESS_C4251
     std::shared_ptr<Output> m_output;
 };
 

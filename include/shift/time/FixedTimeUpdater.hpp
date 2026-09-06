@@ -25,6 +25,7 @@ public:
     }
 
 private:
+    SHIFT_SUPPRESS_C4251
     Duration m_duration;
 };
 

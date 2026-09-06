@@ -41,13 +41,15 @@ public:
     auto enabled() const noexcept -> bool;
 
 private:
+    SHIFT_SUPPRESS_C4251
+
     struct Impl;
     std::unique_ptr<Impl> m_impl;
 
     explicit Message(Level level, std::source_location location);
 
-    auto append_formatted(std::string_view format,
-                          std::format_args args) -> void;
+    auto append_formatted(std::string_view format, std::format_args args)
+        -> void;
 
     friend auto trace(std::source_location location) -> Message;
     friend auto debug(std::source_location location) -> Message;
@@ -57,6 +59,7 @@ private:
     friend auto critical(std::source_location location) -> Message;
 };
 
+// error C2375: redefinition; different linkage
 SHIFT_LOGGER_EXPORT auto trace(
     std::source_location location = std::source_location::current()) -> Message;
 
