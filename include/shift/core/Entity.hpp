@@ -56,9 +56,9 @@ public:
 
     auto has_component(std::string_view name) const -> bool;
 
-    auto get_component(UUID uuid) const -> Component*;
+    auto find_component(UUID uuid) const -> Component*;
 
-    auto get_component(std::string_view name) const -> Component*;
+    auto find_component(std::string_view name) const -> Component*;
 
     auto position() const -> Vec3 { return m_position; }
 

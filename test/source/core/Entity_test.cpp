@@ -83,11 +83,11 @@ TEST_CASE("Entity get_component", "[core][Entity]")
 
     SECTION("UUID")
     {
-        CHECK(object.get_component(uuid));
+        CHECK(object.find_component(uuid));
     }
 
     SECTION("name")
     {
-        CHECK(object.get_component(name));
+        CHECK(object.find_component(name));
     }
 }

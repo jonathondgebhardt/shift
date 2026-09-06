@@ -36,15 +36,15 @@ auto Entity::add_component(std::unique_ptr<Component> component) -> bool
 
 auto Entity::has_component(UUID uuid) const -> bool
 {
-    return get_component(uuid) != nullptr;
+    return find_component(uuid) != nullptr;
 }
 
 auto Entity::has_component(std::string_view name) const -> bool
 {
-    return get_component(name) != nullptr;
+    return find_component(name) != nullptr;
 }
 
-auto Entity::get_component(UUID uuid) const -> Component*
+auto Entity::find_component(UUID uuid) const -> Component*
 {
     auto pipeline = m_components
         | std::views::transform([](const std::unique_ptr<Component>& component)
@@ -59,7 +59,7 @@ auto Entity::get_component(UUID uuid) const -> Component*
     return found != pipeline.end() ? *found : nullptr;
 }
 
-auto Entity::get_component(std::string_view name) const -> Component*
+auto Entity::find_component(std::string_view name) const -> Component*
 {
     auto pipeline = m_components
         | std::views::transform([](const std::unique_ptr<Component>& component)
