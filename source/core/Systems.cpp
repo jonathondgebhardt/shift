@@ -40,4 +40,11 @@ auto Systems::find_system(SystemUID uid) -> System*
     return found != m_systems.end() ? found->get() : nullptr;
 }
 
+auto Systems::startup() -> void
+{
+    std::ranges::for_each(m_systems,
+                          [](const std::unique_ptr<System>& system)
+                          { system->startup(); });
+}
+
 }  // namespace shift

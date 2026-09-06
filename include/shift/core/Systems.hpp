@@ -23,6 +23,8 @@ public:
         return m_systems;
     }
 
+    auto startup() -> void;
+
 private:
     SHIFT_SUPPRESS_C4251
     std::vector<std::unique_ptr<System>> m_systems;
