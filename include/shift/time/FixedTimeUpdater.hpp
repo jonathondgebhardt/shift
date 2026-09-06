@@ -13,7 +13,10 @@ public:
     explicit FixedTimeUpdater(Duration duration)
         : m_duration{duration}
     {
-        // todo: ensure m_delta > 0?
+        if (m_duration.data() <= 0) {
+            throw std::runtime_error(
+                "cannot update time with zero or less duration");
+        }
     }
 
     auto update_impl(Clock& clock) -> void override
