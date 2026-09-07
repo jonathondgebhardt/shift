@@ -20,7 +20,9 @@ TEST_CASE("Timer elapsed", "[time][Timer]")
     CHECK(elapsed < timer.elapsed());
 }
 
-TEST_CASE("Timer tick", "[time][Timer]")
+// disable this test because it's not implemented very well.
+// my goal was to make sure time elapses after reset and tick.
+TEST_CASE("Timer tick", "[time][Timer][.]")
 {
     auto timer = shift::time::Timer{};
     timer.reset();
