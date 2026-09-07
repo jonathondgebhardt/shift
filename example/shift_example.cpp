@@ -76,7 +76,7 @@ public:
         if (update_count < max_updates) {
             using namespace std::chrono_literals;
             return shift::UpdateResult::schedule_after(
-                shift::time::Duration{16ms});
+                shift::time::Duration{1ms});
         }
 
         return shift::UpdateResult::stop();
@@ -86,8 +86,8 @@ private:
     shift::EntityUID m_uid;
 
     double m_angle{};
-    double m_speed{1.0};
-    std::uint8_t m_radius{10u};
+    double m_speed{0.025};
+    std::uint16_t m_radius{10u};
 };
 
 }  // namespace
