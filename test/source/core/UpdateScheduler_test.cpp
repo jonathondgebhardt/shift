@@ -30,7 +30,7 @@ public:
     }
 
     auto update([[maybe_unused]] shift::World& world,
-                 [[maybe_unused]] shift::time::Clock::TimeStep time_step)
+                [[maybe_unused]] shift::time::Clock::TimeStep time_step)
         -> shift::UpdateResult override
     {
         return shift::UpdateResult::schedule_after(

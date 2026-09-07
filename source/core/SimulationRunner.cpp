@@ -16,17 +16,17 @@ namespace shift
 
 auto SimulationRunner::run(Simulation& simulation) -> void
 {
-    shift::log::trace().append("starting up systems");
+    shift::log::trace("starting up systems");
     simulation.systems().startup();
 
-    shift::log::trace().append("sampling initial world state");
+    shift::log::trace("sampling initial world state");
     if (m_telemetry != nullptr) {
         m_telemetry->sample({}, simulation.world());
     }
 
     auto& clock = simulation.clock();
 
-    shift::log::trace().append("scheduling first update");
+    shift::log::trace("scheduling first update");
     // todo: systems().systems() is gross. can scheduling the first update be
     // encapsulated?
     std::ranges::for_each(
@@ -46,7 +46,7 @@ auto SimulationRunner::run(Simulation& simulation) -> void
         throw std::runtime_error("no systems scheduled a first update");
     }
 
-    shift::log::trace().append("running simulation");
+    shift::log::trace("running simulation");
     clock.set_time(first_update->time);
 
     // todo: check end condition before processing updates
@@ -79,7 +79,7 @@ auto SimulationRunner::run(Simulation& simulation) -> void
         }
     }
 
-    shift::log::trace().append("shutting down simulation");
+    shift::log::trace("shutting down simulation");
 }
 
 }  // namespace shift

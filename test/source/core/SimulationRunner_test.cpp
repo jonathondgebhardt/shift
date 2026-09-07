@@ -31,7 +31,7 @@ public:
     }
 
     auto update([[maybe_unused]] shift::World& world,
-                 [[maybe_unused]] shift::time::Clock::TimeStep time_step)
+                [[maybe_unused]] shift::time::Clock::TimeStep time_step)
         -> shift::UpdateResult override
     {
         static auto run_once = false;
