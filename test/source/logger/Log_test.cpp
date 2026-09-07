@@ -27,7 +27,7 @@ TEST_CASE("Log trace", "[logger]")
     auto sink = std::make_shared<TestSink>();
     const auto scoped_sink = shift::log::testing::ScopedSink{sink};
 
-    shift::log::trace().append("Something went wrong");
+    shift::log::trace("Something went wrong");
 
     REQUIRE(sink->records.size() == 1);
     CHECK(sink->records[0].level == shift::log::Level::TRACE);
@@ -39,7 +39,7 @@ TEST_CASE("Log debug", "[logger]")
     auto sink = std::make_shared<TestSink>();
     const auto scoped_sink = shift::log::testing::ScopedSink{sink};
 
-    shift::log::debug().append("Something went wrong");
+    shift::log::debug("Something went wrong");
 
     REQUIRE(sink->records.size() == 1);
     CHECK(sink->records[0].level == shift::log::Level::DEBUG);
@@ -51,7 +51,7 @@ TEST_CASE("Log info", "[logger]")
     auto sink = std::make_shared<TestSink>();
     const auto scoped_sink = shift::log::testing::ScopedSink{sink};
 
-    shift::log::info().append("Something went wrong");
+    shift::log::info("Something went wrong");
 
     REQUIRE(sink->records.size() == 1);
     CHECK(sink->records[0].level == shift::log::Level::INFO);
@@ -63,7 +63,7 @@ TEST_CASE("Log warning", "[logger]")
     auto sink = std::make_shared<TestSink>();
     const auto scoped_sink = shift::log::testing::ScopedSink{sink};
 
-    shift::log::warning().append("Something went wrong");
+    shift::log::warning("Something went wrong");
 
     REQUIRE(sink->records.size() == 1);
     CHECK(sink->records[0].level == shift::log::Level::WARNING);
@@ -75,7 +75,7 @@ TEST_CASE("Log error", "[logger]")
     auto sink = std::make_shared<TestSink>();
     const auto scoped_sink = shift::log::testing::ScopedSink{sink};
 
-    shift::log::error().append("Something went wrong");
+    shift::log::error("Something went wrong");
 
     REQUIRE(sink->records.size() == 1);
     CHECK(sink->records[0].level == shift::log::Level::ERROR);
@@ -87,24 +87,9 @@ TEST_CASE("Log critical", "[logger]")
     auto sink = std::make_shared<TestSink>();
     const auto scoped_sink = shift::log::testing::ScopedSink{sink};
 
-    shift::log::critical().append("Something went wrong");
+    shift::log::critical("Something went wrong");
 
     REQUIRE(sink->records.size() == 1);
     CHECK(sink->records[0].level == shift::log::Level::CRITICAL);
     CHECK(sink->records[0].message == "Something went wrong");
-}
-
-// i'm just disabling this test until i add this feature
-TEST_CASE("Log multiple messages", "[logger][.]")
-{
-    auto sink = std::make_shared<TestSink>();
-    const auto scoped_sink = shift::log::testing::ScopedSink{sink};
-
-    {
-        auto critical = shift::log::critical();
-        critical.append("Something went wrong");
-        critical.append("Something else went wrong");
-    }
-
-    CHECK(sink->records.size() == 2);
 }
