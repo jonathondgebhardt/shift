@@ -52,5 +52,12 @@ shift_add_test(
   LINKS
   shift::core
 )
+shift_add_test(
+  math
+  SOURCES
+  source/math/Utilities_test.cpp
+  LINKS
+  shift::core
+)
 
 add_folders(Test)
