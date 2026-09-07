@@ -1,9 +1,7 @@
-#include <format>
-#include <iterator>
 #include <memory>
 #include <source_location>
 #include <string>
-#include <string_view>
+#include <utility>
 
 #include "shift/logger/Log.hpp"
 
@@ -14,9 +12,10 @@ namespace shift::log
 
 struct Message::Impl
 {
-    Impl(Level lev, std::source_location loc)
+    Impl(std::string tex, Level lev, std::source_location loc)
         : level{lev}
         , location{loc}
+        , text{std::move(tex)}
     {
     }
 
@@ -26,24 +25,14 @@ struct Message::Impl
     bool submitted = false;
 };
 
-Message::Message(Level level, std::source_location location)
-    : m_impl{std::make_unique<Impl>(level, location)}
+Message::Message(std::string text, Level level, std::source_location location)
+    : m_impl{std::make_unique<Impl>(std::move(text), level, location)}
 {
 }
 
 Message::~Message()
 {
     submit();
-}
-
-auto Message::append_formatted(std::string_view format,
-                               std::format_args args) -> void
-{
-    if (m_impl->submitted) {
-        return;
-    }
-
-    std::vformat_to(std::back_inserter(m_impl->text), format, args);
 }
 
 auto Message::submit() -> void
@@ -64,40 +53,6 @@ auto Message::enabled() const noexcept -> bool
     }
 
     return detail::backend().enabled(m_impl->level);
-}
-
-// ------------------------------------------------------------
-// Factory functions
-// ------------------------------------------------------------
-
-auto trace(std::source_location location) -> Message
-{
-    return Message{Level::TRACE, location};
-}
-
-auto debug(std::source_location location) -> Message
-{
-    return Message{Level::DEBUG, location};
-}
-
-auto info(std::source_location location) -> Message
-{
-    return Message{Level::INFO, location};
-}
-
-auto warning(std::source_location location) -> Message
-{
-    return Message{Level::WARNING, location};
-}
-
-auto error(std::source_location location) -> Message
-{
-    return Message{Level::ERROR, location};
-}
-
-auto critical(std::source_location location) -> Message
-{
-    return Message{Level::CRITICAL, location};
 }
 
 }  // namespace shift::log

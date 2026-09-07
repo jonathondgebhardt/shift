@@ -4,7 +4,6 @@
 #include <format>
 #include <memory>
 #include <source_location>
-#include <string_view>
 
 #include "shift/logger/shift_logger_export.hpp"
 
@@ -24,16 +23,15 @@ enum class Level : std::uint8_t
 class SHIFT_LOGGER_EXPORT Message
 {
 public:
+    explicit Message(std::string text,
+                     Level level,
+                     std::source_location location);
+
     Message(const Message&) = delete;
     Message(Message&&) noexcept = default;
-
     ~Message();
-
     auto operator=(const Message&) -> Message& = delete;
     auto operator=(Message&&) noexcept -> Message& = default;
-
-    template<typename... Args>
-    auto append(std::format_string<Args...> format, Args&&... args) -> Message&;
 
     auto submit() -> void;
 
@@ -45,50 +43,69 @@ private:
 
     struct Impl;
     std::unique_ptr<Impl> m_impl;
-
-    explicit Message(Level level, std::source_location location);
-
-    auto append_formatted(std::string_view format, std::format_args args)
-        -> void;
-
-    friend auto trace(std::source_location location) -> Message;
-    friend auto debug(std::source_location location) -> Message;
-    friend auto info(std::source_location location) -> Message;
-    friend auto warning(std::source_location location) -> Message;
-    friend auto error(std::source_location location) -> Message;
-    friend auto critical(std::source_location location) -> Message;
 };
 
-// error C2375: redefinition; different linkage
+// todo: way to much duplication
+template<typename... Args>
 SHIFT_LOGGER_EXPORT auto trace(
-    std::source_location location = std::source_location::current()) -> Message;
-
-SHIFT_LOGGER_EXPORT auto debug(
-    std::source_location location = std::source_location::current()) -> Message;
-
-SHIFT_LOGGER_EXPORT auto info(
-    std::source_location location = std::source_location::current()) -> Message;
-
-SHIFT_LOGGER_EXPORT auto warning(
-    std::source_location location = std::source_location::current()) -> Message;
-
-SHIFT_LOGGER_EXPORT auto error(
-    std::source_location location = std::source_location::current()) -> Message;
-
-SHIFT_LOGGER_EXPORT auto critical(
-    std::source_location location = std::source_location::current()) -> Message;
+    std::format_string<Args...> msg,
+    Args&&... args,
+    std::source_location location = std::source_location::current()) -> Message
+{
+    return Message{
+        std::format(msg, std::forward<Args>(args)...), Level::TRACE, location};
+}
 
 template<typename... Args>
-auto Message::append(
-    std::format_string<Args...> format,
-    Args&&... args)  // NOLINT(cppcoreguidelines-missing-std-forward)
-    -> Message&
+SHIFT_LOGGER_EXPORT auto debug(
+    std::format_string<Args...> msg,
+    Args&&... args,
+    std::source_location location = std::source_location::current()) -> Message
 {
-    if (enabled()) {
-        append_formatted(format.get(), std::make_format_args(args...));
-    }
+    return Message{
+        std::format(msg, std::forward<Args>(args)...), Level::DEBUG, location};
+}
 
-    return *this;
+template<typename... Args>
+SHIFT_LOGGER_EXPORT auto info(
+    std::format_string<Args...> msg,
+    Args&&... args,
+    std::source_location location = std::source_location::current()) -> Message
+{
+    return Message{
+        std::format(msg, std::forward<Args>(args)...), Level::INFO, location};
+}
+
+template<typename... Args>
+SHIFT_LOGGER_EXPORT auto warning(
+    std::format_string<Args...> msg,
+    Args&&... args,
+    std::source_location location = std::source_location::current()) -> Message
+{
+    return Message{std::format(msg, std::forward<Args>(args)...),
+                   Level::WARNING,
+                   location};
+}
+
+template<typename... Args>
+SHIFT_LOGGER_EXPORT auto error(
+    std::format_string<Args...> msg,
+    Args&&... args,
+    std::source_location location = std::source_location::current()) -> Message
+{
+    return Message{
+        std::format(msg, std::forward<Args>(args)...), Level::ERROR, location};
+}
+
+template<typename... Args>
+SHIFT_LOGGER_EXPORT auto critical(
+    std::format_string<Args...> msg,
+    Args&&... args,
+    std::source_location location = std::source_location::current()) -> Message
+{
+    return Message{std::format(msg, std::forward<Args>(args)...),
+                   Level::CRITICAL,
+                   location};
 }
 
 }  // namespace shift::log
