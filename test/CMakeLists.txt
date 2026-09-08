@@ -56,8 +56,9 @@ shift_add_test(
   math
   SOURCES
   source/math/Utilities_test.cpp
+  source/math/Vec3_test.cpp
   LINKS
-  shift::core
+  shift::math
 )
 
 add_folders(Test)
