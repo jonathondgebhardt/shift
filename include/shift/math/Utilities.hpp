@@ -12,8 +12,9 @@ namespace shift::math
 template<typename T>
     requires std::is_floating_point_v<T>
 SHIFT_MATH_EXPORT constexpr auto floating_point_eq(
-    const T lhs, const T rhs, T epsilon = std::numeric_limits<T>::epsilon())
-    -> auto
+    const T lhs,
+    const T rhs,
+    T epsilon = std::numeric_limits<T>::epsilon()) -> auto
 {
     return std::abs(lhs - rhs) < epsilon;
 }

@@ -16,10 +16,10 @@ struct SHIFT_MATH_EXPORT Vec3
 
     // NOLINTBEGIN(bugprone-easily-swappable-parameters,
     // readability-identifier-length)
-    constexpr Vec3(double x, double y, double z)
-        : x{x}
-        , y{y}
-        , z{z}
+    constexpr Vec3(double _x, double _y, double _z)
+        : x{_x}
+        , y{_y}
+        , z{_z}
     {
     }
 
@@ -70,8 +70,8 @@ struct SHIFT_MATH_EXPORT Vec3
         return *this;
     }
 
-    friend constexpr auto operator*(const Vec3& vec, const double scalar)
-        -> Vec3
+    friend constexpr auto operator*(const Vec3& vec,
+                                    const double scalar) -> Vec3
     {
         auto tmp = vec;
         return tmp *= scalar;
