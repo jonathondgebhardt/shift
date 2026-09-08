@@ -51,6 +51,7 @@ shift_add_library(
   source/telemetry/MemoryTelemetryRecorder.cpp
   LINKS
   shift_logger
+  shift_math
   shift_time
 )
 
