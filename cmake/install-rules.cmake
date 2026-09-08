@@ -60,6 +60,19 @@ install(
     INCLUDES #
     DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
 )
+install(
+    TARGETS shift_math
+    EXPORT shiftTargets
+    RUNTIME #
+    COMPONENT shift_Runtime
+    LIBRARY #
+    COMPONENT shift_Runtime
+    NAMELINK_COMPONENT shift_Development
+    ARCHIVE #
+    COMPONENT shift_Development
+    INCLUDES #
+    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+)
 
 write_basic_package_version_file(
     "${package}ConfigVersion.cmake"
