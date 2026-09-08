@@ -25,6 +25,11 @@ shift_add_library(
   spdlog::spdlog
 )
 shift_add_library(
+  math
+  SOURCES
+  source/math/Vec3.cpp
+)
+shift_add_library(
   time
   SOURCES
   source/time/Clock.cpp
