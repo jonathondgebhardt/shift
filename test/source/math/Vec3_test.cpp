@@ -102,7 +102,7 @@ TEST_CASE("Vec3 magnitude", "[math][Vec3]")
 {
     constexpr auto vec = shift::math::Vec3{1.0, 2.0, 3.0};
     CHECK(
-        shift::math::floating_point_eq(vec.magnitude(), std::sqrt(14.0), 1e6));
+        shift::math::floating_point_eq(vec.magnitude(), std::sqrt(14.0), 1e-6));
 }
 
 TEST_CASE("Vec3 distance", "[math][Vec3]")
