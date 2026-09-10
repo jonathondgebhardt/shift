@@ -3,6 +3,7 @@
   "version-semver": "0.1.0",
   "builtin-baseline": "114d9fe62faf35856b45cf55cb93b57028a45d63",
   "dependencies": [
+    "geographiclib",
     "spdlog"
   ],
   "features": {

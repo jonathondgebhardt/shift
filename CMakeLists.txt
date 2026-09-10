@@ -14,6 +14,7 @@ include(cmake/project-is-top-level.cmake)
 include(cmake/variables.cmake)
 
 find_package(spdlog CONFIG REQUIRED)
+find_package(GeographicLib CONFIG REQUIRED)
 
 include(cmake/shift-project.cmake)
 shift_add_library(
