@@ -31,6 +31,13 @@ shift_add_library(
   source/math/Vec3.cpp
 )
 shift_add_library(
+  coordinate
+  SOURCES
+  source/coordinate/CoordinateTransform.cpp
+  LINKS
+  ${GeographicLib_LIBRARIES}
+)
+shift_add_library(
   time
   SOURCES
   source/time/Clock.cpp
