@@ -24,7 +24,7 @@ shift_add_test(
   source/core/UpdateScheduler_test.cpp
   source/core/World_test.cpp
   LINKS
-  shift::core
+  shift_core
 )
 shift_add_test(
   time
@@ -34,7 +34,7 @@ shift_add_test(
   source/time/SimulationTime_test.cpp
   source/time/Timer_test.cpp
   LINKS
-  shift::time
+  shift_time
 )
 shift_add_test(
   logger
@@ -42,7 +42,7 @@ shift_add_test(
   source/logger/Log_test.cpp
   source/logger/LogTesting.cpp
   LINKS
-  shift::logger
+  shift_logger
 )
 shift_add_test(
   telemetry
@@ -50,7 +50,7 @@ shift_add_test(
   source/telemetry/MemoryTelemetryRecorder_test.cpp
   source/telemetry/TelemetryValue_test.cpp
   LINKS
-  shift::core
+  shift_core
 )
 shift_add_test(
   math
@@ -58,7 +58,7 @@ shift_add_test(
   source/math/Utilities_test.cpp
   source/math/Vec3_test.cpp
   LINKS
-  shift::math
+  shift_math
 )
 shift_add_test(
   coordinate
