@@ -12,10 +12,23 @@ template<typename T>
 struct TelemetryTraits;
 
 template<typename T>
-concept ToStringable = requires(T value) {
+concept ToStdStringable = requires(T value) {
+    { std::to_string(value) } -> std::same_as<std::string>;
+};
+
+template<typename T>
+    requires ToStdStringable<T>
+struct TelemetryTraits<T>
+{
+    static auto to_string(const T& value) -> std::string
     {
-        std::to_string(value)
-    } -> std::same_as<std::string>;
+        return std::to_string(value);
+    }
+};
+
+template<typename T>
+concept ToStringable = requires(T value) {
+    { value.to_string() } -> std::same_as<std::string>;
 };
 
 template<typename T>
@@ -24,7 +37,7 @@ struct TelemetryTraits<T>
 {
     static auto to_string(const T& value) -> std::string
     {
-        return std::to_string(value);
+        return value.to_string();
     }
 };
 

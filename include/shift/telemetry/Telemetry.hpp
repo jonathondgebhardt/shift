@@ -2,6 +2,7 @@
 
 #include <utility>
 
+#include "shift/coordinate/Coordinate.hpp"
 #include "shift/core/World.hpp"
 #include "shift/math/Vec3.hpp"
 #include "shift/telemetry/DataDefinition.hpp"
@@ -45,10 +46,10 @@ private:
         ObservationConcept(const ObservationConcept&) = default;
         ObservationConcept(ObservationConcept&&) noexcept = default;
         virtual ~ObservationConcept() = default;
-        auto operator=(const ObservationConcept&) -> ObservationConcept& =
-                                                         default;
-        auto operator=(ObservationConcept&&) noexcept -> ObservationConcept& =
-                                                             default;
+        auto operator=(const ObservationConcept&)
+            -> ObservationConcept& = default;
+        auto operator=(ObservationConcept&&) noexcept
+            -> ObservationConcept& = default;
 
         virtual auto sample(time::SimulationTime,
                             const World&,
@@ -104,7 +105,19 @@ private:
                              time::SimulationTime time,
                              const Entity& entity,
                              std::string_view channel,
-                             const math::Vec3& value)
+                             const coordinate::EcefPosition& value)
+    {
+        recorder.record({.time = time,
+                         .uid = entity.uid(),
+                         .channel = channel,
+                         .value = TelemetryValue{value}});
+    }
+
+    static void record_value(TelemetryRecorder& recorder,
+                             time::SimulationTime time,
+                             const Entity& entity,
+                             std::string_view channel,
+                             const coordinate::EnuPosition& value)
     {
         recorder.record({.time = time,
                          .uid = entity.uid(),

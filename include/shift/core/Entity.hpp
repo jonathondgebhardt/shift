@@ -6,9 +6,9 @@
 #include <string_view>
 #include <vector>
 
+#include "shift/coordinate/Coordinate.hpp"
 #include "shift/core/Component.hpp"
 #include "shift/core/shift_core_export.hpp"
-#include "shift/math/Vec3.hpp"
 
 namespace shift
 {
@@ -53,17 +53,20 @@ public:
 
     auto find_component(std::string_view name) const -> Component*;
 
-    auto position() const -> math::Vec3 { return m_position; }
+    auto position() const -> coordinate::EcefPosition { return m_position; }
 
-    auto position() -> math::Vec3& { return m_position; }
+    auto position() -> coordinate::EcefPosition& { return m_position; }
 
-    auto set_position(math::Vec3 position) -> void { m_position = position; }
+    auto set_position(coordinate::EcefPosition position) -> void
+    {
+        m_position = position;
+    }
 
 private:
     SHIFT_SUPPRESS_C4251
     std::string m_name;
     std::vector<std::unique_ptr<Component>> m_components;
-    math::Vec3 m_position;
+    coordinate::EcefPosition m_position;
     EntityUID m_uid{};
 };
 

@@ -6,6 +6,8 @@
 #include <stdexcept>
 #include <utility>
 
+#include "shift/coordinate/Coordinate.hpp"
+#include "shift/coordinate/CoordinateTransform.hpp"
 #include "shift/core/Entity.hpp"
 #include "shift/core/Simulation.hpp"
 #include "shift/core/SimulationRunner.hpp"
@@ -17,7 +19,6 @@
 #include "shift/telemetry/EntityDataDefinitions.hpp"
 #include "shift/telemetry/Telemetry.hpp"
 #include "shift/time/Clock.hpp"
-#include "shift/time/TimeTypes.hpp"
 
 namespace
 {
@@ -62,8 +63,11 @@ public:
         update_count++;
 
         auto& entity = world.find_entity(m_uid).try_unwrap();
-        entity.position().x = m_radius * std::cos(m_angle);
-        entity.position().y = m_radius * std::sin(m_angle);
+        constexpr auto frame = shift::coordinate::EnuFrame{};
+        auto position = shift::coordinate::to_enu(entity.position(), frame);
+        position.east = m_radius * std::cos(m_angle);
+        position.north = m_radius * std::sin(m_angle);
+        entity.set_position(shift::coordinate::to_ecef(position, frame));
 
         m_angle += m_speed * static_cast<double>(time_step.delta.data());
 
@@ -101,7 +105,7 @@ auto main() -> int
 
     auto telemetry = shift::telemetry::Telemetry{
         std::make_unique<shift::telemetry::ConsoleTelemetryRecorder>()};
-    telemetry.observe(shift::telemetry::entity_position);
+    telemetry.observe(shift::telemetry::entity_position_enu);
 
     runner.set_telemetry(&telemetry);
 
