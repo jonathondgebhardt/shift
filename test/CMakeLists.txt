@@ -60,5 +60,12 @@ shift_add_test(
   LINKS
   shift::math
 )
+shift_add_test(
+  coordinate
+  SOURCES
+  source/coordinate/CoordinateTransform_test.cpp
+  LINKS
+  shift_coordinate
+)
 
 add_folders(Test)
