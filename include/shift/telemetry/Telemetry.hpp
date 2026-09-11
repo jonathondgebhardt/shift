@@ -2,7 +2,6 @@
 
 #include <utility>
 
-#include "shift/coordinate/Coordinate.hpp"
 #include "shift/coordinate/EcefPosition.hpp"
 #include "shift/coordinate/EnuPosition.hpp"
 #include "shift/core/World.hpp"
