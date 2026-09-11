@@ -64,6 +64,7 @@ shift_add_test(
   coordinate
   SOURCES
   source/coordinate/CoordinateTransform_test.cpp
+  source/coordinate/EcefPosition_test.cpp
   source/coordinate/EcefVector_test.cpp
   LINKS
   shift_coordinate
