@@ -35,6 +35,7 @@ shift_add_library(
   SOURCES
   source/coordinate/CoordinateTransform.cpp
   source/coordinate/EcefPosition.cpp
+  source/coordinate/EcefVector.cpp
   LINKS
   ${GeographicLib_LIBRARIES}
 )

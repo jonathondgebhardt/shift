@@ -2,6 +2,7 @@
 
 #include "shift/coordinate/Coordinate.hpp"
 #include "shift/coordinate/EcefPosition.hpp"
+#include "shift/coordinate/EcefVector.hpp"
 #include "shift/coordinate/shift_coordinate_export.hpp"
 
 namespace shift::coordinate

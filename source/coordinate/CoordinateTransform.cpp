@@ -8,6 +8,7 @@
 
 #include "shift/coordinate/Coordinate.hpp"
 #include "shift/coordinate/EcefPosition.hpp"
+#include "shift/coordinate/EcefVector.hpp"
 
 namespace
 {

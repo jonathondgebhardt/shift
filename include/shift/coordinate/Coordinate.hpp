@@ -5,18 +5,6 @@
 namespace shift::coordinate
 {
 
-struct EcefVector
-{
-    double x{};
-    double y{};
-    double z{};
-
-    auto to_string() const -> std::string
-    {
-        return std::format("({}, {}, {})", x, y, z);
-    }
-};
-
 struct GeodeticPosition
 {
     double latitude{};
