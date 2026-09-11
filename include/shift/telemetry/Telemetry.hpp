@@ -6,7 +6,6 @@
 #include "shift/coordinate/EcefPosition.hpp"
 #include "shift/coordinate/EnuPosition.hpp"
 #include "shift/core/World.hpp"
-#include "shift/math/Vec3.hpp"
 #include "shift/telemetry/DataDefinition.hpp"
 #include "shift/telemetry/TelemetryRecorder.hpp"
 #include "shift/time/SimulationTime.hpp"
