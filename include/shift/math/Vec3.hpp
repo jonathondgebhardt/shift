@@ -97,7 +97,6 @@ struct SHIFT_MATH_EXPORT Vec3
             throw std::runtime_error("cannot divide Vec3 by zero");
         }
 
-        // todo: check that scalar is not zero
         x /= scalar;
         y /= scalar;
         z /= scalar;
