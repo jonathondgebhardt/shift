@@ -12,6 +12,34 @@ struct SHIFT_COORDINATE_EXPORT EcefPosition
     double y{};
     double z{};
 
+    constexpr EcefPosition() = default;
+
+    constexpr explicit EcefPosition(double xyz)
+        : x{xyz}
+        , y{xyz}
+        , z{xyz}
+    {
+    }
+
+    // NOLINTBEGIN(bugprone-easily-swappable-parameters,
+    // readability-identifier-length)
+    constexpr EcefPosition(double _x, double _y, double _z)
+        : x{_x}
+        , y{_y}
+        , z{_z}
+    {
+    }
+
+    // NOLINTEND(bugprone-easily-swappable-parameters,
+    // readability-identifier-length)
+
+    constexpr auto operator==(const EcefPosition other) const -> bool
+    {
+        return math::floating_point_eq(x, other.x)
+            && math::floating_point_eq(y, other.y)
+            && math::floating_point_eq(z, other.z);
+    }
+
     friend constexpr auto operator+(const EcefPosition lhs,
                                     const EcefVector rhs) -> EcefPosition
     {

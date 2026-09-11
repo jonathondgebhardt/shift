@@ -10,8 +10,8 @@
 
 TEST_CASE("ECEF to geodetic", "[coordinate]")
 {
-    constexpr auto ecef = shift::coordinate::EcefPosition{
-        .x = 497037.55, .y = -4884763.5, .z = 4057696.3};
+    constexpr auto ecef =
+        shift::coordinate::EcefPosition{497'037.55, -4'884'763.5, 4'057'696.3};
     const auto geodetic = shift::coordinate::to_geodetic(ecef);
 
     CHECK(
@@ -44,9 +44,9 @@ TEST_CASE("geodetic to ECEF", "[coordinate]")
         .latitude = 39.76, .longitude = -84.19, .altitude = 250.0};
     const auto ecef = shift::coordinate::to_ecef(geodetic);
 
-    CHECK(shift::math::floating_point_eq(ecef.x, 497'037.546660842));
-    CHECK(shift::math::floating_point_eq(ecef.y, -4'884'763.506205418));
-    CHECK(shift::math::floating_point_eq(ecef.z, 4'057'696.283478218));
+    CHECK(ecef
+          == shift::coordinate::EcefPosition{
+              497'037.546660842, -4'884'763.506205418, 4'057'696.283478218});
 }
 
 TEST_CASE("ENU to ECEF", "[coordinate]")
@@ -57,10 +57,9 @@ TEST_CASE("ENU to ECEF", "[coordinate]")
         .origin = {.latitude = 39.76, .longitude = -84.19, .altitude = 250.0}};
     const auto ecef = shift::coordinate::to_ecef(enu, frame);
 
-    // 497037.5466608419, -4884763.506205417, 4057696.2834782195
-    CHECK(shift::math::floating_point_eq(ecef.x, 497'037.5466608419));
-    CHECK(shift::math::floating_point_eq(ecef.y, -4'884'763.506205417));
-    CHECK(shift::math::floating_point_eq(ecef.z, 4'057'696.2834782195));
+    CHECK(ecef
+          == shift::coordinate::EcefPosition{
+              497'037.5466608419, -4'884'763.506205417, 4'057'696.2834782195});
 }
 
 TEST_CASE("geodetic to ENU", "[coordinate]")
