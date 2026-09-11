@@ -32,6 +32,14 @@ TEST_CASE("EcefVector triple double", "[coordinate][EcefVector]")
     CHECK(shift::math::floating_point_eq(vec.z, 3.0));
 }
 
+TEST_CASE("EcefVector operator==", "[coordinate][EcefVector]")
+{
+    CHECK(shift::coordinate::EcefVector{1.0}
+          == shift::coordinate::EcefVector{1.0});
+    CHECK(shift::coordinate::EcefVector{0.0}
+          != shift::coordinate::EcefVector{1.0});
+}
+
 TEST_CASE("EcefVector operator+", "[coordinate][EcefVector]")
 {
     constexpr auto lhs = shift::coordinate::EcefVector{1.0, 2.0, 3.0};
