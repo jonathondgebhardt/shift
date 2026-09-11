@@ -45,7 +45,7 @@ struct SHIFT_COORDINATE_EXPORT EcefPosition
     friend constexpr auto operator-(const EcefPosition lhs,
                                     const EcefPosition rhs) -> EcefVector
     {
-        return {.x = lhs.x - rhs.x, .y = lhs.y - rhs.y, .z = lhs.z - rhs.z};
+        return {lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z};
     }
 
     auto to_string() const -> std::string;

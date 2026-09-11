@@ -111,11 +111,11 @@ auto to_ecef(EnuVector vector, const EnuFrame& frame) -> EcefVector
     // NOLINTBEGIN(cppcoreguidelines-avoid-magic-numbers,
     // readability-magic-numbers)
     return {
-        .x = (matrix[0] * vector.east) + (matrix[1] * vector.north)
+        (matrix[0] * vector.east) + (matrix[1] * vector.north)
             + (matrix[2] * vector.up),
-        .y = (matrix[3] * vector.east) + (matrix[4] * vector.north)
+        (matrix[3] * vector.east) + (matrix[4] * vector.north)
             + (matrix[5] * vector.up),
-        .z = (matrix[6] * vector.east) + (matrix[7] * vector.north)
+        (matrix[6] * vector.east) + (matrix[7] * vector.north)
             + (matrix[8] * vector.up),
     };
     // NOLINTEND(cppcoreguidelines-avoid-magic-numbers,
