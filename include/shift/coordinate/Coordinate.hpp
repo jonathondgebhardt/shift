@@ -5,6 +5,7 @@
 namespace shift::coordinate
 {
 
+// todo: consider hiding members to enable validation
 struct GeodeticPosition
 {
     double latitude{};
