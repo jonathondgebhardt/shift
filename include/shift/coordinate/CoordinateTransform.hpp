@@ -4,6 +4,7 @@
 #include "shift/coordinate/EcefPosition.hpp"
 #include "shift/coordinate/EcefVector.hpp"
 #include "shift/coordinate/EnuPosition.hpp"
+#include "shift/coordinate/EnuVector.hpp"
 #include "shift/coordinate/shift_coordinate_export.hpp"
 
 namespace shift::coordinate

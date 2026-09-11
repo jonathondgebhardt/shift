@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "shift/coordinate/EcefPosition.hpp"
+#include "shift/coordinate/EcefVector.hpp"
 #include "shift/core/Component.hpp"
 #include "shift/core/shift_core_export.hpp"
 

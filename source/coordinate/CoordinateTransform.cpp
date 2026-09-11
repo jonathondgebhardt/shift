@@ -10,6 +10,7 @@
 #include "shift/coordinate/EcefPosition.hpp"
 #include "shift/coordinate/EcefVector.hpp"
 #include "shift/coordinate/EnuPosition.hpp"
+#include "shift/coordinate/EnuVector.hpp"
 
 namespace
 {
