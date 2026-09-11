@@ -6,7 +6,7 @@
 #include <string_view>
 #include <vector>
 
-#include "shift/coordinate/Coordinate.hpp"
+#include "shift/coordinate/EcefPosition.hpp"
 #include "shift/core/Component.hpp"
 #include "shift/core/shift_core_export.hpp"
 
@@ -67,6 +67,7 @@ private:
     std::string m_name;
     std::vector<std::unique_ptr<Component>> m_components;
     coordinate::EcefPosition m_position;
+    coordinate::EcefVector m_velocity;
     EntityUID m_uid{};
 };
 

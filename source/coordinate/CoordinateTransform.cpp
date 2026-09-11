@@ -7,6 +7,7 @@
 #include <GeographicLib/LocalCartesian.hpp>
 
 #include "shift/coordinate/Coordinate.hpp"
+#include "shift/coordinate/EcefPosition.hpp"
 
 namespace
 {
