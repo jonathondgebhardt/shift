@@ -4,6 +4,7 @@
 
 #include "shift/coordinate/CoordinateTransform.hpp"
 #include "shift/coordinate/EcefPosition.hpp"
+#include "shift/coordinate/EnuPosition.hpp"
 #include "shift/math/Utilities.hpp"
 
 // NOLINTBEGIN(cppcoreguidelines-avoid-magic-numbers, readability-magic-numbers)

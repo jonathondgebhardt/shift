@@ -17,18 +17,6 @@ struct GeodeticPosition
     }
 };
 
-struct EnuPosition
-{
-    double east{};
-    double north{};
-    double up{};
-
-    auto to_string() const -> std::string
-    {
-        return std::format("({}, {}, {})", east, north, up);
-    }
-};
-
 struct EnuVector
 {
     double east{};
