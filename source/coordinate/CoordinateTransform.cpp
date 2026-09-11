@@ -150,11 +150,11 @@ auto to_enu(EcefVector vector, EnuFrame frame) -> EnuVector
     // NOLINTBEGIN(cppcoreguidelines-avoid-magic-numbers,
     // readability-magic-numbers)
     return {
-        .east = (matrix[0] * vector.x) + (matrix[1] * vector.y)
+        (matrix[0] * vector.x) + (matrix[1] * vector.y)
             + (matrix[2] * vector.z),
-        .north = (matrix[3] * vector.x) + (matrix[4] * vector.y)
+        (matrix[3] * vector.x) + (matrix[4] * vector.y)
             + (matrix[5] * vector.z),
-        .up = (matrix[6] * vector.x) + (matrix[7] * vector.y)
+        (matrix[6] * vector.x) + (matrix[7] * vector.y)
             + (matrix[8] * vector.z),
     };
     // NOLINTEND(cppcoreguidelines-avoid-magic-numbers,
