@@ -17,10 +17,10 @@ struct SHIFT_COORDINATE_EXPORT EnuVector
 
     constexpr EnuVector() = default;
 
-    constexpr explicit EnuVector(double xyz)
-        : east{xyz}
-        , north{xyz}
-        , up{xyz}
+    constexpr explicit EnuVector(double enu)
+        : east{enu}
+        , north{enu}
+        , up{enu}
     {
     }
 
