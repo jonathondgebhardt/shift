@@ -11,6 +11,7 @@
 #include "shift/coordinate/EcefVector.hpp"
 #include "shift/coordinate/EnuPosition.hpp"
 #include "shift/coordinate/EnuVector.hpp"
+#include "shift/coordinate/GeodeticPosition.hpp"
 
 namespace
 {
@@ -20,13 +21,15 @@ namespace
 auto get_cartesian_rotation_matrix(shift::coordinate::EnuFrame frame)
     -> std::array<double, 9>
 {
-    const auto cartesian = GeographicLib::LocalCartesian{
-        frame.origin.latitude, frame.origin.longitude, frame.origin.altitude};
+    const auto cartesian =
+        GeographicLib::LocalCartesian{frame.origin.latitude(),
+                                      frame.origin.longitude(),
+                                      frame.origin.altitude()};
     auto matrix = std::vector<double>{};
     auto dont_care = 0.0;
-    cartesian.Forward(frame.origin.latitude,
-                      frame.origin.longitude,
-                      frame.origin.altitude,
+    cartesian.Forward(frame.origin.latitude(),
+                      frame.origin.longitude(),
+                      frame.origin.altitude(),
                       dont_care,
                       dont_care,
                       dont_care,
@@ -63,37 +66,39 @@ namespace shift::coordinate
 auto to_geodetic(EcefPosition position) -> GeodeticPosition
 {
     const auto& earth = GeographicLib::Geocentric::WGS84();
-    auto geodetic = GeodeticPosition{};
-    earth.Reverse(position.x,
-                  position.y,
-                  position.z,
-                  geodetic.latitude,
-                  geodetic.longitude,
-                  geodetic.altitude);
-    return geodetic;
+    double latitude{};
+    double longitude{};
+    double altitude{};
+    earth.Reverse(
+        position.x, position.y, position.z, latitude, longitude, altitude);
+    return {latitude, longitude, altitude};
 }
 
 auto to_geodetic(EnuPosition position, EnuFrame frame) -> GeodeticPosition
 {
-    const auto cartesian = GeographicLib::LocalCartesian{
-        frame.origin.latitude, frame.origin.longitude, frame.origin.altitude};
-    auto geodetic = GeodeticPosition{};
+    const auto cartesian =
+        GeographicLib::LocalCartesian{frame.origin.latitude(),
+                                      frame.origin.longitude(),
+                                      frame.origin.altitude()};
+    double latitude{};
+    double longitude{};
+    double altitude{};
     cartesian.Reverse(position.east,
                       position.north,
                       position.up,
-                      geodetic.latitude,
-                      geodetic.longitude,
-                      geodetic.altitude);
-    return geodetic;
+                      latitude,
+                      longitude,
+                      altitude);
+    return {latitude, longitude, altitude};
 }
 
 auto to_ecef(GeodeticPosition position) -> EcefPosition
 {
     const auto& earth = GeographicLib::Geocentric::WGS84();
     auto ecef = EcefPosition{};
-    earth.Forward(position.latitude,
-                  position.longitude,
-                  position.altitude,
+    earth.Forward(position.latitude(),
+                  position.longitude(),
+                  position.altitude(),
                   ecef.x,
                   ecef.y,
                   ecef.z);
@@ -126,12 +131,14 @@ auto to_ecef(EnuVector vector, const EnuFrame& frame) -> EcefVector
 
 auto to_enu(GeodeticPosition position, EnuFrame frame) -> EnuPosition
 {
-    const auto cartesian = GeographicLib::LocalCartesian{
-        frame.origin.latitude, frame.origin.longitude, frame.origin.altitude};
+    const auto cartesian =
+        GeographicLib::LocalCartesian{frame.origin.latitude(),
+                                      frame.origin.longitude(),
+                                      frame.origin.altitude()};
     auto enu = EnuPosition{};
-    cartesian.Forward(position.latitude,
-                      position.longitude,
-                      position.altitude,
+    cartesian.Forward(position.latitude(),
+                      position.longitude(),
+                      position.altitude(),
                       enu.east,
                       enu.north,
                       enu.up);

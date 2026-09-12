@@ -2,21 +2,10 @@
 
 #include <format>
 
+#include "shift/coordinate/GeodeticPosition.hpp"
+
 namespace shift::coordinate
 {
-
-// todo: consider hiding members to enable validation
-struct GeodeticPosition
-{
-    double latitude{};
-    double longitude{};
-    double altitude{};
-
-    auto to_string() const -> std::string
-    {
-        return std::format("({}, {}, {})", latitude, longitude, altitude);
-    }
-};
 
 struct EnuFrame
 {

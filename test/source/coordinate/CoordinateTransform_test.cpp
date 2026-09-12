@@ -14,35 +14,31 @@ TEST_CASE("ECEF to geodetic", "[coordinate]")
     constexpr auto ecef =
         shift::coordinate::EcefPosition{497'037.55, -4'884'763.5, 4'057'696.3};
     const auto geodetic = shift::coordinate::to_geodetic(ecef);
-
-    CHECK(
-        shift::math::floating_point_eq(geodetic.latitude, 39.760000147999506));
-    CHECK(
-        shift::math::floating_point_eq(geodetic.longitude, -84.18999995390443));
-    CHECK(
-        shift::math::floating_point_eq(geodetic.altitude, 250.00608094938437));
+    CHECK(geodetic
+          == shift::coordinate::GeodeticPosition{
+              39.760000147999506, -84.18999995390443, 250.00608094938437});
 }
 
 TEST_CASE("ENU to geodetic", "[coordinate]")
 {
     // todo: add tests with a non-zero enu
-    constexpr auto frame = shift::coordinate::EnuFrame{
-        .origin = {.latitude = 39.76, .longitude = -84.19, .altitude = 250.0}};
+    const auto frame =
+        shift::coordinate::EnuFrame{.origin = {39.76, -84.19, 250.0}};
     constexpr auto enu = shift::coordinate::EnuPosition{};
     const auto geodetic = shift::coordinate::to_geodetic(enu, frame);
 
     CHECK(shift::math::floating_point_eq(
-        geodetic.latitude, frame.origin.latitude, 1e-6));
+        geodetic.latitude(), frame.origin.latitude(), 1e-6));
     CHECK(shift::math::floating_point_eq(
-        geodetic.longitude, frame.origin.longitude, 1e-6));
+        geodetic.longitude(), frame.origin.longitude(), 1e-6));
     CHECK(shift::math::floating_point_eq(
-        geodetic.altitude, frame.origin.altitude, 1e-6));
+        geodetic.altitude(), frame.origin.altitude(), 1e-6));
 }
 
 TEST_CASE("geodetic to ECEF", "[coordinate]")
 {
-    constexpr auto geodetic = shift::coordinate::GeodeticPosition{
-        .latitude = 39.76, .longitude = -84.19, .altitude = 250.0};
+    const auto geodetic =
+        shift::coordinate::GeodeticPosition{39.76, -84.19, 250.0};
     const auto ecef = shift::coordinate::to_ecef(geodetic);
 
     CHECK(ecef
@@ -54,8 +50,8 @@ TEST_CASE("ENU to ECEF", "[coordinate]")
 {
     // todo: add tests with a non-zero enu
     constexpr auto enu = shift::coordinate::EnuPosition{};
-    constexpr auto frame = shift::coordinate::EnuFrame{
-        .origin = {.latitude = 39.76, .longitude = -84.19, .altitude = 250.0}};
+    const auto frame =
+        shift::coordinate::EnuFrame{.origin = {39.76, -84.19, 250.0}};
     const auto ecef = shift::coordinate::to_ecef(enu, frame);
 
     CHECK(ecef
@@ -67,9 +63,9 @@ TEST_CASE("geodetic to ENU", "[coordinate]")
 {
     SECTION("ENU frame same as geodetic position")
     {
-        constexpr auto geodetic = shift::coordinate::GeodeticPosition{
-            .latitude = 39.76, .longitude = -84.19, .altitude = 250.0};
-        constexpr auto frame = shift::coordinate::EnuFrame{.origin = geodetic};
+        const auto geodetic =
+            shift::coordinate::GeodeticPosition{39.76, -84.19, 250.0};
+        const auto frame = shift::coordinate::EnuFrame{.origin = geodetic};
         const auto enu = shift::coordinate::to_enu(geodetic, frame);
 
         CHECK(shift::math::floating_point_eq(enu.east, 0.0));
@@ -79,8 +75,7 @@ TEST_CASE("geodetic to ENU", "[coordinate]")
 
     SECTION("equator, prime meridian")
     {
-        constexpr auto frame = shift::coordinate::EnuFrame{
-            .origin = {.latitude = 30.0, .longitude = 120.0}};
+        const auto frame = shift::coordinate::EnuFrame{.origin = {30.0, 120.0}};
         constexpr auto geodetic = shift::coordinate::GeodeticPosition{};
         const auto enu = shift::coordinate::to_enu(geodetic, frame);
 
