@@ -1,8 +1,8 @@
 #pragma once
 
-#include "shift/coordinate/Coordinate.hpp"
 #include "shift/coordinate/EcefPosition.hpp"
 #include "shift/coordinate/EcefVector.hpp"
+#include "shift/coordinate/EnuFrame.hpp"
 #include "shift/coordinate/EnuPosition.hpp"
 #include "shift/coordinate/EnuVector.hpp"
 #include "shift/coordinate/GeodeticPosition.hpp"

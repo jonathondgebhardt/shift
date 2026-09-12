@@ -6,8 +6,8 @@
 #include <stdexcept>
 #include <utility>
 
-#include "shift/coordinate/Coordinate.hpp"
 #include "shift/coordinate/CoordinateTransform.hpp"
+#include "shift/coordinate/EnuFrame.hpp"
 #include "shift/core/Entity.hpp"
 #include "shift/core/Simulation.hpp"
 #include "shift/core/SimulationRunner.hpp"

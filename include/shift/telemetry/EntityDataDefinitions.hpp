@@ -1,7 +1,7 @@
 #pragma once
 
-#include "shift/coordinate/Coordinate.hpp"
 #include "shift/coordinate/CoordinateTransform.hpp"
+#include "shift/coordinate/EnuFrame.hpp"
 #include "shift/core/Entity.hpp"
 #include "shift/telemetry/DataDefinition.hpp"
 

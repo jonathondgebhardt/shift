@@ -1,11 +1,11 @@
-#include "shift/coordinate/Coordinate.hpp"
+#include "shift/coordinate/CoordinateTransform.hpp"
 
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
 
-#include "shift/coordinate/CoordinateTransform.hpp"
 #include "shift/coordinate/EcefPosition.hpp"
+#include "shift/coordinate/EnuFrame.hpp"
 #include "shift/coordinate/EnuPosition.hpp"
 
 // NOLINTBEGIN(cppcoreguidelines-avoid-magic-numbers, readability-magic-numbers)
