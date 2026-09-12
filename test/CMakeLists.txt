@@ -68,6 +68,7 @@ shift_add_test(
   source/coordinate/EcefVector_test.cpp
   source/coordinate/EnuPosition_test.cpp
   source/coordinate/EnuVector_test.cpp
+  source/coordinate/GeodeticPosition_test.cpp
   LINKS
   shift_coordinate
 )
