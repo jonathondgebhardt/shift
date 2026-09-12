@@ -50,6 +50,7 @@ public:
     auto get() const -> const T&
     {
         if (!is<T>()) {
+            // todo: throw with a useful message
             throw std::bad_cast{};
         }
 
