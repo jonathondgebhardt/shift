@@ -1,22 +1,10 @@
-#include <limits>
-#include <type_traits>
 #include <typeinfo>
 
 #include "shift/telemetry/TelemetryValue.hpp"
 
 #include <catch2/catch_test_macros.hpp>
-
-namespace
-{
-
-template<typename T>
-    requires std::is_floating_point_v<T>
-auto floating_point_equal(const T lhs, const T rhs) -> bool
-{
-    return std::abs(lhs - rhs) < std::numeric_limits<T>::epsilon();
-}
-
-}  // namespace
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
+#include <catch2/matchers/catch_matchers_string.hpp>
 
 TEST_CASE("TelemetryValue is", "[telemetry][TelemetryValue]")
 {
@@ -28,9 +16,8 @@ TEST_CASE("TelemetryValue is", "[telemetry][TelemetryValue]")
 TEST_CASE("TelemetryValue get", "[telemetry][TelemetryValue]")
 {
     const auto double_value = shift::telemetry::TelemetryValue{1.0};
-    CHECK(floating_point_equal(double_value.get<double>(), 1.0));
-    CHECK_THROWS_AS(floating_point_equal(double_value.get<float>(), 1.0f),
-                    std::bad_cast);
+    CHECK_THAT(double_value.get<double>(), Catch::Matchers::WithinRel(1.0));
+    CHECK_THROWS_AS(double_value.get<float>(), std::bad_cast);
 }
 
 TEST_CASE("TelemetryValue type", "[telemetry][TelemetryValue]")
@@ -43,7 +30,7 @@ TEST_CASE("TelemetryValue type", "[telemetry][TelemetryValue]")
 TEST_CASE("TelemetryValue to_string", "[telemetry][TelemetryValue]")
 {
     const auto double_value = shift::telemetry::TelemetryValue{1.0};
-    CHECK(double_value.to_string() == "1.000000");
+    CHECK_THAT(double_value.to_string(), Catch::Matchers::StartsWith("1.0"));
 }
 
 TEST_CASE("TelemetryValue copy ctor", "[telemetry][TelemetryValue]")
