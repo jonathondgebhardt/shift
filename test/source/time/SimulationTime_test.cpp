@@ -6,7 +6,7 @@
 
 TEST_CASE("SimulationTime as", "[time][SimulationTime]")
 {
-    const auto time = shift::time::Seconds{1};
+    constexpr auto time = shift::time::Seconds{1};
     const auto sim_time = shift::time::SimulationTime{time};
 
     CHECK(sim_time.as<shift::time::Minutes>()

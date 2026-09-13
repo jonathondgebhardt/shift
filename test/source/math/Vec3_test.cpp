@@ -64,7 +64,7 @@ TEST_CASE("Vec3 operator-", "[math][Vec3]")
 {
     constexpr auto lhs = shift::math::Vec3{1.0, 2.0, 3.0};
     constexpr auto rhs = lhs;
-    const auto result = lhs - rhs;
+    constexpr auto result = lhs - rhs;
     CHECK_THAT(result.x, Catch::Matchers::WithinRel(0.0));
     CHECK_THAT(result.y, Catch::Matchers::WithinRel(0.0));
     CHECK_THAT(result.z, Catch::Matchers::WithinRel(0.0));
@@ -101,7 +101,7 @@ TEST_CASE("Vec3 operator*=", "[math][Vec3]")
 TEST_CASE("Vec3 operator/", "[math][Vec3]")
 {
     constexpr auto vec = shift::math::Vec3{2.0, 4.0, 6.0};
-    constexpr auto result = vec / 2.0;
+    const auto result = vec / 2.0;
     CHECK_THAT(result.x, Catch::Matchers::WithinRel(1.0));
     CHECK_THAT(result.y, Catch::Matchers::WithinRel(2.0));
     CHECK_THAT(result.z, Catch::Matchers::WithinRel(3.0));
