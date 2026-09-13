@@ -92,6 +92,19 @@ public:
     {
         m_velocity = velocity;
     }
+
+    auto acceleration() const -> coordinate::EcefVector
+    {
+        return m_acceleration;
+    }
+
+    auto acceleration() -> coordinate::EcefVector& { return m_acceleration; }
+
+    auto set_acceleration(coordinate::EcefVector acceleration) -> void
+    {
+        m_acceleration = acceleration;
+    }
+
 private:
     SHIFT_SUPPRESS_C4251
     std::string m_name;
