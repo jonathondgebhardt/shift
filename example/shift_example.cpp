@@ -26,7 +26,7 @@ namespace
 class OrbitSystem : public shift::System
 {
 public:
-    explicit OrbitSystem(shift::EntityUID uid)
+    explicit OrbitSystem(const shift::EntityUID uid)
         : m_uid{uid}
     {
     }
@@ -56,7 +56,8 @@ public:
         return shift::UpdateResult::schedule_now();
     }
 
-    auto update(shift::World& world, shift::time::Clock::TimeStep time_step)
+    auto update(shift::World& world,
+                const shift::time::Clock::TimeStep time_step)
         -> shift::UpdateResult override
     {
         static auto update_count = 0u;
