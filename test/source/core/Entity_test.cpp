@@ -106,7 +106,6 @@ TEST_CASE("Entity position", "[core][Entity]")
         constexpr auto position =
             shift::coordinate::EcefPosition{1.0, 2.0, 3.0};
         entity.set_position(position);
-
         CHECK(entity.position() == position);
     }
 
@@ -130,7 +129,6 @@ TEST_CASE("Entity orientation", "[core][Entity]")
         const auto orientation =
             shift::coordinate::EulerOrientation{1.0, 2.0, 3.0};
         entity.set_orientation(orientation);
-
         CHECK(entity.orientation() == orientation);
     }
 
@@ -166,5 +164,28 @@ TEST_CASE("Entity velocity", "[core][Entity]")
         CHECK_THAT(entity.velocity().y, Catch::Matchers::WithinRel(1.0));
         entity.velocity().z = 1.0;
         CHECK_THAT(entity.velocity().z, Catch::Matchers::WithinRel(1.0));
+    }
+}
+
+TEST_CASE("Entity acceleration", "[core][Entity]")
+{
+    auto entity = shift::Entity{};
+
+    SECTION("setter")
+    {
+        constexpr auto acceleration =
+            shift::coordinate::EcefVector{1.0, 2.0, 3.0};
+        entity.set_acceleration(acceleration);
+        CHECK(entity.acceleration() == acceleration);
+    }
+
+    SECTION("reference getter")
+    {
+        entity.acceleration().x = 1.0;
+        CHECK_THAT(entity.acceleration().x, Catch::Matchers::WithinRel(1.0));
+        entity.acceleration().y = 1.0;
+        CHECK_THAT(entity.acceleration().y, Catch::Matchers::WithinRel(1.0));
+        entity.acceleration().z = 1.0;
+        CHECK_THAT(entity.acceleration().z, Catch::Matchers::WithinRel(1.0));
     }
 }
