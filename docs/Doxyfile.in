@@ -36,4 +36,4 @@ EXCLUDE_SYMBOLS = shift::time::ClockType \
                   shift::time::TimeType \
                   shift::telemetry::ToStdStringable \
                   shift::telemetry::ToStringable \
-                  shift::time::is_any_of
+                  shift::time::detail::is_any_of
