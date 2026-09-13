@@ -12,6 +12,7 @@ using Minutes = std::chrono::minutes;
 using Hours = std::chrono::hours;
 using Days = std::chrono::days;
 
+// todo: hide this helper
 template<typename T, typename... U>
 concept is_any_of = (std::same_as<T, U> || ...);
 
