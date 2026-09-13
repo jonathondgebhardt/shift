@@ -1,5 +1,6 @@
 #pragma once
 
+#include <compare>
 #include <cstdint>
 #include <string>
 
@@ -17,6 +18,7 @@ public:
     auto empty() const -> bool;
 
     auto operator==(const UUID&) const -> bool;
+    auto operator<=>(const UUID&) const noexcept -> std::strong_ordering;
 
 private:
     UUID(std::uint64_t first, std::uint64_t second)
