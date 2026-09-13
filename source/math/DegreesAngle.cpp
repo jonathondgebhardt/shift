@@ -2,6 +2,8 @@
 
 #include "shift/math/DegreesAngle.hpp"
 
+#include "shift/math/Utilities.hpp"
+
 namespace
 {
 
@@ -35,6 +37,11 @@ namespace shift::math
 DegreesAngle::DegreesAngle(float angle)
     : m_angle{fix_up(angle)}
 {
+}
+
+auto DegreesAngle::operator==(const DegreesAngle& other) const -> bool
+{
+    return math::floating_point_eq(m_angle, other.m_angle);
 }
 
 auto DegreesAngle::set_angle(float angle) -> void

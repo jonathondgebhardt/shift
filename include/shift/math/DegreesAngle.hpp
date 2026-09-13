@@ -20,6 +20,8 @@ public:
     constexpr auto operator=(DegreesAngle&&) noexcept
         -> DegreesAngle& = default;
 
+    auto operator==(const DegreesAngle& other) const -> bool;
+
     constexpr auto angle() const -> float { return m_angle; }
 
     auto set_angle(float angle) -> void;

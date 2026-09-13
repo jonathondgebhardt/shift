@@ -20,6 +20,8 @@ public:
     constexpr auto operator=(EulerOrientation&&) noexcept
         -> EulerOrientation& = default;
 
+    auto operator==(const EulerOrientation&) const -> bool = default;
+
     auto yaw() const -> float;
 
     auto set_yaw(float yaw) -> void;
