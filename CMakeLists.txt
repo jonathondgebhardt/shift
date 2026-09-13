@@ -47,6 +47,7 @@ shift_add_library(
   time
   SOURCES
   source/time/Clock.cpp
+  source/time/FixedTimeUpdater.cpp
   source/time/RealTimeUpdater.cpp
 )
 shift_add_library(
