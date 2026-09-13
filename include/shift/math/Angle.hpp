@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 #include "shift/math/shift_math_export.hpp"
 
 namespace shift::math
@@ -20,6 +22,8 @@ public:
     constexpr auto angle() const -> float { return m_angle; }
 
     auto set_angle(float angle) -> void;
+
+    auto to_string() const -> std::string;
 
 private:
     float m_angle{};
