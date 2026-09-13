@@ -8,6 +8,7 @@
 
 #include "shift/coordinate/EcefPosition.hpp"
 #include "shift/coordinate/EcefVector.hpp"
+#include "shift/coordinate/EulerOrientation.hpp"
 #include "shift/core/Component.hpp"
 #include "shift/core/shift_core_export.hpp"
 
@@ -68,12 +69,27 @@ public:
         m_position = position;
     }
 
+    auto orientation() const -> coordinate::EulerOrientation
+    {
+        return m_orientation;
+    }
+
+    auto orientation() -> coordinate::EulerOrientation&
+    {
+        return m_orientation;
+    }
+
+    auto set_orientation(coordinate::EulerOrientation orientation) -> void
+    {
+        m_orientation = orientation;
+    }
 private:
     SHIFT_SUPPRESS_C4251
     std::string m_name;
     SHIFT_SUPPRESS_C4251
     std::vector<std::unique_ptr<Component>> m_components;
     coordinate::EcefPosition m_position;
+    coordinate::EulerOrientation m_orientation;
     coordinate::EcefVector m_velocity;
     EntityUID m_uid{};
 };
