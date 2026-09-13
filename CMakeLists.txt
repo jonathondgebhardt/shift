@@ -39,6 +39,7 @@ shift_add_library(
   source/coordinate/EcefVector.cpp
   source/coordinate/EnuPosition.cpp
   source/coordinate/EnuVector.cpp
+  source/coordinate/EulerOrientation.cpp
   source/coordinate/GeodeticPosition.cpp
   LINKS
   ${GeographicLib_LIBRARIES}
