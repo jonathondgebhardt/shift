@@ -83,6 +83,15 @@ public:
     {
         m_orientation = orientation;
     }
+
+    auto velocity() const -> coordinate::EcefVector { return m_velocity; }
+
+    auto velocity() -> coordinate::EcefVector& { return m_velocity; }
+
+    auto set_velocity(coordinate::EcefVector velocity) -> void
+    {
+        m_velocity = velocity;
+    }
 private:
     SHIFT_SUPPRESS_C4251
     std::string m_name;
@@ -91,6 +100,7 @@ private:
     coordinate::EcefPosition m_position;
     coordinate::EulerOrientation m_orientation;
     coordinate::EcefVector m_velocity;
+    coordinate::EcefVector m_acceleration;
     EntityUID m_uid{};
 };
 
