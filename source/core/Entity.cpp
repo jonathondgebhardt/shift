@@ -34,12 +34,12 @@ auto Entity::add_component(std::unique_ptr<Component> component) -> bool
     return true;
 }
 
-auto Entity::has_component(UUID uuid) const -> bool
+auto Entity::has_component(const UUID uuid) const -> bool
 {
     return find_component(uuid) != nullptr;
 }
 
-auto Entity::has_component(std::string_view name) const -> bool
+auto Entity::has_component(const std::string_view name) const -> bool
 {
     return find_component(name) != nullptr;
 }

@@ -22,7 +22,7 @@ auto World::find_entity(EntityUID uid) -> OptionalEntityReference
     return {};
 }
 
-auto World::find_entity(std::string_view name) -> OptionalEntityReference
+auto World::find_entity(const std::string_view name) -> OptionalEntityReference
 {
     const auto found = std::ranges::find_if(m_entities,
                                             [&](const Entity& entity)
@@ -42,7 +42,7 @@ auto World::add_entity() -> Entity&
     return m_entities.back();
 }
 
-auto World::remove_entity(EntityUID uid) -> bool
+auto World::remove_entity(const EntityUID uid) -> bool
 {
     return std::erase_if(m_entities,
                          [&](const Entity& entity)
@@ -50,7 +50,7 @@ auto World::remove_entity(EntityUID uid) -> bool
         > 0;
 }
 
-auto World::remove_entity(std::string_view name) -> bool
+auto World::remove_entity(const std::string_view name) -> bool
 {
     return std::erase_if(m_entities,
                          [&](const Entity& entity)
