@@ -1,6 +1,6 @@
 services:
   dev:
-    image: yasf-ubuntu
+    image: shift-ubuntu
     working_dir: ${PROJECT_ROOT}
 
     build:

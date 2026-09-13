@@ -1,5 +1,5 @@
 {
-  "name": "yasf-ubuntu",
+  "name": "shift-ubuntu",
   "build": {
     "dockerfile": "Dockerfile"
   },
