@@ -9,9 +9,6 @@ namespace shift::coordinate
 class SHIFT_COORDINATE_EXPORT EulerOrientation
 {
 public:
-    EulerOrientation(math::DegreesAngle yaw,
-                     math::DegreesAngle pitch,
-                     math::DegreesAngle roll);
     EulerOrientation(float yaw, float pitch, float roll);
 
     constexpr EulerOrientation() = default;
@@ -23,21 +20,15 @@ public:
     constexpr auto operator=(EulerOrientation&&) noexcept
         -> EulerOrientation& = default;
 
-    auto yaw() const -> math::DegreesAngle { return m_yaw; }
-
-    auto set_yaw(math::DegreesAngle yaw) -> void { m_yaw = yaw; }
+    auto yaw() const -> float;
 
     auto set_yaw(float yaw) -> void;
 
-    auto pitch() const -> math::DegreesAngle { return m_pitch; }
-
-    auto set_pitch(math::DegreesAngle pitch) -> void { m_pitch = pitch; }
+    auto pitch() const -> float;
 
     auto set_pitch(float pitch) -> void;
 
-    auto roll() const -> math::DegreesAngle { return m_roll; }
-
-    auto set_roll(math::DegreesAngle roll) -> void { m_roll = roll; }
+    auto roll() const -> float;
 
     auto set_roll(float roll) -> void;
 
