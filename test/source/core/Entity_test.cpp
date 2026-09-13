@@ -8,6 +8,7 @@
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
 
 #include "shift/coordinate/EcefPosition.hpp"
+#include "shift/coordinate/EulerOrientation.hpp"
 #include "shift/core/Component.hpp"
 
 TEST_CASE("Entity uid zero on ctor", "[core][Entity]")
@@ -116,5 +117,31 @@ TEST_CASE("Entity position", "[core][Entity]")
         CHECK_THAT(entity.position().y, Catch::Matchers::WithinRel(1.0));
         entity.position().z = 1.0;
         CHECK_THAT(entity.position().z, Catch::Matchers::WithinRel(1.0));
+    }
+}
+
+TEST_CASE("Entity orientation", "[core][Entity]")
+{
+    auto entity = shift::Entity{};
+
+    SECTION("setter")
+    {
+        const auto orientation =
+            shift::coordinate::EulerOrientation{1.0, 2.0, 3.0};
+        entity.set_orientation(orientation);
+
+        CHECK(entity.orientation() == orientation);
+    }
+
+    SECTION("reference getter")
+    {
+        entity.orientation().set_yaw(1.0f);
+        CHECK_THAT(entity.orientation().yaw(), Catch::Matchers::WithinRel(1.0));
+        entity.orientation().set_pitch(1.0f);
+        CHECK_THAT(entity.orientation().pitch(),
+                   Catch::Matchers::WithinRel(1.0));
+        entity.orientation().set_roll(1.0f);
+        CHECK_THAT(entity.orientation().roll(),
+                   Catch::Matchers::WithinRel(1.0));
     }
 }
