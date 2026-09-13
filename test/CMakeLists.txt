@@ -57,7 +57,7 @@ shift_add_test(
 shift_add_test(
   math
   SOURCES
-  source/math/Angle_test.cpp
+  source/math/DegreesAngle_test.cpp
   source/math/Utilities_test.cpp
   source/math/Vec3_test.cpp
   LINKS

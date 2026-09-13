@@ -28,7 +28,7 @@ shift_add_library(
 shift_add_library(
   math
   SOURCES
-  source/math/Angle.cpp
+  source/math/DegreesAngle.cpp
   source/math/Vec3.cpp
 )
 shift_add_library(

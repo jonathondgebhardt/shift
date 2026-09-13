@@ -1,23 +1,23 @@
 #include <string>
 
-#include "shift/math/Angle.hpp"
+#include "shift/math/DegreesAngle.hpp"
 
 // todo: throw or do math to put angle between [0, 360)?
 
 namespace shift::math
 {
 
-Angle::Angle(float angle)
+DegreesAngle::DegreesAngle(float angle)
     : m_angle{angle}
 {
 }
 
-auto Angle::set_angle(float angle) -> void
+auto DegreesAngle::set_angle(float angle) -> void
 {
     m_angle = angle;
 }
 
-auto Angle::to_string() const -> std::string
+auto DegreesAngle::to_string() const -> std::string
 {
     return std::to_string(m_angle);
 }
