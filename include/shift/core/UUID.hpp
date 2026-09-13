@@ -16,7 +16,7 @@ public:
     auto to_string() const -> std::string;
     auto empty() const -> bool;
 
-    auto operator<=>(const UUID&) const noexcept -> bool = default;
+    auto operator==(const UUID&) const -> bool;
 
 private:
     UUID(std::uint64_t first, std::uint64_t second)
