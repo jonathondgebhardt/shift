@@ -3,14 +3,13 @@
 #include <optional>
 #include <variant>
 
-#include "shift/core/shift_core_export.hpp"
 #include "shift/time/Duration.hpp"
 #include "shift/time/SimulationTime.hpp"
 
 namespace shift
 {
 
-class SHIFT_CORE_EXPORT UpdateResult
+class UpdateResult
 {
 public:
     static constexpr auto schedule_at(time::SimulationTime time) -> UpdateResult

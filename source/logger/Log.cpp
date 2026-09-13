@@ -30,10 +30,14 @@ Message::Message(std::string text, Level level, std::source_location location)
 {
 }
 
+Message::Message(Message&&) noexcept = default;
+
 Message::~Message()
 {
     submit();
 }
+
+auto Message::operator=(Message&&) noexcept -> Message& = default;
 
 auto Message::submit() -> void
 {

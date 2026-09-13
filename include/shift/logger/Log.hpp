@@ -28,10 +28,10 @@ public:
                      std::source_location location);
 
     Message(const Message&) = delete;
-    Message(Message&&) noexcept = default;
+    Message(Message&&) noexcept;
     ~Message();
     auto operator=(const Message&) -> Message& = delete;
-    auto operator=(Message&&) noexcept -> Message& = default;
+    auto operator=(Message&&) noexcept -> Message&;
 
     auto submit() -> void;
 
@@ -47,40 +47,40 @@ private:
 
 // todo: way to much duplication
 template<typename... Args>
-SHIFT_LOGGER_EXPORT auto trace(
-    std::format_string<Args...> msg,
-    Args&&... args,
-    std::source_location location = std::source_location::current()) -> Message
+auto trace(std::format_string<Args...> msg,
+           Args&&... args,
+           std::source_location location = std::source_location::current())
+    -> Message
 {
     return Message{
         std::format(msg, std::forward<Args>(args)...), Level::TRACE, location};
 }
 
 template<typename... Args>
-SHIFT_LOGGER_EXPORT auto debug(
-    std::format_string<Args...> msg,
-    Args&&... args,
-    std::source_location location = std::source_location::current()) -> Message
+auto debug(std::format_string<Args...> msg,
+           Args&&... args,
+           std::source_location location = std::source_location::current())
+    -> Message
 {
     return Message{
         std::format(msg, std::forward<Args>(args)...), Level::DEBUG, location};
 }
 
 template<typename... Args>
-SHIFT_LOGGER_EXPORT auto info(
-    std::format_string<Args...> msg,
-    Args&&... args,
-    std::source_location location = std::source_location::current()) -> Message
+auto info(std::format_string<Args...> msg,
+          Args&&... args,
+          std::source_location location = std::source_location::current())
+    -> Message
 {
     return Message{
         std::format(msg, std::forward<Args>(args)...), Level::INFO, location};
 }
 
 template<typename... Args>
-SHIFT_LOGGER_EXPORT auto warning(
-    std::format_string<Args...> msg,
-    Args&&... args,
-    std::source_location location = std::source_location::current()) -> Message
+auto warning(std::format_string<Args...> msg,
+             Args&&... args,
+             std::source_location location = std::source_location::current())
+    -> Message
 {
     return Message{std::format(msg, std::forward<Args>(args)...),
                    Level::WARNING,
@@ -88,20 +88,20 @@ SHIFT_LOGGER_EXPORT auto warning(
 }
 
 template<typename... Args>
-SHIFT_LOGGER_EXPORT auto error(
-    std::format_string<Args...> msg,
-    Args&&... args,
-    std::source_location location = std::source_location::current()) -> Message
+auto error(std::format_string<Args...> msg,
+           Args&&... args,
+           std::source_location location = std::source_location::current())
+    -> Message
 {
     return Message{
         std::format(msg, std::forward<Args>(args)...), Level::ERROR, location};
 }
 
 template<typename... Args>
-SHIFT_LOGGER_EXPORT auto critical(
-    std::format_string<Args...> msg,
-    Args&&... args,
-    std::source_location location = std::source_location::current()) -> Message
+auto critical(std::format_string<Args...> msg,
+              Args&&... args,
+              std::source_location location = std::source_location::current())
+    -> Message
 {
     return Message{std::format(msg, std::forward<Args>(args)...),
                    Level::CRITICAL,
