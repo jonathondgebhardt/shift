@@ -64,6 +64,7 @@ private:
     SHIFT_SUPPRESS_C4251
     std::priority_queue<UpdateEvent, std::vector<UpdateEvent>, std::greater<>>
         m_events;
+    SHIFT_SUPPRESS_C4251
     std::vector<UpdateEvent> m_processed;
 };
 

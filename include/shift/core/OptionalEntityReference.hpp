@@ -29,6 +29,7 @@ public:
     auto empty() const -> bool;
 
 private:
+    SHIFT_SUPPRESS_C4251
     OER m_entity;
 };
 

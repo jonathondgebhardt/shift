@@ -66,6 +66,7 @@ public:
 private:
     SHIFT_SUPPRESS_C4251
     std::string m_name;
+    SHIFT_SUPPRESS_C4251
     std::vector<std::unique_ptr<Component>> m_components;
     coordinate::EcefPosition m_position;
     coordinate::EcefVector m_velocity;

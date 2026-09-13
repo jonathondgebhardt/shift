@@ -25,6 +25,7 @@ public:
     auto remove_entity(std::string_view name) -> bool;
 
 private:
+    SHIFT_SUPPRESS_C4251
     std::vector<Entity> m_entities;
 };
 

@@ -81,6 +81,7 @@ private:
     {
     }
 
+    SHIFT_SUPPRESS_C4251
     std::optional<UpdateResultType> m_next;
 };
 

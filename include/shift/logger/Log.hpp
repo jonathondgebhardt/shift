@@ -39,9 +39,9 @@ public:
     auto enabled() const noexcept -> bool;
 
 private:
-    SHIFT_SUPPRESS_C4251
-
     struct Impl;
+
+    SHIFT_SUPPRESS_C4251
     std::unique_ptr<Impl> m_impl;
 };
 

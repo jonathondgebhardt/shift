@@ -21,6 +21,7 @@ public:
     }
 
 private:
+    SHIFT_SUPPRESS_C4251
     std::vector<TelemetryRecord> m_records;
 };
 
