@@ -25,6 +25,7 @@ shift_add_test(
   source/core/World_test.cpp
   LINKS
   shift_core
+  shift_time
 )
 shift_add_test(
   time
@@ -51,6 +52,7 @@ shift_add_test(
   source/telemetry/TelemetryValue_test.cpp
   LINKS
   shift_core
+  shift_time
 )
 shift_add_test(
   math

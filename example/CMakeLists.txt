@@ -13,7 +13,7 @@ add_custom_target(run-examples)
 
 function(add_example NAME)
   add_executable("${NAME}" "${NAME}.cpp")
-  target_link_libraries("${NAME}" PRIVATE shift::core shift::logger)
+  target_link_libraries("${NAME}" PRIVATE shift::core shift::logger shift::coordinate shift::time)
   target_compile_features("${NAME}" PRIVATE cxx_std_23)
   add_custom_target("run_${NAME}" COMMAND "${NAME}" VERBATIM)
   add_dependencies("run_${NAME}" "${NAME}")
