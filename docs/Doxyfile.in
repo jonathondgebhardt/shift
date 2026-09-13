@@ -30,3 +30,10 @@ CREATE_SUBDIRS = NO
 # Include all directories, files and namespaces in the documentation
 # Disable to include only explicitly documented objects
 M_SHOW_UNDOCUMENTED = YES
+
+# exclude concepts because m.css can't handle them
+EXCLUDE_SYMBOLS = shift::time::ClockType \
+                  shift::time::TimeType \
+                  shift::telemetry::ToStdStringable \
+                  shift::telemetry::ToStringable \
+                  shift::time::is_any_of
