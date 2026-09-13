@@ -3,11 +3,12 @@
 #include "shift/time/Clock.hpp"
 #include "shift/time/Duration.hpp"
 #include "shift/time/SimulationTime.hpp"
+#include "shift/time/shift_time_export.hpp"
 
 namespace shift::time
 {
 
-class TimeUpdater
+class SHIFT_TIME_EXPORT TimeUpdater
 {
 public:
     TimeUpdater() = default;

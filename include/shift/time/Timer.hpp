@@ -4,13 +4,12 @@
 
 #include "shift/time/Duration.hpp"
 #include "shift/time/TimeTypes.hpp"
-#include "shift/time/shift_time_export.hpp"
 
 namespace shift::time
 {
 
 template<time::ClockType T = std::chrono::steady_clock>
-class SHIFT_TIME_EXPORT Timer
+class Timer
 {
 public:
     auto reset() -> void
