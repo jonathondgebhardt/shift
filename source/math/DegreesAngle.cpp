@@ -42,6 +42,18 @@ auto DegreesAngle::set_angle(float angle) -> void
     m_angle = fix_up(angle);
 }
 
+auto DegreesAngle::operator+=(const DegreesAngle& other) -> DegreesAngle&
+{
+    m_angle = fix_up(m_angle + other.m_angle);
+    return *this;
+}
+
+auto DegreesAngle::operator-=(const DegreesAngle& other) -> DegreesAngle&
+{
+    m_angle = fix_up(m_angle - other.m_angle);
+    return *this;
+}
+
 auto DegreesAngle::to_string() const -> std::string
 {
     return std::to_string(m_angle);

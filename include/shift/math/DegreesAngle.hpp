@@ -24,6 +24,26 @@ public:
 
     auto set_angle(float angle) -> void;
 
+    // todo: consider adding overloads for float
+
+    friend auto operator+(const DegreesAngle& lhs, const DegreesAngle& rhs)
+        -> DegreesAngle
+    {
+        auto temp = lhs;
+        return temp += rhs;
+    }
+
+    auto operator+=(const DegreesAngle& other) -> DegreesAngle&;
+
+    friend auto operator-(const DegreesAngle& lhs, const DegreesAngle& rhs)
+        -> DegreesAngle
+    {
+        auto temp = lhs;
+        return temp -= rhs;
+    }
+
+    auto operator-=(const DegreesAngle& other) -> DegreesAngle&;
+
     auto to_string() const -> std::string;
 
 private:
