@@ -13,7 +13,9 @@ struct TelemetryTraits;
 
 template<typename T>
 concept ToStdStringable = requires(T value) {
-    { std::to_string(value) } -> std::same_as<std::string>;
+    {
+        std::to_string(value)
+    } -> std::same_as<std::string>;
 };
 
 template<typename T>
@@ -28,7 +30,9 @@ struct TelemetryTraits<T>
 
 template<typename T>
 concept ToStringable = requires(T value) {
-    { value.to_string() } -> std::same_as<std::string>;
+    {
+        value.to_string()
+    } -> std::same_as<std::string>;
 };
 
 template<typename T>

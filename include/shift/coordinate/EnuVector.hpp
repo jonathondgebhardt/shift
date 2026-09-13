@@ -43,8 +43,8 @@ struct SHIFT_COORDINATE_EXPORT EnuVector
             && math::floating_point_eq(up, other.up);
     }
 
-    friend constexpr auto operator+(const EnuVector lhs, const EnuVector rhs)
-        -> EnuVector
+    friend constexpr auto operator+(const EnuVector lhs,
+                                    const EnuVector rhs) -> EnuVector
     {
         auto tmp = lhs;
         return tmp += rhs;
@@ -58,8 +58,8 @@ struct SHIFT_COORDINATE_EXPORT EnuVector
         return *this;
     }
 
-    friend constexpr auto operator-(const EnuVector lhs, const EnuVector rhs)
-        -> EnuVector
+    friend constexpr auto operator-(const EnuVector lhs,
+                                    const EnuVector rhs) -> EnuVector
     {
         auto tmp = lhs;
         return tmp -= rhs;
@@ -73,8 +73,8 @@ struct SHIFT_COORDINATE_EXPORT EnuVector
         return *this;
     }
 
-    friend constexpr auto operator*(const EnuVector vector, const double scalar)
-        -> EnuVector
+    friend constexpr auto operator*(const EnuVector vector,
+                                    const double scalar) -> EnuVector
     {
         auto tmp = vector;
         return tmp *= scalar;
@@ -88,8 +88,8 @@ struct SHIFT_COORDINATE_EXPORT EnuVector
         return *this;
     }
 
-    friend constexpr auto operator/(const EnuVector vector, const double scalar)
-        -> EnuVector
+    friend constexpr auto operator/(const EnuVector vector,
+                                    const double scalar) -> EnuVector
     {
         auto tmp = vector;
         return tmp /= scalar;
@@ -133,8 +133,8 @@ struct SHIFT_COORDINATE_EXPORT EnuVector
         return {};
     }
 
-    static constexpr auto cross(const EnuVector lhs, const EnuVector rhs)
-        -> EnuVector
+    static constexpr auto cross(const EnuVector lhs,
+                                const EnuVector rhs) -> EnuVector
     {
         // NOLINTBEGIN(readability-identifier-length)
         const auto i = (lhs.north * rhs.up) - (lhs.up * rhs.north);

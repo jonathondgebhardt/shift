@@ -42,8 +42,8 @@ struct SHIFT_COORDINATE_EXPORT EnuPosition
             && math::floating_point_eq(up, other.up);
     }
 
-    friend constexpr auto operator+(const EnuPosition lhs, const EnuVector rhs)
-        -> EnuPosition
+    friend constexpr auto operator+(const EnuPosition lhs,
+                                    const EnuVector rhs) -> EnuPosition
     {
         auto tmp = lhs;
         return tmp += rhs;
@@ -57,8 +57,8 @@ struct SHIFT_COORDINATE_EXPORT EnuPosition
         return *this;
     }
 
-    friend constexpr auto operator-(const EnuPosition lhs, const EnuVector rhs)
-        -> EnuPosition
+    friend constexpr auto operator-(const EnuPosition lhs,
+                                    const EnuVector rhs) -> EnuPosition
     {
         auto tmp = lhs;
         return tmp -= rhs;

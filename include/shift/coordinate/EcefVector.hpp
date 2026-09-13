@@ -43,8 +43,8 @@ struct SHIFT_COORDINATE_EXPORT EcefVector
             && math::floating_point_eq(z, other.z);
     }
 
-    friend constexpr auto operator+(const EcefVector lhs, const EcefVector rhs)
-        -> EcefVector
+    friend constexpr auto operator+(const EcefVector lhs,
+                                    const EcefVector rhs) -> EcefVector
     {
         auto tmp = lhs;
         return tmp += rhs;
@@ -58,8 +58,8 @@ struct SHIFT_COORDINATE_EXPORT EcefVector
         return *this;
     }
 
-    friend constexpr auto operator-(const EcefVector lhs, const EcefVector rhs)
-        -> EcefVector
+    friend constexpr auto operator-(const EcefVector lhs,
+                                    const EcefVector rhs) -> EcefVector
     {
         auto tmp = lhs;
         return tmp -= rhs;
@@ -129,8 +129,8 @@ struct SHIFT_COORDINATE_EXPORT EcefVector
         return {};
     }
 
-    static constexpr auto cross(const EcefVector lhs, const EcefVector rhs)
-        -> EcefVector
+    static constexpr auto cross(const EcefVector lhs,
+                                const EcefVector rhs) -> EcefVector
     {
         // NOLINTBEGIN(readability-identifier-length)
         const auto i = (lhs.y * rhs.z) - (lhs.z * rhs.y);
