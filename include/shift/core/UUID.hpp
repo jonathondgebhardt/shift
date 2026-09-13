@@ -17,7 +17,7 @@ public:
     auto to_string() const -> std::string;
     auto empty() const -> bool;
 
-    auto operator==(const UUID&) const -> bool;
+    auto operator==(const UUID&) const -> bool = default;
     auto operator<=>(const UUID&) const noexcept -> std::strong_ordering;
 
 private:
