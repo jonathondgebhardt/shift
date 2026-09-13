@@ -63,12 +63,12 @@ public:
         static auto update_count = 0u;
         update_count++;
 
-        auto& entity = world.find_entity(m_uid).try_unwrap();
+        auto* entity = world.find_entity(m_uid);
         constexpr auto frame = shift::coordinate::EnuFrame{};
-        auto position = shift::coordinate::to_enu(entity.position(), frame);
+        auto position = shift::coordinate::to_enu(entity->position(), frame);
         position.east = m_radius * std::cos(m_angle);
         position.north = m_radius * std::sin(m_angle);
-        entity.set_position(shift::coordinate::to_ecef(position, frame));
+        entity->set_position(shift::coordinate::to_ecef(position, frame));
 
         m_angle += m_speed * static_cast<double>(time_step.delta.data());
 
@@ -100,7 +100,7 @@ private:
 auto main() -> int
 {
     auto simulation = shift::Simulation{};
-    auto& entity = simulation.world().add_entity();
+    const auto* entity = simulation.world().add_entity();
 
     auto runner = shift::SimulationRunner{};
 
@@ -110,7 +110,7 @@ auto main() -> int
 
     runner.set_telemetry(&telemetry);
 
-    auto system = std::make_unique<OrbitSystem>(entity.uid());
+    auto system = std::make_unique<OrbitSystem>(entity->uid());
     simulation.systems().add_system(std::move(system));
 
     runner.run(simulation);

@@ -71,14 +71,16 @@ private:
                     TelemetryRecorder& recorder) const -> void override
         {
             for (const auto& entity : world.entities()) {
-                const auto value = m_definition.get(entity);
+                // todo: should probably do this safely
+                const auto value = m_definition.get(*entity);
 
                 if (!value) {
                     continue;
                 }
 
+                // todo: should probably do this safely
                 record_value(
-                    recorder, time, entity, m_definition.name(), *value);
+                    recorder, time, *entity, m_definition.name(), *value);
             }
         }
 

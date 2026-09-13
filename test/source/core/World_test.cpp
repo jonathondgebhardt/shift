@@ -15,43 +15,45 @@ TEST_CASE("World add_entity", "[core][World]")
 TEST_CASE("World find_entity", "[core][World]")
 {
     auto world = shift::World{};
-    auto& entity = world.add_entity();
+    auto* entity = world.add_entity();
+    REQUIRE(entity != nullptr);
 
-    const auto uid = entity.uid();
+    const auto uid = entity->uid();
     constexpr auto name = "name";
-    entity.set_name(name);
+    entity->set_name(name);
 
     REQUIRE(uid != shift::EntityUID{});
-    REQUIRE(!entity.name().empty());
+    REQUIRE(!entity->name().empty());
 
     SECTION("uid")
     {
-        const auto entity_ref = world.find_entity(uid);
-        REQUIRE(!entity_ref.empty());
+        const auto entity_ptr = world.find_entity(uid);
+        REQUIRE(entity_ptr != nullptr);
         // NOLINTNEXTLINE(bugprone-unchecked-optional-access)
-        CHECK(entity_ref.unwrap().uid() == uid);
+        CHECK(entity_ptr->uid() == uid);
     }
 
     SECTION("name")
     {
-        const auto entity_ref = world.find_entity(name);
-        REQUIRE(!entity_ref.empty());
+        const auto entity_ptr = world.find_entity(name);
+        REQUIRE(entity_ptr != nullptr);
         // NOLINTNEXTLINE(bugprone-unchecked-optional-access)
-        CHECK(entity_ref.unwrap().name() == name);
+        CHECK(entity_ptr->name() == name);
     }
 }
 
 TEST_CASE("World remove_entity", "[core][World]")
 {
     auto world = shift::World{};
-    auto& entity = world.add_entity();
+    auto* entity = world.add_entity();
+    REQUIRE(entity != nullptr);
 
-    const auto uid = entity.uid();
+    const auto uid = entity->uid();
     constexpr auto name = "name";
-    entity.set_name(name);
+    entity->set_name(name);
 
     REQUIRE(uid != shift::EntityUID{});
-    REQUIRE(!entity.name().empty());
+    REQUIRE(!entity->name().empty());
 
     SECTION("uid")
     {
