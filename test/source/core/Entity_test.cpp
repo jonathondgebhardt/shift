@@ -8,6 +8,7 @@
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
 
 #include "shift/coordinate/EcefPosition.hpp"
+#include "shift/coordinate/EcefVector.hpp"
 #include "shift/coordinate/EulerOrientation.hpp"
 #include "shift/core/Component.hpp"
 
@@ -143,5 +144,27 @@ TEST_CASE("Entity orientation", "[core][Entity]")
         entity.orientation().set_roll(1.0f);
         CHECK_THAT(entity.orientation().roll(),
                    Catch::Matchers::WithinRel(1.0));
+    }
+}
+
+TEST_CASE("Entity velocity", "[core][Entity]")
+{
+    auto entity = shift::Entity{};
+
+    SECTION("setter")
+    {
+        constexpr auto velocity = shift::coordinate::EcefVector{1.0, 2.0, 3.0};
+        entity.set_velocity(velocity);
+        CHECK(entity.velocity() == velocity);
+    }
+
+    SECTION("reference getter")
+    {
+        entity.velocity().x = 1.0;
+        CHECK_THAT(entity.velocity().x, Catch::Matchers::WithinRel(1.0));
+        entity.velocity().y = 1.0;
+        CHECK_THAT(entity.velocity().y, Catch::Matchers::WithinRel(1.0));
+        entity.velocity().z = 1.0;
+        CHECK_THAT(entity.velocity().z, Catch::Matchers::WithinRel(1.0));
     }
 }
