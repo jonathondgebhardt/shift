@@ -41,6 +41,7 @@ shift_add_library(
   source/coordinate/GeodeticPosition.cpp
   LINKS
   ${GeographicLib_LIBRARIES}
+  shift_math
 )
 shift_add_library(
   time
