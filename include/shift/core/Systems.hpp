@@ -12,6 +12,13 @@ namespace shift
 class SHIFT_CORE_EXPORT Systems
 {
 public:
+    Systems() = default;
+    Systems(const Systems&) = delete;
+    Systems(Systems&&) noexcept = default;
+    ~Systems() = default;
+    auto operator=(const Systems&) -> Systems& = delete;
+    auto operator=(Systems&&) noexcept -> Systems& = default;
+
     auto add_system(std::unique_ptr<System> system) -> void;
 
     auto remove_system(SystemUID uid) -> bool;

@@ -25,6 +25,11 @@ public:
     }
 
     Entity() = default;
+    Entity(const Entity&) = delete;
+    Entity(Entity&&) = default;
+    ~Entity() = default;
+    auto operator=(const Entity&) -> Entity& = delete;
+    auto operator=(Entity&&) noexcept -> Entity& = default;
 
     auto uid() const -> EntityUID;
 
