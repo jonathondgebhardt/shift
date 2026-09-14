@@ -24,7 +24,9 @@ shift_add_test(
   source/core/UpdateScheduler_test.cpp
   source/core/World_test.cpp
   LINKS
+  shift_coordinate
   shift_core
+  shift_math
   shift_time
 )
 shift_add_test(
