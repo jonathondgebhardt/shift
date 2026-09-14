@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>shift::telemetry::DataDefinition class | shift</title>
+  <title>shift/coordinate/EulerOrientation.hpp file | shift</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -49,9 +49,7 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="DataDefinition_8hpp.html">&lt;shift/telemetry/DataDefinition.hpp&gt;</a></div>
-          <div class="m-doc-template">template&lt;<a href="classshift_1_1telemetry_1_1DataDefinition.html" class="m-doc">typename</a> <a href="classshift_1_1telemetry_1_1DataDefinition.html" class="m-doc">Owner</a>, <a href="classshift_1_1telemetry_1_1DataDefinition.html" class="m-doc">typename</a> Value&gt;</div>
-          <span class="m-breadcrumb"><a href="namespaceshift.html">shift</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespaceshift_1_1telemetry.html">telemetry</a>::<wbr/></span>DataDefinition <span class="m-thin">class</span>
+          <span class="m-breadcrumb"><a href="dir_ef5b40bb4ef50f64a96bf7100126957f.html">shift</a>/</span><span class="m-breadcrumb"><a href="dir_1c837ff8b714dca16ea55d10d5b43e3f.html">coordinate</a>/</span>EulerOrientation.hpp <span class="m-thin">file</span>
         </h1>
         <p><span></span></p>
         <nav class="m-block m-default">
@@ -60,43 +58,26 @@
             <li>
               Reference
               <ul>
-                <li><a href="#pub-types">Public types</a></li>
-                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="pub-types">
-          <h2><a href="#pub-types">Public types</a></h2>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
-            <dt id="a12fc88dcee5eb37f69f163b972bcfd76">
-              using <a href="#a12fc88dcee5eb37f69f163b972bcfd76" class="m-doc-self">OwnerType</a> = <a href="classshift_1_1telemetry_1_1DataDefinition.html" class="m-doc">Owner</a>
-            </dt>
+            <dt>namespace <a href="namespaceshift.html" class="m-doc">shift</a></dt>
             <dd><span></span></dd>
-            <dt id="a44ea357f5427dd364784cdd20c891262">
-              using <a href="#a44ea357f5427dd364784cdd20c891262" class="m-doc-self">ValueType</a> = Value
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a1606ace66d9d29dab975e24046f520e5">
-              using <a href="#a1606ace66d9d29dab975e24046f520e5" class="m-doc-self">Getter</a> = Value(*)(<a href="classshift_1_1telemetry_1_1DataDefinition.html" class="m-doc">const</a> <a href="classshift_1_1telemetry_1_1DataDefinition.html" class="m-doc">Owner</a>&amp;)
-            </dt>
+            <dt>namespace <a href="namespaceshift_1_1coordinate.html" class="m-doc">shift::coordinate</a></dt>
             <dd><span></span></dd>
           </dl>
         </section>
-        <section id="pub-methods">
-          <h2><a href="#pub-methods">Public functions</a></h2>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
-            <dt id="ab21f053baa06b679be6ca421fe0b18e1">
-              <span class="m-doc-wrap-bumper">auto <a href="#ab21f053baa06b679be6ca421fe0b18e1" class="m-doc-self">DataDefinition</a>(</span><span class="m-doc-wrap">std::string_view name,
-              <a href="#a1606ace66d9d29dab975e24046f520e5" class="m-doc">Getter</a> getter) -&gt; <a href="classshift_1_1telemetry_1_1DataDefinition.html" class="m-doc">constexpr</a> <span class="m-label m-flat m-primary">constexpr</span></span>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a71f8778fcfc4127b26d3f662f5b6314f">
-              <span class="m-doc-wrap-bumper">auto <a href="#a71f8778fcfc4127b26d3f662f5b6314f" class="m-doc-self">name</a>(</span><span class="m-doc-wrap">) const noexcept -&gt; std::string_view -&gt; <a href="classshift_1_1telemetry_1_1DataDefinition.html" class="m-doc">constexpr</a> <a href="classshift_1_1telemetry_1_1DataDefinition.html" class="m-doc">auto</a> <span class="m-label m-flat m-primary">constexpr</span> <span class="m-label m-flat m-success">noexcept</span></span>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a16b154d0e1c5eb19cc501a9b306eab52">
-              <span class="m-doc-wrap-bumper">auto <a href="#a16b154d0e1c5eb19cc501a9b306eab52" class="m-doc-self">get</a>(</span><span class="m-doc-wrap"><a href="classshift_1_1telemetry_1_1DataDefinition.html" class="m-doc">const</a> <a href="classshift_1_1telemetry_1_1DataDefinition.html" class="m-doc">Owner</a>&amp; owner) const -&gt; Value -&gt; <a href="classshift_1_1telemetry_1_1DataDefinition.html" class="m-doc">auto</a></span>
+            <dt>
+              class <a href="classshift_1_1coordinate_1_1EulerOrientation.html" class="m-doc">shift::coordinate::EulerOrientation</a>
             </dt>
             <dd><span></span></dd>
           </dl>
