@@ -17,8 +17,8 @@ public:
     constexpr DegreesAngle(DegreesAngle&&) noexcept = default;
     ~DegreesAngle() = default;
     constexpr auto operator=(const DegreesAngle&) -> DegreesAngle& = default;
-    constexpr auto operator=(DegreesAngle&&) noexcept
-        -> DegreesAngle& = default;
+    constexpr auto operator=(DegreesAngle&&) noexcept -> DegreesAngle& =
+                                                             default;
 
     auto operator==(const DegreesAngle& other) const -> bool;
 
@@ -28,8 +28,8 @@ public:
 
     // todo: consider adding overloads for float
 
-    friend auto operator+(const DegreesAngle& lhs, const DegreesAngle& rhs)
-        -> DegreesAngle
+    friend auto operator+(const DegreesAngle& lhs,
+                          const DegreesAngle& rhs) -> DegreesAngle
     {
         auto temp = lhs;
         return temp += rhs;
@@ -37,8 +37,8 @@ public:
 
     auto operator+=(const DegreesAngle& other) -> DegreesAngle&;
 
-    friend auto operator-(const DegreesAngle& lhs, const DegreesAngle& rhs)
-        -> DegreesAngle
+    friend auto operator-(const DegreesAngle& lhs,
+                          const DegreesAngle& rhs) -> DegreesAngle
     {
         auto temp = lhs;
         return temp -= rhs;

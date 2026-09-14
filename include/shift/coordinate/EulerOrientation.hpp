@@ -15,10 +15,10 @@ public:
     constexpr EulerOrientation(const EulerOrientation&) = default;
     constexpr EulerOrientation(EulerOrientation&&) noexcept = default;
     ~EulerOrientation() = default;
-    constexpr auto operator=(const EulerOrientation&)
-        -> EulerOrientation& = default;
-    constexpr auto operator=(EulerOrientation&&) noexcept
-        -> EulerOrientation& = default;
+    constexpr auto operator=(const EulerOrientation&) -> EulerOrientation& =
+                                                             default;
+    constexpr auto operator=(EulerOrientation&&) noexcept -> EulerOrientation& =
+                                                                 default;
 
     auto operator==(const EulerOrientation&) const -> bool = default;
 
