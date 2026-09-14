@@ -79,8 +79,10 @@ private:
                 }
 
                 // todo: should probably do this safely
-                record_value(
-                    recorder, time, *entity, m_definition.name(), *value);
+                recorder.record({.time = time,
+                                 .uid = entity->uid(),
+                                 .channel = m_definition.name(),
+                                 .value = TelemetryValue{*value}});
             }
         }
 
@@ -91,41 +93,6 @@ private:
     // todo: may want to move these out into some other file or delegate to a
     // class
     // todo: TelemetryValue type erases, can we just use T?
-    static void record_value(TelemetryRecorder& recorder,
-                             time::SimulationTime time,
-                             const Entity& entity,
-                             std::string_view channel,
-                             double value)
-    {
-        recorder.record({.time = time,
-                         .uid = entity.uid(),
-                         .channel = channel,
-                         .value = TelemetryValue{value}});
-    }
-
-    static void record_value(TelemetryRecorder& recorder,
-                             time::SimulationTime time,
-                             const Entity& entity,
-                             std::string_view channel,
-                             const coordinate::EcefPosition& value)
-    {
-        recorder.record({.time = time,
-                         .uid = entity.uid(),
-                         .channel = channel,
-                         .value = TelemetryValue{value}});
-    }
-
-    static void record_value(TelemetryRecorder& recorder,
-                             time::SimulationTime time,
-                             const Entity& entity,
-                             std::string_view channel,
-                             const coordinate::EnuPosition& value)
-    {
-        recorder.record({.time = time,
-                         .uid = entity.uid(),
-                         .channel = channel,
-                         .value = TelemetryValue{value}});
-    }
 
     std::vector<std::unique_ptr<ObservationConcept>> m_observations;
     std::unique_ptr<TelemetryRecorder> m_recorder;
