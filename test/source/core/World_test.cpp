@@ -27,7 +27,7 @@ TEST_CASE("World find_entity", "[core][World]")
 
     SECTION("uid")
     {
-        const auto entity_ptr = world.find_entity(uid);
+        auto* const entity_ptr = world.find_entity(uid);
         REQUIRE(entity_ptr != nullptr);
         // NOLINTNEXTLINE(bugprone-unchecked-optional-access)
         CHECK(entity_ptr->uid() == uid);
@@ -35,7 +35,7 @@ TEST_CASE("World find_entity", "[core][World]")
 
     SECTION("name")
     {
-        const auto entity_ptr = world.find_entity(name);
+        auto* const entity_ptr = world.find_entity(name);
         REQUIRE(entity_ptr != nullptr);
         // NOLINTNEXTLINE(bugprone-unchecked-optional-access)
         CHECK(entity_ptr->name() == name);
