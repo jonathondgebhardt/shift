@@ -2,8 +2,6 @@
 
 #include <utility>
 
-#include "shift/coordinate/EcefPosition.hpp"
-#include "shift/coordinate/EnuPosition.hpp"
 #include "shift/core/World.hpp"
 #include "shift/telemetry/DataDefinition.hpp"
 #include "shift/telemetry/TelemetryRecorder.hpp"
@@ -46,10 +44,10 @@ private:
         ObservationConcept(const ObservationConcept&) = default;
         ObservationConcept(ObservationConcept&&) noexcept = default;
         virtual ~ObservationConcept() = default;
-        auto operator=(const ObservationConcept&) -> ObservationConcept& =
-                                                         default;
-        auto operator=(ObservationConcept&&) noexcept -> ObservationConcept& =
-                                                             default;
+        auto operator=(const ObservationConcept&)
+            -> ObservationConcept& = default;
+        auto operator=(ObservationConcept&&) noexcept
+            -> ObservationConcept& = default;
 
         virtual auto sample(time::SimulationTime,
                             const World&,
