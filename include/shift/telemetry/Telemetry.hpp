@@ -1,5 +1,6 @@
 #pragma once
 
+#include <ranges>
 #include <utility>
 
 #include "shift/core/World.hpp"
@@ -44,10 +45,10 @@ private:
         ObservationConcept(const ObservationConcept&) = default;
         ObservationConcept(ObservationConcept&&) noexcept = default;
         virtual ~ObservationConcept() = default;
-        auto operator=(const ObservationConcept&)
-            -> ObservationConcept& = default;
-        auto operator=(ObservationConcept&&) noexcept
-            -> ObservationConcept& = default;
+        auto operator=(const ObservationConcept&) -> ObservationConcept& =
+                                                         default;
+        auto operator=(ObservationConcept&&) noexcept -> ObservationConcept& =
+                                                             default;
 
         virtual auto sample(time::SimulationTime,
                             const World&,
@@ -68,11 +69,11 @@ private:
                     const World& world,
                     TelemetryRecorder& recorder) const -> void override
         {
-            for (const auto& entity : world.entities()) {
-                // todo: should probably do this safely
+            for (const auto& entity : world.entities()
+                     | std::views::filter([](const auto& entity)
+                                          { return entity != nullptr; }))
+            {
                 const auto value = m_definition.get(*entity);
-
-                // todo: should probably do this safely
                 recorder.record({.time = time,
                                  .uid = entity->uid(),
                                  .channel = m_definition.name(),
