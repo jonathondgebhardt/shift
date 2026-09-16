@@ -20,8 +20,8 @@ public:
     auto operator=(const World&) -> World& = delete;
     auto operator=(World&&) noexcept -> World& = default;
 
-    auto find_entity(EntityUID uid) -> Entity*;
-    auto find_entity(std::string_view name) -> Entity*;
+    auto find_entity(EntityUID uid) const -> Entity*;
+    auto find_entity(std::string_view name) const -> Entity*;
 
     auto entities() const -> std::span<const std::unique_ptr<Entity>>
     {

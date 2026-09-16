@@ -11,7 +11,7 @@
 namespace shift
 {
 
-auto World::find_entity(const EntityUID uid) -> Entity*
+auto World::find_entity(const EntityUID uid) const -> Entity*
 {
     const auto found =
         std::ranges::find_if(m_entities,
@@ -24,7 +24,7 @@ auto World::find_entity(const EntityUID uid) -> Entity*
     return {};
 }
 
-auto World::find_entity(const std::string_view name) -> Entity*
+auto World::find_entity(const std::string_view name) const -> Entity*
 {
     const auto found =
         std::ranges::find_if(m_entities,
