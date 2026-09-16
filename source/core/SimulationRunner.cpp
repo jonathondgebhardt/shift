@@ -52,7 +52,6 @@ auto SimulationRunner::run(Simulation& simulation) -> void
     }
 
     shift::log::trace("running simulation");
-    clock.set_time(first_update->time);
 
     // todo: check end condition before processing updates
     // todo: this API is kind of annoying: make sure scheduler is not empty, get
