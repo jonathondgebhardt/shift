@@ -37,8 +37,8 @@ public:
 
     constexpr auto get() const -> SimulationTimeType { return m_time; }
 
-    friend constexpr auto operator+(SimulationTime time,
-                                    Duration duration) -> SimulationTime
+    friend constexpr auto operator+(SimulationTime time, Duration duration)
+        -> SimulationTime
     {
         time += duration;
         return time;
@@ -50,8 +50,8 @@ public:
         return *this;
     }
 
-    friend constexpr auto operator-(SimulationTime time,
-                                    Duration duration) -> SimulationTime
+    friend constexpr auto operator-(SimulationTime time, Duration duration)
+        -> SimulationTime
     {
         time -= duration;
         return time;
@@ -63,16 +63,13 @@ public:
         return *this;
     }
 
-    friend constexpr auto operator-(SimulationTime lhs,
-                                    SimulationTime rhs) -> Duration
+    friend constexpr auto operator-(SimulationTime lhs, SimulationTime rhs)
+        -> Duration
     {
         return Duration{lhs.get() - rhs.get()};
     }
 
-    auto to_string() const -> std::string
-    {
-        return std::to_string(m_time.count());
-    }
+    auto to_string() const -> std::string;
 
 private:
     SHIFT_SUPPRESS_C4251

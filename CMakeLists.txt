@@ -51,6 +51,7 @@ shift_add_library(
   source/time/Clock.cpp
   source/time/FixedTimeUpdater.cpp
   source/time/RealTimeUpdater.cpp
+  source/time/SimulationTime.cpp
 )
 shift_add_library(
   core
