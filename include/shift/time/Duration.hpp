@@ -61,7 +61,7 @@ public:
         return *this;
     }
 
-    auto to_string() const -> std::string { return std::to_string(data()); }
+    auto to_string() const -> std::string;
 
 private:
     SHIFT_SUPPRESS_C4251
