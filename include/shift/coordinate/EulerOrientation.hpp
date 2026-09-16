@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 #include "shift/coordinate/shift_coordinate_export.hpp"
 #include "shift/math/DegreesAngle.hpp"
 
@@ -15,10 +17,10 @@ public:
     constexpr EulerOrientation(const EulerOrientation&) = default;
     constexpr EulerOrientation(EulerOrientation&&) noexcept = default;
     ~EulerOrientation() = default;
-    constexpr auto operator=(const EulerOrientation&) -> EulerOrientation& =
-                                                             default;
-    constexpr auto operator=(EulerOrientation&&) noexcept -> EulerOrientation& =
-                                                                 default;
+    constexpr auto operator=(const EulerOrientation&)
+        -> EulerOrientation& = default;
+    constexpr auto operator=(EulerOrientation&&) noexcept
+        -> EulerOrientation& = default;
 
     auto operator==(const EulerOrientation&) const -> bool = default;
 
@@ -33,6 +35,8 @@ public:
     auto roll() const -> float;
 
     auto set_roll(float roll) -> void;
+
+    auto to_string() const -> std::string;
 
 private:
     math::DegreesAngle m_yaw;

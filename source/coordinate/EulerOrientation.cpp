@@ -1,3 +1,6 @@
+#include <format>
+#include <string>
+
 #include "shift/coordinate/EulerOrientation.hpp"
 
 #include "shift/math/DegreesAngle.hpp"
@@ -41,6 +44,14 @@ auto EulerOrientation::roll() const -> float
 auto EulerOrientation::set_roll(float roll) -> void
 {
     m_roll.set_angle(roll);
+}
+
+auto EulerOrientation::to_string() const -> std::string
+{
+    return std::format("({:.2f}, {:.2f}, {:.2f})",
+                       m_yaw.angle(),
+                       m_pitch.angle(),
+                       m_roll.angle());
 }
 
 }  // namespace shift::coordinate
