@@ -19,7 +19,7 @@ auto EcefVector::distance(const EcefVector lhs, const EcefVector rhs) -> double
 
 auto EcefVector::to_string() const -> std::string
 {
-    return std::format("({}, {}, {})", x, y, z);
+    return std::format("({:.2f}, {:.2f}, {:.2f})", x, y, z);
 }
 
 }  // namespace shift::coordinate

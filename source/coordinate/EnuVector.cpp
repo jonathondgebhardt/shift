@@ -19,7 +19,7 @@ auto EnuVector::distance(const EnuVector lhs, const EnuVector rhs) -> double
 
 auto EnuVector::to_string() const -> std::string
 {
-    return std::format("({}, {}, {})", east, north, up);
+    return std::format("({:.2f}, {:.2f}, {:.2f})", east, north, up);
 }
 
 }  // namespace shift::coordinate

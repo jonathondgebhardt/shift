@@ -72,7 +72,8 @@ auto GeodeticPosition::set_longitude(double longitude) -> void
 
 auto GeodeticPosition::to_string() const -> std::string
 {
-    return std::format("({}, {}, {})", m_latitude, m_longitude, m_altitude);
+    return std::format(
+        "({:.2f}, {:.2f}, {:.2f})", m_latitude, m_longitude, m_altitude);
 }
 
 }  // namespace shift::coordinate
