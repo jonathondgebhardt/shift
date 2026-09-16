@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <format>
+#include <iostream>
 #include <memory>
 #include <stdexcept>
 
@@ -10,12 +11,16 @@
 #include "shift/core/UpdateResult.hpp"
 #include "shift/logger/Log.hpp"
 #include "shift/time/Clock.hpp"
+#include "shift/time/Timer.hpp"
 
 namespace shift
 {
 
 auto SimulationRunner::run(Simulation& simulation) -> void
 {
+    auto timer = time::Timer{};
+    timer.reset();
+
     shift::log::trace("starting up systems");
     simulation.systems().startup(simulation.world());
 
@@ -80,6 +85,11 @@ auto SimulationRunner::run(Simulation& simulation) -> void
     }
 
     shift::log::trace("shutting down simulation");
+
+    // todo: would like to be able to do this
+    // shift::log::trace("time elapsed: {}", timer.elapsed().to_string());
+
+    std::cout << "time elapsed: " << timer.elapsed().to_string() << '\n';
 }
 
 }  // namespace shift
