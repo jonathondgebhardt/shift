@@ -64,6 +64,10 @@ auto SimulationRunner::run(Simulation& simulation) -> void
         clock.set_time(current_update->time);
         const auto time_step = clock.time_step();
 
+        if (m_time_limit && time_step.time >= *m_time_limit) {
+            break;
+        }
+
         // todo: i thought about encapsulating updating a system into Systems,
         // but that introduce a coupling between Systems and UpdateScheduler.
         auto* system = simulation.systems().find_system(current_update->uid);
