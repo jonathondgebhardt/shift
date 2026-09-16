@@ -17,7 +17,7 @@ namespace shift
 auto SimulationRunner::run(Simulation& simulation) -> void
 {
     shift::log::trace("starting up systems");
-    simulation.systems().startup();
+    simulation.systems().startup(simulation.world());
 
     shift::log::trace("sampling initial world state");
     if (m_telemetry != nullptr) {

@@ -6,6 +6,7 @@
 #include "shift/core/Systems.hpp"
 
 #include "shift/core/System.hpp"
+#include "shift/core/World.hpp"
 #include "shift/logger/Log.hpp"
 
 namespace shift
@@ -40,11 +41,11 @@ auto Systems::find_system(SystemUID uid) -> System*
     return found != m_systems.end() ? found->get() : nullptr;
 }
 
-auto Systems::startup() -> void
+auto Systems::startup(const World& world) -> void
 {
     std::ranges::for_each(m_systems,
-                          [](const std::unique_ptr<System>& system)
-                          { system->startup(); });
+                          [&](const std::unique_ptr<System>& system)
+                          { system->startup(world); });
 }
 
 }  // namespace shift

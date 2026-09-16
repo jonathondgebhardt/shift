@@ -30,12 +30,12 @@ public:
     // todo: friend function
     auto set_uid(SystemUID uid) { m_uid = uid; }
 
-    virtual auto startup() -> void {}
+    virtual auto startup([[maybe_unused]] const World& world) -> void {}
 
     virtual auto first_update() -> UpdateResult = 0;
 
-    virtual auto update(World& world,
-                        time::Clock::TimeStep time_step) -> UpdateResult = 0;
+    virtual auto update(World& world, time::Clock::TimeStep time_step)
+        -> UpdateResult = 0;
 
 private:
     SystemUID m_uid{};

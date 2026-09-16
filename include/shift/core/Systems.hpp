@@ -30,7 +30,7 @@ public:
         return m_systems;
     }
 
-    auto startup() -> void;
+    auto startup(const World& world) -> void;
 
 private:
     SHIFT_SUPPRESS_C4251

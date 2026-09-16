@@ -31,7 +31,7 @@ public:
     {
     }
 
-    auto startup() -> void override
+    auto startup([[maybe_unused]] const shift::World& world) -> void override
     {
         if (m_uid == shift::EntityUID{}) {
             throw std::runtime_error("uid cannot be empty");
