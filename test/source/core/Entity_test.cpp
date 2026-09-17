@@ -59,7 +59,8 @@ TEST_CASE("Entity has_component", "[core][Entity]")
     constexpr auto name = "name";
     component->set_name(name);
 
-    // todo: the linter complaints that "Moved-from object 'component' is moved"
+    // the linter complaints that "Moved-from object 'component' is moved"
+    // NOLINTNEXTLINE(clang-analyzer-cplusplus.Move)
     REQUIRE(object.add_component(std::move(component)));
 
     SECTION("UUID")
@@ -83,7 +84,8 @@ TEST_CASE("Entity get_component", "[core][Entity]")
     constexpr auto name = "name";
     component->set_name(name);
 
-    // todo: the linter complaints that "Moved-from object 'component' is moved"
+    // the linter complaints that "Moved-from object 'component' is moved"
+    // NOLINTNEXTLINE(clang-analyzer-cplusplus.Move)
     REQUIRE(object.add_component(std::move(component)));
 
     SECTION("UUID")
