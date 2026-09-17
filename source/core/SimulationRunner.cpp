@@ -46,8 +46,7 @@ auto SimulationRunner::run(Simulation& simulation) -> void
             }
         });
 
-    auto first_update = m_scheduler.top();
-    if (!first_update) {
+    if (m_scheduler.empty()) {
         throw std::runtime_error("no systems scheduled a first update");
     }
 
