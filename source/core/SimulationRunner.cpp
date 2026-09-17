@@ -2,7 +2,6 @@
 #include <format>
 #include <iostream>
 #include <memory>
-#include <stdexcept>
 
 #include "shift/core/Simulation.hpp"
 
@@ -12,6 +11,7 @@
 #include "shift/logger/Log.hpp"
 #include "shift/time/Clock.hpp"
 #include "shift/time/Timer.hpp"
+#include "shift/utilities/Exception.hpp"
 
 namespace shift
 {
@@ -47,7 +47,7 @@ auto SimulationRunner::run(Simulation& simulation) -> void
         });
 
     if (m_scheduler.empty()) {
-        throw std::runtime_error("no systems scheduled a first update");
+        throw Exception{"no systems scheduled a first update"};
     }
 
     shift::log::trace("running simulation");
@@ -74,8 +74,8 @@ auto SimulationRunner::run(Simulation& simulation) -> void
         // but that introduce a coupling between Systems and UpdateScheduler.
         auto* system = simulation.systems().find_system(current_update.uid);
         if (system == nullptr) {
-            throw std::runtime_error(std::format(
-                "failed to find system with uid {}", current_update.uid));
+            throw Exception{std::format("failed to find system with uid {}",
+                                        current_update.uid)};
         }
 
         const auto result = system->update(simulation.world(), time_step);

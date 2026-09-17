@@ -8,8 +8,8 @@
 namespace
 {
 
-auto format_message(const std::string& message, const std::source_location& loc)
-    -> std::string
+auto format_message(const std::string& message,
+                    const std::source_location& loc) -> std::string
 {
     return std::format("{} at {}:{} ({})",
                        message,

@@ -1,10 +1,12 @@
 #pragma once
 
+#include <format>
 #include <memory>
 #include <typeindex>
 #include <utility>
 
 #include "shift/telemetry/TelemetryTraits.hpp"
+#include "shift/utilities/Exception.hpp"
 
 namespace shift::telemetry
 {
@@ -52,6 +54,8 @@ public:
         if (!is<T>()) {
             // todo: throw with a useful message
             throw std::bad_cast{};
+            throw Exception{
+                std::format("bad cast: value is not a {}", typeid(T).name())};
         }
 
         return *static_cast<const T*>(m_value->pointer());

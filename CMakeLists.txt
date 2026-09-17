@@ -49,6 +49,7 @@ shift_add_library(
   LINKS
   ${GeographicLib_LIBRARIES}
   shift_math
+  shift_utilities
 )
 shift_add_library(
   time
@@ -78,6 +79,7 @@ shift_add_library(
   shift_logger
   shift_math
   shift_time
+  shift_utilities
 )
 
 # ---- Examples ----

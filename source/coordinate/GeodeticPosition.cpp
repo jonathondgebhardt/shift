@@ -1,8 +1,9 @@
 #include <format>
-#include <stdexcept>
 #include <string>
 
 #include "shift/coordinate/GeodeticPosition.hpp"
+
+#include "shift/utilities/Exception.hpp"
 
 namespace
 {
@@ -40,21 +41,21 @@ GeodeticPosition::GeodeticPosition(double latitude,
 {
     // NOLINTEND(bugprone-easily-swappable-parameters)
     if (!valid_latitude(latitude)) {
-        throw std::runtime_error(
-            std::format("latitude must be within [-90, 90]: {}", latitude));
+        throw Exception{
+            std::format("latitude must be within [-90, 90]: {}", latitude)};
     }
 
     if (!valid_longitude(longitude)) {
-        throw std::runtime_error(
-            std::format("longitude must be within [-180, 180]: {}", longitude));
+        throw Exception{
+            std::format("longitude must be within [-180, 180]: {}", longitude)};
     }
 }
 
 auto GeodeticPosition::set_latitude(double latitude) -> void
 {
     if (!valid_latitude(latitude)) {
-        throw std::runtime_error(
-            std::format("latitude must be within [-90, 90]: {}", latitude));
+        throw Exception{
+            std::format("latitude must be within [-90, 90]: {}", latitude)};
     }
 
     m_latitude = latitude;
@@ -63,8 +64,8 @@ auto GeodeticPosition::set_latitude(double latitude) -> void
 auto GeodeticPosition::set_longitude(double longitude) -> void
 {
     if (!valid_longitude(longitude)) {
-        throw std::runtime_error(
-            std::format("longitude must be within [-180, 180]: {}", longitude));
+        throw Exception{
+            std::format("longitude must be within [-180, 180]: {}", longitude)};
     }
 
     m_longitude = longitude;

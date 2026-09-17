@@ -7,6 +7,7 @@
 #include "shift/telemetry/DataDefinition.hpp"
 #include "shift/telemetry/TelemetryRecorder.hpp"
 #include "shift/time/SimulationTime.hpp"
+#include "shift/utilities/Exception.hpp"
 
 namespace shift::telemetry
 {
@@ -30,7 +31,7 @@ public:
     auto sample(time::SimulationTime time, const World& world) -> void
     {
         if (m_recorder == nullptr) {
-            throw std::runtime_error("recorder cannot be null");
+            throw Exception{"recorder cannot be null"};
         }
 
         for (const auto& observation : m_observations) {

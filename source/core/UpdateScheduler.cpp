@@ -1,12 +1,12 @@
 #include <optional>
 #include <queue>
-#include <stdexcept>
 #include <vector>
 
 #include "shift/core/UpdateScheduler.hpp"
 
 #include "shift/core/System.hpp"
 #include "shift/time/SimulationTime.hpp"
+#include "shift/utilities/Exception.hpp"
 
 namespace shift
 {
@@ -15,7 +15,7 @@ auto UpdateScheduler::schedule(const System& system,
                                const time::SimulationTime time) -> void
 {
     if (system.uid() == shift::SystemUID{}) {
-        throw std::runtime_error("cannot schedule system with invalid UID");
+        throw Exception{"cannot schedule system with invalid UID"};
     }
 
     m_events.emplace(UpdateEvent{.uid = system.uid(), .time = time});

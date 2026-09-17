@@ -1,10 +1,10 @@
 #pragma once
 
-#include <stdexcept>
 #include <string>
 
 #include "shift/coordinate/shift_coordinate_export.hpp"
 #include "shift/math/Utilities.hpp"
+#include "shift/utilities/Exception.hpp"
 
 namespace shift::coordinate
 {
@@ -98,7 +98,7 @@ struct SHIFT_COORDINATE_EXPORT EcefVector
     constexpr auto operator/=(const double scalar) -> EcefVector&
     {
         if (math::floating_point_eq(scalar, 0.0)) {
-            throw std::runtime_error("cannot divide Vec3 by zero");
+            throw Exception{"cannot divide Vec3 by zero"};
         }
 
         x /= scalar;
