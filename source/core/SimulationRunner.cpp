@@ -57,11 +57,12 @@ auto SimulationRunner::run(Simulation& simulation) -> void
     // first next update event, then make sure it's not nullopt
     while (!m_scheduler.empty()) {
         const auto current_update = m_scheduler.top();
-        m_scheduler.pop();
 
         if (m_time_limit && current_update->time > *m_time_limit) {
             break;
         }
+
+        m_scheduler.pop();
 
         clock.set_time(current_update->time);
         const auto time_step = clock.time_step();
