@@ -55,24 +55,27 @@ auto SimulationRunner::run(Simulation& simulation) -> void
     // todo: check end condition before processing updates
     // todo: this API is kind of annoying: make sure scheduler is not empty, get
     // first next update event, then make sure it's not nullopt
-    while (!m_scheduler.empty()) {
-        const auto current_update = m_scheduler.top();
+    while (!m_scheduler.empty() && m_scheduler.top()) {
+        // we know there's a valid event to process because the scheduler is not
+        // empty and we check that the top event is not nullopt
+        // NOLINTNEXTLINE(bugprone-unchecked-optional-access)
+        const auto current_update = m_scheduler.top().value();
 
-        if (m_time_limit && current_update->time > *m_time_limit) {
+        if (m_time_limit && current_update.time > *m_time_limit) {
             break;
         }
 
         m_scheduler.pop();
 
-        clock.set_time(current_update->time);
+        clock.set_time(current_update.time);
         const auto time_step = clock.time_step();
 
         // todo: i thought about encapsulating updating a system into Systems,
         // but that introduce a coupling between Systems and UpdateScheduler.
-        auto* system = simulation.systems().find_system(current_update->uid);
+        auto* system = simulation.systems().find_system(current_update.uid);
         if (system == nullptr) {
             throw std::runtime_error(std::format(
-                "failed to find system with uid {}", current_update->uid));
+                "failed to find system with uid {}", current_update.uid));
         }
 
         const auto result = system->update(simulation.world(), time_step);
