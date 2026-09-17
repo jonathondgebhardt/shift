@@ -26,6 +26,11 @@ shift_add_library(
   spdlog::spdlog
 )
 shift_add_library(
+  utilities
+  SOURCES
+  source/utilities/Exception.cpp
+)
+shift_add_library(
   math
   SOURCES
   source/math/DegreesAngle.cpp
