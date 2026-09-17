@@ -62,7 +62,7 @@ auto SimulationRunner::run(Simulation& simulation) -> void
         clock.set_time(current_update->time);
         const auto time_step = clock.time_step();
 
-        if (m_time_limit && time_step.time >= *m_time_limit) {
+        if (m_time_limit && time_step.time > *m_time_limit) {
             break;
         }
 
