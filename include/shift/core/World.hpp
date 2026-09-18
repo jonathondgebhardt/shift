@@ -4,6 +4,7 @@
 #include <span>
 #include <vector>
 
+#include "shift/coordinate/EnuFrame.hpp"
 #include "shift/core/Entity.hpp"
 #include "shift/core/shift_core_export.hpp"
 
@@ -33,9 +34,20 @@ public:
     auto remove_entity(EntityUID uid) -> bool;
     auto remove_entity(std::string_view name) -> bool;
 
+    auto reference_frame() const -> coordinate::EnuFrame
+    {
+        return m_reference_frame;
+    }
+
+    auto set_reference_frame(coordinate::EnuFrame reference_frame) -> void
+    {
+        m_reference_frame = reference_frame;
+    }
+
 private:
     SHIFT_SUPPRESS_C4251
     std::vector<std::unique_ptr<Entity>> m_entities;
+    coordinate::EnuFrame m_reference_frame;
 };
 
 }  // namespace shift
