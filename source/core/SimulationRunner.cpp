@@ -23,17 +23,17 @@ auto SimulationRunner::run(Simulation& simulation,
     auto timer = time::Timer{};
     timer.reset();
 
-    shift::log::trace("starting up systems");
+    log::trace("starting up systems");
     simulation.systems().startup(simulation.world());
 
-    shift::log::trace("sampling initial world state");
+    log::trace("sampling initial world state");
     if (m_telemetry != nullptr) {
         m_telemetry->sample({}, simulation.world());
     }
 
     auto& clock = simulation.clock();
 
-    shift::log::trace("scheduling first update");
+    log::trace("scheduling first update");
     // todo: systems().systems() is gross. can scheduling the first update be
     // encapsulated?
     std::ranges::for_each(
@@ -52,7 +52,7 @@ auto SimulationRunner::run(Simulation& simulation,
         throw Exception{"no systems scheduled a first update"};
     }
 
-    shift::log::trace("running simulation");
+    log::trace("running simulation");
 
     // todo: check end condition before processing updates
     // todo: this API is kind of annoying: make sure scheduler is not empty, get
@@ -94,7 +94,7 @@ auto SimulationRunner::run(Simulation& simulation,
         }
     }
 
-    shift::log::trace("shutting down simulation");
+    log::trace("shutting down simulation");
 
     // todo: would like to be able to do this
     // shift::log::trace("time elapsed: {}", timer.elapsed().to_string());

@@ -15,7 +15,7 @@ namespace shift
 auto Systems::add_system(std::unique_ptr<System> system) -> void
 {
     if (!system) {
-        shift::log::warning("refusing to add null system");
+        log::warning("refusing to add null system");
         return;
     }
 
