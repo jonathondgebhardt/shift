@@ -2,6 +2,8 @@
 
 #include <catch2/catch_test_macros.hpp>
 
+#include "shift/coordinate/EnuFrame.hpp"
+#include "shift/coordinate/GeodeticPosition.hpp"
 #include "shift/core/Entity.hpp"
 
 TEST_CASE("World add_entity", "[core][World]")
@@ -64,4 +66,21 @@ TEST_CASE("World remove_entity", "[core][World]")
     {
         CHECK(world.remove_entity(name));
     }
+}
+
+TEST_CASE("World reference frame", "[core][World]")
+{
+    auto world = shift::World{};
+
+    SECTION("zero initialized")
+    {
+        CHECK(world.reference_frame() == shift::coordinate::EnuFrame{});
+    }
+
+    const auto reference_frame = shift::coordinate::EnuFrame{
+        .origin = shift::coordinate::GeodeticPosition{},
+    };
+    world.set_reference_frame(reference_frame);
+
+    CHECK(world.reference_frame() == reference_frame);
 }
