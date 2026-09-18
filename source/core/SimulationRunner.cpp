@@ -64,6 +64,8 @@ auto SimulationRunner::run(Simulation& simulation,
         const auto current_update = m_scheduler.top().value();
 
         if (current_update.time > time_limit) {
+            log::info(
+                std::format("time limit met: {}", clock.time().to_string()));
             break;
         }
 
