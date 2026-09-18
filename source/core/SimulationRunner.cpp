@@ -98,8 +98,8 @@ auto SimulationRunner::run(Simulation& simulation,
 
     // todo: would like to be able to do this
     // shift::log::trace("time elapsed: {}", timer.elapsed().to_string());
-
-    std::cout << "time elapsed: " << timer.elapsed().to_string() << '\n';
+    log::info(
+        std::format("real time elapsed: {}", timer.elapsed().to_string()));
 }
 
 }  // namespace shift
