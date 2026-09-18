@@ -47,28 +47,28 @@ private:
 
 // todo: i would like this to accept a format string and a parameter pack to
 // populate the format string
-auto trace(std::string message,
-           std::source_location location = std::source_location::current())
-    -> Message;
+SHIFT_LOGGER_EXPORT auto trace(
+    std::string message,
+    std::source_location location = std::source_location::current()) -> Message;
 
-auto debug(std::string message,
-           std::source_location location = std::source_location::current())
-    -> Message;
+SHIFT_LOGGER_EXPORT auto debug(
+    std::string message,
+    std::source_location location = std::source_location::current()) -> Message;
 
-auto info(std::string message,
-          std::source_location location = std::source_location::current())
-    -> Message;
+SHIFT_LOGGER_EXPORT auto info(
+    std::string message,
+    std::source_location location = std::source_location::current()) -> Message;
 
-auto warning(std::string message,
-             std::source_location location = std::source_location::current())
-    -> Message;
+SHIFT_LOGGER_EXPORT auto warning(
+    std::string message,
+    std::source_location location = std::source_location::current()) -> Message;
 
-auto error(std::string message,
-           std::source_location location = std::source_location::current())
-    -> Message;
+SHIFT_LOGGER_EXPORT auto error(
+    std::string message,
+    std::source_location location = std::source_location::current()) -> Message;
 
-auto critical(std::string message,
-              std::source_location location = std::source_location::current())
-    -> Message;
+SHIFT_LOGGER_EXPORT auto critical(
+    std::string message,
+    std::source_location location = std::source_location::current()) -> Message;
 
 }  // namespace shift::log
