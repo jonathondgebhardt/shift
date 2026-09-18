@@ -77,6 +77,7 @@ shift_add_test(
   source/coordinate/GeodeticPosition_test.cpp
   LINKS
   shift_coordinate
+  shift_utilities
 )
 
 add_folders(Test)
