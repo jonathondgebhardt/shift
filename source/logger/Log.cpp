@@ -59,4 +59,35 @@ auto Message::enabled() const noexcept -> bool
     return detail::backend().enabled(m_impl->level);
 }
 
+// todo: too much duplication
+auto trace(std::string message, std::source_location location) -> Message
+{
+    return Message{std::move(message), Level::TRACE, location};
+}
+
+auto debug(std::string message, std::source_location location) -> Message
+{
+    return Message{std::move(message), Level::DEBUG, location};
+}
+
+auto info(std::string message, std::source_location location) -> Message
+{
+    return Message{std::move(message), Level::INFO, location};
+}
+
+auto warning(std::string message, std::source_location location) -> Message
+{
+    return Message{std::move(message), Level::WARNING, location};
+}
+
+auto error(std::string message, std::source_location location) -> Message
+{
+    return Message{std::move(message), Level::ERROR, location};
+}
+
+auto critical(std::string message, std::source_location location) -> Message
+{
+    return Message{std::move(message), Level::CRITICAL, location};
+}
+
 }  // namespace shift::log

@@ -45,67 +45,30 @@ private:
     std::unique_ptr<Impl> m_impl;
 };
 
-// todo: way to much duplication
-template<typename... Args>
-auto trace(std::format_string<Args...> msg,
-           Args&&... args,
+// todo: i would like this to accept a format string and a parameter pack to
+// populate the format string
+auto trace(std::string message,
            std::source_location location = std::source_location::current())
-    -> Message
-{
-    return Message{
-        std::format(msg, std::forward<Args>(args)...), Level::TRACE, location};
-}
+    -> Message;
 
-template<typename... Args>
-auto debug(std::format_string<Args...> msg,
-           Args&&... args,
+auto debug(std::string message,
            std::source_location location = std::source_location::current())
-    -> Message
-{
-    return Message{
-        std::format(msg, std::forward<Args>(args)...), Level::DEBUG, location};
-}
+    -> Message;
 
-template<typename... Args>
-auto info(std::format_string<Args...> msg,
-          Args&&... args,
+auto info(std::string message,
           std::source_location location = std::source_location::current())
-    -> Message
-{
-    return Message{
-        std::format(msg, std::forward<Args>(args)...), Level::INFO, location};
-}
+    -> Message;
 
-template<typename... Args>
-auto warning(std::format_string<Args...> msg,
-             Args&&... args,
+auto warning(std::string message,
              std::source_location location = std::source_location::current())
-    -> Message
-{
-    return Message{std::format(msg, std::forward<Args>(args)...),
-                   Level::WARNING,
-                   location};
-}
+    -> Message;
 
-template<typename... Args>
-auto error(std::format_string<Args...> msg,
-           Args&&... args,
+auto error(std::string message,
            std::source_location location = std::source_location::current())
-    -> Message
-{
-    return Message{
-        std::format(msg, std::forward<Args>(args)...), Level::ERROR, location};
-}
+    -> Message;
 
-template<typename... Args>
-auto critical(std::format_string<Args...> msg,
-              Args&&... args,
+auto critical(std::string message,
               std::source_location location = std::source_location::current())
-    -> Message
-{
-    return Message{std::format(msg, std::forward<Args>(args)...),
-                   Level::CRITICAL,
-                   location};
-}
+    -> Message;
 
 }  // namespace shift::log
