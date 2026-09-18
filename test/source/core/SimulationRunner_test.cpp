@@ -12,6 +12,7 @@
 #include "shift/core/World.hpp"
 #include "shift/time/Clock.hpp"
 #include "shift/time/Duration.hpp"
+#include "shift/time/SimulationTime.hpp"
 #include "shift/time/TimeTypes.hpp"
 
 namespace
@@ -63,7 +64,8 @@ TEST_CASE("SimulationRunner run", "[core][SimulationRunner]")
     auto system = std::make_unique<TestSystem>(duration);
     simulation.systems().add_system(std::move(system));
 
-    runner.run(simulation);
+    runner.run(simulation,
+               shift::time::SimulationTime{shift::time::Seconds{1}});
 
     CHECK(clock.time().get() == duration.get());
     CHECK(clock.delta() == duration);

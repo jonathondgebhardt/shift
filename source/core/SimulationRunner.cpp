@@ -10,13 +10,15 @@
 #include "shift/core/UpdateResult.hpp"
 #include "shift/logger/Log.hpp"
 #include "shift/time/Clock.hpp"
+#include "shift/time/SimulationTime.hpp"
 #include "shift/time/Timer.hpp"
 #include "shift/utilities/Exception.hpp"
 
 namespace shift
 {
 
-auto SimulationRunner::run(Simulation& simulation) -> void
+auto SimulationRunner::run(Simulation& simulation,
+                           time::SimulationTime time_limit) -> void
 {
     auto timer = time::Timer{};
     timer.reset();
@@ -61,7 +63,7 @@ auto SimulationRunner::run(Simulation& simulation) -> void
         // NOLINTNEXTLINE(bugprone-unchecked-optional-access)
         const auto current_update = m_scheduler.top().value();
 
-        if (m_time_limit && current_update.time > *m_time_limit) {
+        if (current_update.time > time_limit) {
             break;
         }
 

@@ -19,6 +19,8 @@
 #include "shift/telemetry/EntityDataDefinitions.hpp"
 #include "shift/telemetry/Telemetry.hpp"
 #include "shift/time/Clock.hpp"
+#include "shift/time/SimulationTime.hpp"
+#include "shift/time/TimeTypes.hpp"
 
 namespace
 {
@@ -60,9 +62,6 @@ public:
                 const shift::time::Clock::TimeStep time_step)
         -> shift::UpdateResult override
     {
-        static auto update_count = 0u;
-        update_count++;
-
         auto* entity = world.find_entity(m_uid);
         constexpr auto frame = shift::coordinate::EnuFrame{};
         auto position = shift::coordinate::to_enu(entity->position(), frame);
@@ -77,14 +76,8 @@ public:
             m_angle -= two_pi;
         }
 
-        constexpr auto max_updates = 5;
-        if (update_count < max_updates) {
-            using namespace std::chrono_literals;
-            return shift::UpdateResult::schedule_after(
-                shift::time::Duration{1ms});
-        }
-
-        return shift::UpdateResult::stop();
+        using namespace std::chrono_literals;
+        return shift::UpdateResult::schedule_after(shift::time::Duration{1ms});
     }
 
 private:
@@ -113,7 +106,8 @@ auto main() -> int
     auto system = std::make_unique<OrbitSystem>(entity->uid());
     simulation.systems().add_system(std::move(system));
 
-    runner.run(simulation);
+    runner.run(simulation,
+               shift::time::SimulationTime{shift::time::Milliseconds{5}});
 
     return 0;
 }
