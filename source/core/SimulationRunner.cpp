@@ -1,6 +1,5 @@
 #include <algorithm>
 #include <format>
-#include <iostream>
 #include <memory>
 
 #include "shift/core/Simulation.hpp"
