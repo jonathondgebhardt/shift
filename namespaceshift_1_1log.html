@@ -100,45 +100,33 @@
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <div class="m-doc-template">template&lt;typename... Args&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#ae1eecfd1f843824455aa4e4c9bde2ccd" class="m-doc">trace</a>(</span><span class="m-doc-wrap">std::format_string&lt;Args...&gt; msg,
-              Args &amp;&amp; ... args,
-              std::source_location location = std::source_location::current()) -&gt; Message -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a540e745ff2e370a76395e080b59874c9" class="m-doc">trace</a>(</span><span class="m-doc-wrap">std::string message,
+              std::source_location location = std::source_location::current()) -&gt; Message -&gt; SHIFT_LOGGER_EXPORT auto</span>
             </dt>
             <dd><span></span></dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename... Args&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a0f1ac667df8f9091db6984b34109bdd6" class="m-doc">debug</a>(</span><span class="m-doc-wrap">std::format_string&lt;Args...&gt; msg,
-              Args &amp;&amp; ... args,
-              std::source_location location = std::source_location::current()) -&gt; Message -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1a5b083d49c6fe63c126e0903067572f" class="m-doc">debug</a>(</span><span class="m-doc-wrap">std::string message,
+              std::source_location location = std::source_location::current()) -&gt; Message -&gt; SHIFT_LOGGER_EXPORT auto</span>
             </dt>
             <dd><span></span></dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename... Args&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a81a45273a0011acfd34228d365f5dda1" class="m-doc">info</a>(</span><span class="m-doc-wrap">std::format_string&lt;Args...&gt; msg,
-              Args &amp;&amp; ... args,
-              std::source_location location = std::source_location::current()) -&gt; Message -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#adaf03bb170264a166c4c32a1617f0bdb" class="m-doc">info</a>(</span><span class="m-doc-wrap">std::string message,
+              std::source_location location = std::source_location::current()) -&gt; Message -&gt; SHIFT_LOGGER_EXPORT auto</span>
             </dt>
             <dd><span></span></dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename... Args&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#afce310ac43cf0b1233349f19b0ce6f01" class="m-doc">warning</a>(</span><span class="m-doc-wrap">std::format_string&lt;Args...&gt; msg,
-              Args &amp;&amp; ... args,
-              std::source_location location = std::source_location::current()) -&gt; Message -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3b269d3cbfdaaadea57ce3713a28773d" class="m-doc">warning</a>(</span><span class="m-doc-wrap">std::string message,
+              std::source_location location = std::source_location::current()) -&gt; Message -&gt; SHIFT_LOGGER_EXPORT auto</span>
             </dt>
             <dd><span></span></dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename... Args&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#ae40d5140756a86a9f36d2d24f6f5200a" class="m-doc">error</a>(</span><span class="m-doc-wrap">std::format_string&lt;Args...&gt; msg,
-              Args &amp;&amp; ... args,
-              std::source_location location = std::source_location::current()) -&gt; Message -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a533d343a063d68230284a33cc332e01c" class="m-doc">error</a>(</span><span class="m-doc-wrap">std::string message,
+              std::source_location location = std::source_location::current()) -&gt; Message -&gt; SHIFT_LOGGER_EXPORT auto</span>
             </dt>
             <dd><span></span></dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename... Args&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a647e3f20bba5de228e7075b912a6f72c" class="m-doc">critical</a>(</span><span class="m-doc-wrap">std::format_string&lt;Args...&gt; msg,
-              Args &amp;&amp; ... args,
-              std::source_location location = std::source_location::current()) -&gt; Message -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a77a7c81bafb5eb0afa2e50d04146f5cd" class="m-doc">critical</a>(</span><span class="m-doc-wrap">std::string message,
+              std::source_location location = std::source_location::current()) -&gt; Message -&gt; SHIFT_LOGGER_EXPORT auto</span>
             </dt>
             <dd><span></span></dd>
           </dl>
@@ -155,75 +143,51 @@
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ae1eecfd1f843824455aa4e4c9bde2ccd"><div>
+          <section class="m-doc-details" id="a540e745ff2e370a76395e080b59874c9"><div>
             <h3>
-              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="Log_8hpp.html">&lt;shift/logger/Log.hpp&gt;</a></div>
-              <div class="m-doc-template">
-                template&lt;typename... Args&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">auto shift::<wbr />log::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae1eecfd1f843824455aa4e4c9bde2ccd" class="m-doc-self">trace</a>(</span><span class="m-doc-wrap">std::format_string&lt;Args...&gt; msg,
-              Args &amp;&amp; ... args,
+              <span class="m-doc-wrap-bumper">SHIFT_LOGGER_EXPORT auto shift::<wbr />log::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a540e745ff2e370a76395e080b59874c9" class="m-doc-self">trace</a>(</span><span class="m-doc-wrap">std::string message,
               std::source_location location = std::source_location::current()) -&gt; Message</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="Log_8hpp.html">&lt;shift/logger/Log.hpp&gt;</a></div>
             </h3>
             <p><span></span></p>
           </div></section>
-          <section class="m-doc-details" id="a0f1ac667df8f9091db6984b34109bdd6"><div>
+          <section class="m-doc-details" id="a1a5b083d49c6fe63c126e0903067572f"><div>
             <h3>
-              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="Log_8hpp.html">&lt;shift/logger/Log.hpp&gt;</a></div>
-              <div class="m-doc-template">
-                template&lt;typename... Args&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">auto shift::<wbr />log::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0f1ac667df8f9091db6984b34109bdd6" class="m-doc-self">debug</a>(</span><span class="m-doc-wrap">std::format_string&lt;Args...&gt; msg,
-              Args &amp;&amp; ... args,
+              <span class="m-doc-wrap-bumper">SHIFT_LOGGER_EXPORT auto shift::<wbr />log::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1a5b083d49c6fe63c126e0903067572f" class="m-doc-self">debug</a>(</span><span class="m-doc-wrap">std::string message,
               std::source_location location = std::source_location::current()) -&gt; Message</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="Log_8hpp.html">&lt;shift/logger/Log.hpp&gt;</a></div>
             </h3>
             <p><span></span></p>
           </div></section>
-          <section class="m-doc-details" id="a81a45273a0011acfd34228d365f5dda1"><div>
+          <section class="m-doc-details" id="adaf03bb170264a166c4c32a1617f0bdb"><div>
             <h3>
-              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="Log_8hpp.html">&lt;shift/logger/Log.hpp&gt;</a></div>
-              <div class="m-doc-template">
-                template&lt;typename... Args&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">auto shift::<wbr />log::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a81a45273a0011acfd34228d365f5dda1" class="m-doc-self">info</a>(</span><span class="m-doc-wrap">std::format_string&lt;Args...&gt; msg,
-              Args &amp;&amp; ... args,
+              <span class="m-doc-wrap-bumper">SHIFT_LOGGER_EXPORT auto shift::<wbr />log::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adaf03bb170264a166c4c32a1617f0bdb" class="m-doc-self">info</a>(</span><span class="m-doc-wrap">std::string message,
               std::source_location location = std::source_location::current()) -&gt; Message</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="Log_8hpp.html">&lt;shift/logger/Log.hpp&gt;</a></div>
             </h3>
             <p><span></span></p>
           </div></section>
-          <section class="m-doc-details" id="afce310ac43cf0b1233349f19b0ce6f01"><div>
+          <section class="m-doc-details" id="a3b269d3cbfdaaadea57ce3713a28773d"><div>
             <h3>
-              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="Log_8hpp.html">&lt;shift/logger/Log.hpp&gt;</a></div>
-              <div class="m-doc-template">
-                template&lt;typename... Args&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">auto shift::<wbr />log::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afce310ac43cf0b1233349f19b0ce6f01" class="m-doc-self">warning</a>(</span><span class="m-doc-wrap">std::format_string&lt;Args...&gt; msg,
-              Args &amp;&amp; ... args,
+              <span class="m-doc-wrap-bumper">SHIFT_LOGGER_EXPORT auto shift::<wbr />log::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3b269d3cbfdaaadea57ce3713a28773d" class="m-doc-self">warning</a>(</span><span class="m-doc-wrap">std::string message,
               std::source_location location = std::source_location::current()) -&gt; Message</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="Log_8hpp.html">&lt;shift/logger/Log.hpp&gt;</a></div>
             </h3>
             <p><span></span></p>
           </div></section>
-          <section class="m-doc-details" id="ae40d5140756a86a9f36d2d24f6f5200a"><div>
+          <section class="m-doc-details" id="a533d343a063d68230284a33cc332e01c"><div>
             <h3>
-              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="Log_8hpp.html">&lt;shift/logger/Log.hpp&gt;</a></div>
-              <div class="m-doc-template">
-                template&lt;typename... Args&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">auto shift::<wbr />log::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae40d5140756a86a9f36d2d24f6f5200a" class="m-doc-self">error</a>(</span><span class="m-doc-wrap">std::format_string&lt;Args...&gt; msg,
-              Args &amp;&amp; ... args,
+              <span class="m-doc-wrap-bumper">SHIFT_LOGGER_EXPORT auto shift::<wbr />log::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a533d343a063d68230284a33cc332e01c" class="m-doc-self">error</a>(</span><span class="m-doc-wrap">std::string message,
               std::source_location location = std::source_location::current()) -&gt; Message</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="Log_8hpp.html">&lt;shift/logger/Log.hpp&gt;</a></div>
             </h3>
             <p><span></span></p>
           </div></section>
-          <section class="m-doc-details" id="a647e3f20bba5de228e7075b912a6f72c"><div>
+          <section class="m-doc-details" id="a77a7c81bafb5eb0afa2e50d04146f5cd"><div>
             <h3>
-              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="Log_8hpp.html">&lt;shift/logger/Log.hpp&gt;</a></div>
-              <div class="m-doc-template">
-                template&lt;typename... Args&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">auto shift::<wbr />log::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a647e3f20bba5de228e7075b912a6f72c" class="m-doc-self">critical</a>(</span><span class="m-doc-wrap">std::format_string&lt;Args...&gt; msg,
-              Args &amp;&amp; ... args,
+              <span class="m-doc-wrap-bumper">SHIFT_LOGGER_EXPORT auto shift::<wbr />log::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a77a7c81bafb5eb0afa2e50d04146f5cd" class="m-doc-self">critical</a>(</span><span class="m-doc-wrap">std::string message,
               std::source_location location = std::source_location::current()) -&gt; Message</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="Log_8hpp.html">&lt;shift/logger/Log.hpp&gt;</a></div>
             </h3>
             <p><span></span></p>
           </div></section>
