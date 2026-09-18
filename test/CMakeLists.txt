@@ -55,6 +55,7 @@ shift_add_test(
   LINKS
   shift_core
   shift_time
+  shift_utilities
 )
 shift_add_test(
   math
