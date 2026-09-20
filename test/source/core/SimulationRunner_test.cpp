@@ -10,6 +10,8 @@
 #include "shift/core/Systems.hpp"
 #include "shift/core/UpdateResult.hpp"
 #include "shift/core/World.hpp"
+#include "shift/telemetry/TelemetryRecord.hpp"
+#include "shift/telemetry/TelemetryRecorder.hpp"
 #include "shift/time/Clock.hpp"
 #include "shift/time/Duration.hpp"
 #include "shift/time/SimulationTime.hpp"
@@ -58,6 +60,19 @@ struct TestSystem : public shift::System
     bool was_shutdown{};
 };
 
+struct TestTelemetryRecorder : public shift::telemetry::TelemetryRecorder
+{
+    auto record(
+        [[maybe_unused]] const shift::telemetry::TelemetryRecord& record)
+        -> void override
+    {
+    }
+
+    auto shutdown() -> void override { was_shutdown = true; }
+
+    bool was_shutdown{};
+};
+
 }  // namespace
 
 TEST_CASE("SimulationRunner run", "[core][SimulationRunner]")
@@ -81,6 +96,10 @@ TEST_CASE("SimulationRunner run", "[core][SimulationRunner]")
         dynamic_cast<TestSystem*>(simulation.systems().systems().back().get());
     REQUIRE(system != nullptr);
 
+    auto telemetry =
+        shift::telemetry::Telemetry{std::make_unique<TestTelemetryRecorder>()};
+    runner.set_telemetry(&telemetry);
+
     runner.run(simulation,
                shift::time::SimulationTime{shift::time::Seconds{1}});
 
@@ -89,4 +108,7 @@ TEST_CASE("SimulationRunner run", "[core][SimulationRunner]")
 
     CHECK(system->was_started_up);
     CHECK(system->was_shutdown);
+
+    CHECK(dynamic_cast<TestTelemetryRecorder*>(telemetry.recorder())
+              ->was_shutdown);
 }
