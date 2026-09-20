@@ -12,9 +12,8 @@
 namespace
 {
 
-class TestSystem : public shift::System
+struct TestSystem : public shift::System
 {
-public:
     auto first_update() -> shift::UpdateResult override
     {
         return shift::UpdateResult::schedule_now();
@@ -26,6 +25,19 @@ public:
     {
         return shift::UpdateResult::schedule_now();
     }
+
+    auto startup([[maybe_unused]] const shift::World& world) -> void override
+    {
+        was_started_up = true;
+    }
+
+    auto shutdown([[maybe_unused]] const shift::World& world) -> void override
+    {
+        was_shutdown = true;
+    }
+
+    bool was_started_up{};
+    bool was_shutdown{};
 };
 
 }  // namespace
@@ -118,3 +130,29 @@ TEST_CASE("Systems find_system", "[core][Systems]")
 }
 
 // NOLINTEND(readability-function-cognitive-complexity)
+
+TEST_CASE("Systems startup", "[core][Systems]")
+{
+    auto systems = shift::Systems{};
+    systems.add_system(std::make_unique<TestSystem>());
+    REQUIRE(!systems.systems().empty());
+    auto* const system =
+        dynamic_cast<TestSystem*>(systems.systems().back().get());
+    REQUIRE(system != nullptr);
+
+    systems.startup(shift::World{});
+    CHECK(system->was_started_up);
+}
+
+TEST_CASE("Systems shutdown", "[core][Systems]")
+{
+    auto systems = shift::Systems{};
+    systems.add_system(std::make_unique<TestSystem>());
+    REQUIRE(!systems.systems().empty());
+    auto* const system =
+        dynamic_cast<TestSystem*>(systems.systems().back().get());
+    REQUIRE(system != nullptr);
+
+    systems.shutdown(shift::World{});
+    CHECK(system->was_shutdown);
+}
