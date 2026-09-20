@@ -78,7 +78,7 @@ TEST_CASE("World reference frame", "[core][World]")
     }
 
     const auto reference_frame = shift::coordinate::EnuFrame{
-        .origin = shift::coordinate::GeodeticPosition{},
+        .origin = shift::coordinate::GeodeticPosition{1.0, 2.0, 3.0},
     };
     world.set_reference_frame(reference_frame);
 
