@@ -74,30 +74,41 @@ TEST_CASE("Entity has_component", "[core][Entity]")
     }
 }
 
-TEST_CASE("Entity get_component", "[core][Entity]")
+// NOLINTBEGIN(readability-function-cognitive-complexity)
+TEST_CASE("Entity find_component", "[core][Entity]")
 {
-    auto object = shift::Entity{};
-    auto component = std::make_unique<shift::Component>();
+    struct TestComponent : public shift::Component
+    {
+        TestComponent() { set_name("name"); }
+    };
+
+    auto component = std::make_unique<TestComponent>();
     REQUIRE(component);
 
     const auto uuid = component->uuid();
-    constexpr auto name = "name";
-    component->set_name(name);
 
     // the linter complaints that "Moved-from object 'component' is moved"
     // NOLINTNEXTLINE(clang-analyzer-cplusplus.Move)
-    REQUIRE(object.add_component(std::move(component)));
+    auto entity = shift::Entity{};
+    REQUIRE(entity.add_component(std::move(component)));
 
     SECTION("UUID")
     {
-        CHECK(object.find_component(uuid));
+        CHECK(entity.find_component(uuid));
     }
 
     SECTION("name")
     {
-        CHECK(object.find_component(name));
+        CHECK(entity.find_component("name"));
+    }
+
+    SECTION("templated")
+    {
+        CHECK(entity.find_component<TestComponent>());
     }
 }
+
+// NOLINTEND(readability-function-cognitive-complexity)
 
 TEST_CASE("Entity position", "[core][Entity]")
 {
