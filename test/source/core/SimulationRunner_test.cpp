@@ -18,11 +18,10 @@
 namespace
 {
 
-class TestSystem : public shift::System
+struct TestSystem : public shift::System
 {
-public:
     explicit TestSystem(shift::time::Duration duration)
-        : m_duration{duration}
+        : delta{duration}
     {
     }
 
@@ -38,14 +37,13 @@ public:
         static auto run_once = false;
         if (!run_once) {
             run_once = true;
-            return shift::UpdateResult::schedule_after(m_duration);
+            return shift::UpdateResult::schedule_after(delta);
         }
 
         return shift::UpdateResult::stop();
     }
 
-private:
-    shift::time::Duration m_duration;
+    shift::time::Duration delta;
 };
 
 }  // namespace
