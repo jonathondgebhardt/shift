@@ -21,6 +21,8 @@ public:
     {
     }
 
+    auto recorder() const -> TelemetryRecorder* { return m_recorder.get(); }
+
     template<typename Owner, typename Value>
     auto observe(const DataDefinition<Owner, Value>& definition) -> void
     {
