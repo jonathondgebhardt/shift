@@ -32,6 +32,8 @@ public:
 
     virtual auto startup([[maybe_unused]] const World& world) -> void {}
 
+    virtual auto shutdown([[maybe_unused]] const World& world) -> void {}
+
     virtual auto first_update() -> UpdateResult = 0;
 
     virtual auto update(World& world,
