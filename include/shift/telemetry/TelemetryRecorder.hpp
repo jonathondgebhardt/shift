@@ -18,6 +18,8 @@ public:
                                                         default;
 
     virtual auto record(const TelemetryRecord& record) -> void = 0;
+
+    virtual auto shutdown() -> void {}
 };
 
 }  // namespace shift::telemetry
