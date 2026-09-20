@@ -139,6 +139,7 @@ TEST_CASE("Systems startup", "[core][Systems]")
     auto* const system =
         dynamic_cast<TestSystem*>(systems.systems().back().get());
     REQUIRE(system != nullptr);
+    REQUIRE(!system->was_started_up);
 
     systems.startup(shift::World{});
     CHECK(system->was_started_up);
@@ -152,6 +153,7 @@ TEST_CASE("Systems shutdown", "[core][Systems]")
     auto* const system =
         dynamic_cast<TestSystem*>(systems.systems().back().get());
     REQUIRE(system != nullptr);
+    REQUIRE(!system->was_shutdown);
 
     systems.shutdown(shift::World{});
     CHECK(system->was_shutdown);
