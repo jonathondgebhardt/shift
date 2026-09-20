@@ -93,7 +93,8 @@ auto SimulationRunner::run(Simulation& simulation,
         }
     }
 
-    log::trace("shutting down simulation");
+    log::trace("shutting down systems");
+    simulation.systems().shutdown(simulation.world());
 
     // todo: would like to be able to do this
     // shift::log::trace("time elapsed: {}", timer.elapsed().to_string());
