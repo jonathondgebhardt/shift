@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <ranges>
 #include <span>
 #include <string>
 #include <string_view>
@@ -59,6 +60,24 @@ public:
     auto find_component(UUID uuid) const -> Component*;
 
     auto find_component(std::string_view name) const -> Component*;
+
+    template<typename T>
+        requires std::is_base_of_v<Component, T>
+    auto find_component() const -> T*
+    {
+        auto pipeline = m_components
+            | std::views::transform(
+                            [](const std::unique_ptr<Component>& component)
+                            { return component.get(); })
+            | std::views::filter([](const Component* component)
+                                 { return component != nullptr; });
+
+        const auto found = std::ranges::find_if(
+            pipeline,
+            [](Component* component)
+            { return dynamic_cast<const T*>(component) != nullptr; });
+        return found != pipeline.end() ? dynamic_cast<T*>(*found) : nullptr;
+    }
 
     auto position() const -> coordinate::EcefPosition { return m_position; }
 
