@@ -19,39 +19,39 @@ TEST_CASE("Entity uid zero on ctor", "[core][Entity]")
 
 TEST_CASE("Entity name", "[core][Entity]")
 {
-    auto object = shift::Entity{};
+    auto entity = shift::Entity{};
 
     SECTION("empty on construction")
     {
-        REQUIRE(object.name().empty());
+        REQUIRE(entity.name().empty());
     }
 
     constexpr auto name = "name";
-    object.set_name(name);
+    entity.set_name(name);
     SECTION("populated by setter")
     {
-        REQUIRE(object.name() == name);
+        REQUIRE(entity.name() == name);
     }
 }
 
 TEST_CASE("Entity add_component", "[core][Entity]")
 {
-    auto object = shift::Entity{};
+    auto entity = shift::Entity{};
 
     SECTION("pass component")
     {
-        CHECK(object.add_component(std::make_unique<shift::Component>()));
+        CHECK(entity.add_component(std::make_unique<shift::Component>()));
     }
 
     SECTION("templated")
     {
-        CHECK(object.add_component<shift::Component>());
+        CHECK(entity.add_component<shift::Component>());
     }
 }
 
 TEST_CASE("Entity has_component", "[core][Entity]")
 {
-    auto object = shift::Entity{};
+    auto entity = shift::Entity{};
     auto component = std::make_unique<shift::Component>();
     REQUIRE(component);
 
@@ -61,16 +61,16 @@ TEST_CASE("Entity has_component", "[core][Entity]")
 
     // the linter complaints that "Moved-from object 'component' is moved"
     // NOLINTNEXTLINE(clang-analyzer-cplusplus.Move)
-    REQUIRE(object.add_component(std::move(component)));
+    REQUIRE(entity.add_component(std::move(component)));
 
     SECTION("UUID")
     {
-        CHECK(object.has_component(uuid));
+        CHECK(entity.has_component(uuid));
     }
 
     SECTION("name")
     {
-        CHECK(object.has_component(name));
+        CHECK(entity.has_component(name));
     }
 }
 
