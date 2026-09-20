@@ -121,9 +121,9 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a17b4f07f7569a9fe1d8774e44edd9221" class="m-doc-self">add_component</a>(</span><span class="m-doc-wrap">std::unique_ptr&lt;<a href="classshift_1_1Component.html" class="m-doc">Component</a>&gt; component) -&gt; bool -&gt; auto</span>
             </dt>
             <dd><span></span></dd>
-            <dt id="a4abb869db89d2046fe2652e349c47077">
+            <dt id="a640dd3f8b3213bd01955dddad788c364">
               <div class="m-doc-template">template&lt;typename T, typename... Args&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a4abb869db89d2046fe2652e349c47077" class="m-doc-self">add_component</a>(</span><span class="m-doc-wrap">Args &amp;&amp; ... args) -&gt; bool -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a640dd3f8b3213bd01955dddad788c364" class="m-doc-self">add_component</a>(</span><span class="m-doc-wrap">Args &amp;&amp; ... args) -&gt; T * -&gt; auto</span>
             </dt>
             <dd><span></span></dd>
             <dt id="a96b3fa99573a3ae169f8f4c9d1d38ed4">
@@ -140,6 +140,11 @@
             <dd><span></span></dd>
             <dt id="a0d2c6283f1f4e9ea4f17283d7ea9ef7d">
               <span class="m-doc-wrap-bumper">auto <a href="#a0d2c6283f1f4e9ea4f17283d7ea9ef7d" class="m-doc-self">find_component</a>(</span><span class="m-doc-wrap">std::string_view name) const -&gt; Component * -&gt; auto</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a43956387df3e1eef8b2205dcdf9e5c70">
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a43956387df3e1eef8b2205dcdf9e5c70" class="m-doc-self">find_component</a>(</span><span class="m-doc-wrap">) const -&gt; T * -&gt; auto</span>
             </dt>
             <dd><span></span></dd>
             <dt id="abd1641e4fecc733c4eba4d0ef23074f4">
