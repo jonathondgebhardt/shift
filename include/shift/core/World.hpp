@@ -47,6 +47,8 @@ public:
 private:
     SHIFT_SUPPRESS_C4251
     std::vector<std::unique_ptr<Entity>> m_entities;
+
+    // todo: move to Environment
     coordinate::EnuFrame m_reference_frame;
 };
 
