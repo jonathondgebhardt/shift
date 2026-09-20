@@ -43,7 +43,19 @@ struct TestSystem : public shift::System
         return shift::UpdateResult::stop();
     }
 
+    auto startup([[maybe_unused]] const shift::World& world) -> void override
+    {
+        was_started_up = true;
+    }
+
+    auto shutdown([[maybe_unused]] const shift::World& world) -> void override
+    {
+        was_shutdown = true;
+    }
+
     shift::time::Duration delta;
+    bool was_started_up{};
+    bool was_shutdown{};
 };
 
 }  // namespace
@@ -59,12 +71,22 @@ TEST_CASE("SimulationRunner run", "[core][SimulationRunner]")
     auto runner = shift::SimulationRunner{};
 
     constexpr auto duration = shift::time::Duration{shift::time::Seconds{1}};
-    auto system = std::make_unique<TestSystem>(duration);
-    simulation.systems().add_system(std::move(system));
+
+    {
+        auto system = std::make_unique<TestSystem>(duration);
+        simulation.systems().add_system(std::move(system));
+    }
+
+    auto* system =
+        dynamic_cast<TestSystem*>(simulation.systems().systems().back().get());
+    REQUIRE(system != nullptr);
 
     runner.run(simulation,
                shift::time::SimulationTime{shift::time::Seconds{1}});
 
     CHECK(clock.time().get() == duration.get());
     CHECK(clock.delta() == duration);
+
+    CHECK(system->was_started_up);
+    CHECK(system->was_shutdown);
 }
