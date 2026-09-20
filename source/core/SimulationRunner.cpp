@@ -96,6 +96,11 @@ auto SimulationRunner::run(Simulation& simulation,
     log::trace("shutting down systems");
     simulation.systems().shutdown(simulation.world());
 
+    if (m_telemetry != nullptr) {
+        log::trace("shutting down telemetry");
+        m_telemetry->shutdown();
+    }
+
     // todo: would like to be able to do this
     // shift::log::trace("time elapsed: {}", timer.elapsed().to_string());
     log::info(
