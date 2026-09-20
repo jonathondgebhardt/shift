@@ -39,6 +39,13 @@ public:
         }
     }
 
+    auto shutdown() -> void
+    {
+        if (m_recorder != nullptr) {
+            m_recorder->shutdown();
+        }
+    }
+
 private:
     struct ObservationConcept
     {
