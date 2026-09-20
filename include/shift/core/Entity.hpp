@@ -48,9 +48,13 @@ public:
 
     template<typename T, typename... Args>
         requires std::is_base_of_v<Component, T>
-    auto add_component(Args&&... args) -> bool
+    auto add_component(Args&&... args) -> T*
     {
-        return add_component(std::make_unique<T>(std::forward<Args>(args)...));
+        if (add_component(std::make_unique<T>(std::forward<Args>(args)...))) {
+            return components().back().get();
+        }
+
+        return {};
     }
 
     auto has_component(UUID uuid) const -> bool;
