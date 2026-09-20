@@ -50,6 +50,7 @@ shift_add_test(
 shift_add_test(
   telemetry
   SOURCES
+  source/telemetry/DataDefinition_test.cpp
   source/telemetry/MemoryTelemetryRecorder_test.cpp
   source/telemetry/TelemetryValue_test.cpp
   LINKS
