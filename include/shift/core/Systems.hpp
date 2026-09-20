@@ -31,6 +31,7 @@ public:
     }
 
     auto startup(const World& world) -> void;
+    auto shutdown(const World& world) -> void;
 
 private:
     SHIFT_SUPPRESS_C4251

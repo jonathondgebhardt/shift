@@ -48,4 +48,11 @@ auto Systems::startup(const World& world) -> void
                           { system->startup(world); });
 }
 
+auto Systems::shutdown(const World& world) -> void
+{
+    std::ranges::for_each(m_systems,
+                          [&](const std::unique_ptr<System>& system)
+                          { system->shutdown(world); });
+}
+
 }  // namespace shift
