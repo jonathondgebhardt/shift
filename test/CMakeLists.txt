@@ -55,6 +55,7 @@ shift_add_test(
   source/telemetry/MemoryTelemetryRecorder_test.cpp
   source/telemetry/TelemetryTraits_test.cpp
   source/telemetry/TelemetryValue_test.cpp
+  source/telemetry/Telemetry_test.cpp
   LINKS
   shift_core
   shift_time
