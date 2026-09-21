@@ -7,7 +7,7 @@
 TEST_CASE("FixedTimeUpdater update", "[time][FixedTimeUpdater]")
 {
     auto clock = shift::time::Clock{};
-    REQUIRE(clock.time() == shift::time::SimulationTime{});
+    REQUIRE(clock.time() == shift::time::TimePoint{});
     REQUIRE(clock.delta() == shift::time::Duration{});
 
     constexpr auto duration =
@@ -15,6 +15,6 @@ TEST_CASE("FixedTimeUpdater update", "[time][FixedTimeUpdater]")
     auto updater = shift::time::FixedTimeUpdater{duration};
     updater.update(clock);
 
-    CHECK(clock.time() == shift::time::SimulationTime{duration.get()});
+    CHECK(clock.time() == shift::time::TimePoint{duration.get()});
     CHECK(clock.delta() == duration);
 }

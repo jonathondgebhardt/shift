@@ -5,13 +5,13 @@
 #include <catch2/catch_test_macros.hpp>
 
 #include "shift/time/Clock.hpp"
-#include "shift/time/SimulationTime.hpp"
+#include "shift/time/TimePoint.hpp"
 #include "shift/time/TimeTypes.hpp"
 
 TEST_CASE("RealTimeUpdater update", "[time][RealTimeUpdater]")
 {
     auto clock = shift::time::Clock{};
-    REQUIRE(clock.time() == shift::time::SimulationTime{});
+    REQUIRE(clock.time() == shift::time::TimePoint{});
     REQUIRE(clock.delta() == shift::time::Duration{});
 
     auto updater = shift::time::RealTimeUpdater{};

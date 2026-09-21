@@ -6,7 +6,7 @@
 #include "shift/core/UpdateResult.hpp"
 #include "shift/core/World.hpp"
 #include "shift/time/Clock.hpp"
-#include "shift/time/SimulationTime.hpp"
+#include "shift/time/TimePoint.hpp"
 
 namespace
 {
@@ -50,11 +50,11 @@ TEST_CASE("UpdateEvent operator<", "[core][UpdateEvent]")
 {
     constexpr auto lhs = shift::UpdateEvent{
         .uid = shift::SystemUID{},
-        .time = shift::time::SimulationTime{shift::time::Seconds{0}},
+        .time = shift::time::TimePoint{shift::time::Seconds{0}},
     };
     constexpr auto rhs = shift::UpdateEvent{
         .uid = shift::SystemUID{},
-        .time = shift::time::SimulationTime{shift::time::Seconds{1}},
+        .time = shift::time::TimePoint{shift::time::Seconds{1}},
     };
     CHECK(lhs < rhs);
     CHECK(rhs >= lhs);
@@ -85,8 +85,7 @@ TEST_CASE("UpdateScheduler processed empty", "[core][UpdateScheduler]")
 TEST_CASE("UpdateScheduler schedule", "[core][UpdateScheduler]")
 {
     auto scheduler = shift::UpdateScheduler{};
-    constexpr auto sim_time =
-        shift::time::SimulationTime{shift::time::Seconds{0}};
+    constexpr auto sim_time = shift::time::TimePoint{shift::time::Seconds{0}};
 
     SECTION("invalid system")
     {
@@ -110,7 +109,7 @@ TEST_CASE("UpdateScheduler pop", "[core][UpdateScheduler]")
     const auto schedule_event = [&](shift::time::Seconds time)
     {
         scheduler.schedule(TestSystem::valid_system(),
-                           shift::time::SimulationTime{time});
+                           shift::time::TimePoint{time});
     };
 
     // todo: mix time types?
@@ -124,7 +123,7 @@ TEST_CASE("UpdateScheduler pop", "[core][UpdateScheduler]")
     {
         const auto event = scheduler.top();
         REQUIRE(event);
-        CHECK(event->time == shift::time::SimulationTime{time});
+        CHECK(event->time == shift::time::TimePoint{time});
         scheduler.pop();
     };
 
@@ -141,7 +140,7 @@ TEST_CASE("UpdateScheduler processed", "[core][UpdateScheduler]")
     const auto schedule_event = [&](shift::time::Seconds time)
     {
         scheduler.schedule(TestSystem::valid_system(),
-                           shift::time::SimulationTime{time});
+                           shift::time::TimePoint{time});
     };
 
     // todo: mix time types?
@@ -156,7 +155,7 @@ TEST_CASE("UpdateScheduler processed", "[core][UpdateScheduler]")
     {
         scheduler.pop();
         CHECK(scheduler.processed().back().time
-              == shift::time::SimulationTime{time});
+              == shift::time::TimePoint{time});
     };
 
     pop_and_check(shift::time::Seconds{0});

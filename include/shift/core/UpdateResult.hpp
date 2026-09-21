@@ -4,7 +4,7 @@
 #include <variant>
 
 #include "shift/time/Duration.hpp"
-#include "shift/time/SimulationTime.hpp"
+#include "shift/time/TimePoint.hpp"
 
 namespace shift
 {
@@ -12,7 +12,7 @@ namespace shift
 class UpdateResult
 {
 public:
-    static constexpr auto schedule_at(time::SimulationTime time) -> UpdateResult
+    static constexpr auto schedule_at(time::TimePoint time) -> UpdateResult
     {
         return UpdateResult{At{time}};
     }
@@ -36,14 +36,14 @@ public:
     }
 
     [[nodiscard]]
-    constexpr auto next_time(time::SimulationTime current) const
-        -> std::optional<time::SimulationTime>
+    constexpr auto next_time(time::TimePoint current) const
+        -> std::optional<time::TimePoint>
     {
         if (!m_next) {
             return std::nullopt;
         }
 
-        return std::visit([&](const auto& value) -> time::SimulationTime
+        return std::visit([&](const auto& value) -> time::TimePoint
                           { return value.resolve(current); },
                           *m_next);
     }
@@ -51,19 +51,18 @@ public:
 private:
     struct At
     {
-        constexpr auto resolve([[maybe_unused]] time::SimulationTime current)
-            const -> time::SimulationTime
+        constexpr auto resolve([[maybe_unused]] time::TimePoint current) const
+            -> time::TimePoint
         {
             return time;
         }
 
-        time::SimulationTime time;
+        time::TimePoint time;
     };
 
     struct After
     {
-        constexpr auto resolve(time::SimulationTime current) const
-            -> time::SimulationTime
+        constexpr auto resolve(time::TimePoint current) const -> time::TimePoint
         {
             return current + delta;
         }

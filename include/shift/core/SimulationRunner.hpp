@@ -4,7 +4,7 @@
 #include "shift/core/UpdateScheduler.hpp"
 #include "shift/core/shift_core_export.hpp"
 #include "shift/telemetry/Telemetry.hpp"
-#include "shift/time/SimulationTime.hpp"
+#include "shift/time/TimePoint.hpp"
 
 namespace shift
 {
@@ -12,7 +12,7 @@ namespace shift
 class SHIFT_CORE_EXPORT SimulationRunner
 {
 public:
-    auto run(Simulation& simulation, time::SimulationTime time_limit) -> void;
+    auto run(Simulation& simulation, time::TimePoint time_limit) -> void;
 
     auto set_telemetry(telemetry::Telemetry* telemetry)
     {

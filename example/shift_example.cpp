@@ -19,7 +19,7 @@
 #include "shift/telemetry/EntityDataDefinitions.hpp"
 #include "shift/telemetry/Telemetry.hpp"
 #include "shift/time/Clock.hpp"
-#include "shift/time/SimulationTime.hpp"
+#include "shift/time/TimePoint.hpp"
 #include "shift/time/TimeTypes.hpp"
 
 namespace
@@ -107,7 +107,7 @@ auto main() -> int
     simulation.systems().add_system(std::move(system));
 
     runner.run(simulation,
-               shift::time::SimulationTime{shift::time::Milliseconds{5}});
+               shift::time::TimePoint{shift::time::Milliseconds{5}});
 
     return 0;
 }

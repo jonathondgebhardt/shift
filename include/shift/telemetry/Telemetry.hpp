@@ -6,7 +6,7 @@
 #include "shift/core/World.hpp"
 #include "shift/telemetry/DataDefinition.hpp"
 #include "shift/telemetry/TelemetryRecorder.hpp"
-#include "shift/time/SimulationTime.hpp"
+#include "shift/time/TimePoint.hpp"
 #include "shift/utilities/Exception.hpp"
 
 namespace shift::telemetry
@@ -30,7 +30,7 @@ public:
             std::make_unique<Observation<Owner, Value>>(definition));
     }
 
-    auto sample(time::SimulationTime time, const World& world) -> void
+    auto sample(time::TimePoint time, const World& world) -> void
     {
         if (m_recorder == nullptr) {
             throw Exception{"recorder cannot be null"};
@@ -60,7 +60,7 @@ private:
         auto operator=(ObservationConcept&&) noexcept -> ObservationConcept& =
                                                              default;
 
-        virtual auto sample(time::SimulationTime,
+        virtual auto sample(time::TimePoint,
                             const World&,
                             TelemetryRecorder&) const -> void = 0;
     };
@@ -75,7 +75,7 @@ private:
         {
         }
 
-        auto sample(time::SimulationTime time,
+        auto sample(time::TimePoint time,
                     const World& world,
                     TelemetryRecorder& recorder) const -> void override
         {

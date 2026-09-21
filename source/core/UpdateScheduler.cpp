@@ -5,14 +5,14 @@
 #include "shift/core/UpdateScheduler.hpp"
 
 #include "shift/core/System.hpp"
-#include "shift/time/SimulationTime.hpp"
+#include "shift/time/TimePoint.hpp"
 #include "shift/utilities/Exception.hpp"
 
 namespace shift
 {
 
 auto UpdateScheduler::schedule(const System& system,
-                               const time::SimulationTime time) -> void
+                               const time::TimePoint time) -> void
 {
     if (system.uid() == shift::SystemUID{}) {
         throw Exception{"cannot schedule system with invalid UID"};

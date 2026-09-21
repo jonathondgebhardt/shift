@@ -33,9 +33,9 @@ shift_add_test(
 shift_add_test(
   time
   SOURCES
-  source/time/RealTimeUpdater_test.cpp
   source/time/FixedTimeUpdater_test.cpp
-  source/time/SimulationTime_test.cpp
+  source/time/RealTimeUpdater_test.cpp
+  source/time/TimePoint_test.cpp
   source/time/Timer_test.cpp
   LINKS
   shift_time

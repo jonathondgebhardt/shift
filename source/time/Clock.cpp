@@ -1,12 +1,12 @@
 #include "shift/time/Clock.hpp"
 
 #include "shift/time/Duration.hpp"
-#include "shift/time/SimulationTime.hpp"
+#include "shift/time/TimePoint.hpp"
 
 namespace shift::time
 {
 
-auto Clock::set_time(SimulationTime time) -> void
+auto Clock::set_time(TimePoint time) -> void
 {
     m_duration = time - m_time;
     m_time = time;

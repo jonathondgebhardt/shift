@@ -1,12 +1,12 @@
 #include <format>
 #include <string>
 
-#include "shift/time/SimulationTime.hpp"
+#include "shift/time/TimePoint.hpp"
 
 namespace shift::time
 {
 
-auto SimulationTime::to_string() const -> std::string
+auto TimePoint::to_string() const -> std::string
 {
     return std::format("{:%T}", m_time);
 }

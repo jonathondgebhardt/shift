@@ -9,7 +9,7 @@
 #include "shift/core/UpdateResult.hpp"
 #include "shift/logger/Log.hpp"
 #include "shift/time/Clock.hpp"
-#include "shift/time/SimulationTime.hpp"
+#include "shift/time/TimePoint.hpp"
 #include "shift/time/Timer.hpp"
 #include "shift/utilities/Exception.hpp"
 
@@ -17,7 +17,7 @@ namespace shift
 {
 
 auto SimulationRunner::run(Simulation& simulation,
-                           time::SimulationTime time_limit) -> void
+                           time::TimePoint time_limit) -> void
 {
     auto timer = time::Timer{};
     timer.reset();

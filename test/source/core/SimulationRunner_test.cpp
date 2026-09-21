@@ -14,7 +14,7 @@
 #include "shift/telemetry/TelemetryRecorder.hpp"
 #include "shift/time/Clock.hpp"
 #include "shift/time/Duration.hpp"
-#include "shift/time/SimulationTime.hpp"
+#include "shift/time/TimePoint.hpp"
 #include "shift/time/TimeTypes.hpp"
 
 namespace
@@ -84,7 +84,7 @@ TEST_CASE("SimulationRunner run", "[core][SimulationRunner]")
     auto simulation = shift::Simulation{};
 
     auto& clock = simulation.clock();
-    REQUIRE(clock.time() == shift::time::SimulationTime{});
+    REQUIRE(clock.time() == shift::time::TimePoint{});
     REQUIRE(clock.delta() == shift::time::Duration{});
 
     auto runner = shift::SimulationRunner{};
@@ -104,8 +104,7 @@ TEST_CASE("SimulationRunner run", "[core][SimulationRunner]")
         shift::telemetry::Telemetry{std::make_unique<TestTelemetryRecorder>()};
     runner.set_telemetry(&telemetry);
 
-    runner.run(simulation,
-               shift::time::SimulationTime{shift::time::Seconds{1}});
+    runner.run(simulation, shift::time::TimePoint{shift::time::Seconds{1}});
 
     CHECK(clock.time().get() == duration.get());
     CHECK(clock.delta() == duration);
@@ -142,7 +141,6 @@ TEST_CASE("SimulationRunner throws if no first update",
 
     auto runner = shift::SimulationRunner{};
     CHECK_THROWS_AS(
-        runner.run(simulation,
-                   shift::time::SimulationTime{shift::time::Seconds{}}),
+        runner.run(simulation, shift::time::TimePoint{shift::time::Seconds{}}),
         shift::Exception);
 }

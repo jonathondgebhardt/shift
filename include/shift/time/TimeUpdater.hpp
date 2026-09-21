@@ -2,7 +2,7 @@
 
 #include "shift/time/Clock.hpp"
 #include "shift/time/Duration.hpp"
-#include "shift/time/SimulationTime.hpp"
+#include "shift/time/TimePoint.hpp"
 #include "shift/time/shift_time_export.hpp"
 
 namespace shift::time
@@ -27,7 +27,7 @@ public:
     }
 
 protected:
-    static auto update_time(Clock& clock, SimulationTime time) -> void
+    static auto update_time(Clock& clock, TimePoint time) -> void
     {
         clock.set_time(time);
     }

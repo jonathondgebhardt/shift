@@ -9,7 +9,7 @@
 
 #include "shift/core/System.hpp"
 #include "shift/core/shift_core_export.hpp"
-#include "shift/time/SimulationTime.hpp"
+#include "shift/time/TimePoint.hpp"
 
 namespace shift
 {
@@ -44,13 +44,13 @@ struct UpdateEvent
     }
 
     SystemUID uid{};
-    time::SimulationTime time;
+    time::TimePoint time;
 };
 
 class SHIFT_CORE_EXPORT UpdateScheduler
 {
 public:
-    auto schedule(const System& system, time::SimulationTime time) -> void;
+    auto schedule(const System& system, time::TimePoint time) -> void;
 
     auto empty() const -> bool { return m_events.empty(); }
 

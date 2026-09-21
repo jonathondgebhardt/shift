@@ -4,14 +4,14 @@
 
 #include "shift/core/Entity.hpp"
 #include "shift/telemetry/TelemetryValue.hpp"
-#include "shift/time/SimulationTime.hpp"
+#include "shift/time/TimePoint.hpp"
 
 namespace shift::telemetry
 {
 
 struct TelemetryRecord
 {
-    time::SimulationTime time;
+    time::TimePoint time;
     EntityUID uid{};
     std::string_view channel;
     TelemetryValue value;
