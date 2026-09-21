@@ -5,6 +5,7 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
+#include <catch2/matchers/catch_matchers_string.hpp>
 
 // NOLINTBEGIN(cppcoreguidelines-avoid-magic-numbers, readability-magic-numbers)
 
@@ -176,6 +177,12 @@ TEST_CASE("EcefVector cross", "[coordinate][EcefVector]")
     CHECK_THAT(cross.x, Catch::Matchers::WithinRel(-2.0));
     CHECK_THAT(cross.y, Catch::Matchers::WithinRel(4.0));
     CHECK_THAT(cross.z, Catch::Matchers::WithinRel(-2.0));
+}
+
+TEST_CASE("EcefVector to_string", "[coordinate][EcefVector]")
+{
+    constexpr auto vec = shift::coordinate::EcefVector{1.0, 2.0, 3.0};
+    CHECK_THAT(vec.to_string(), Catch::Matchers::Equals("(1.00, 2.00, 3.00)"));
 }
 
 // NOLINTEND(cppcoreguidelines-avoid-magic-numbers, readability-magic-numbers)

@@ -3,6 +3,7 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
+#include <catch2/matchers/catch_matchers_string.hpp>
 
 #include "shift/coordinate/EnuVector.hpp"
 
@@ -99,6 +100,13 @@ TEST_CASE("EnuPosition operator-=", "[coordinate][EnuPosition]")
     CHECK_THAT(position.east, Catch::Matchers::WithinRel(0.0));
     CHECK_THAT(position.north, Catch::Matchers::WithinRel(0.0));
     CHECK_THAT(position.up, Catch::Matchers::WithinRel(0.0));
+}
+
+TEST_CASE("EnuPosition to_string", "[coordinate][EnuPosition]")
+{
+    constexpr auto position = shift::coordinate::EnuPosition{1.0, 2.0, 3.0};
+    CHECK_THAT(position.to_string(),
+               Catch::Matchers::Equals("(1.00, 2.00, 3.00)"));
 }
 
 // NOLINTEND(cppcoreguidelines-avoid-magic-numbers, readability-magic-numbers)

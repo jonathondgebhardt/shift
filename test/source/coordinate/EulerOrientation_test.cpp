@@ -3,6 +3,7 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
+#include <catch2/matchers/catch_matchers_string.hpp>
 
 TEST_CASE("EulerOrientation zero initialized", "[coordinate][EulerOrientation]")
 {
@@ -44,4 +45,11 @@ TEST_CASE("EulerOrientation set_roll", "[coordinate][EulerOrientation]")
     auto orientation = shift::coordinate::EulerOrientation{};
     orientation.set_roll(1.0f);
     CHECK_THAT(orientation.roll(), Catch::Matchers::WithinRel(1.0f));
+}
+
+TEST_CASE("EulerOrientation to_string", "[coordinate][EulerOrientation]")
+{
+    const auto orientation = shift::coordinate::EulerOrientation{1.0, 2.0, 3.0};
+    CHECK_THAT(orientation.to_string(),
+               Catch::Matchers::Equals("(1.00, 2.00, 3.00)"));
 }

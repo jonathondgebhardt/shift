@@ -203,3 +203,10 @@ TEST_CASE("Geodetic set_altitude", "[coordinate][GeodeticPosition]")
     geodetic.set_altitude(1.0);
     CHECK_THAT(geodetic.altitude(), Catch::Matchers::WithinRel(1.0));
 }
+
+TEST_CASE("GeodeticPosition to_string", "[coordinate][GeodeticPosition]")
+{
+    const auto position = shift::coordinate::GeodeticPosition{1.0, 2.0, 3.0};
+    CHECK_THAT(position.to_string(),
+               Catch::Matchers::Equals("(1.00, 2.00, 3.00)"));
+}
