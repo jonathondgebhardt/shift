@@ -118,3 +118,31 @@ TEST_CASE("SimulationRunner run", "[core][SimulationRunner]")
     CHECK(dynamic_cast<TestTelemetryRecorder*>(telemetry.recorder())
               ->was_shutdown);
 }
+
+TEST_CASE("SimulationRunner throws if no first update",
+          "[core][SimulationRunner]")
+{
+    struct BadSystem : public shift::System
+    {
+        auto first_update() -> shift::UpdateResult override
+        {
+            return shift::UpdateResult::stop();
+        }
+
+        auto update([[maybe_unused]] shift::World& world,
+                    [[maybe_unused]] shift::time::Clock::TimeStep time_step)
+            -> shift::UpdateResult override
+        {
+            return shift::UpdateResult::stop();
+        }
+    };
+
+    auto simulation = shift::Simulation{};
+    simulation.systems().add_system(std::make_unique<BadSystem>());
+
+    auto runner = shift::SimulationRunner{};
+    CHECK_THROWS_AS(
+        runner.run(simulation,
+                   shift::time::SimulationTime{shift::time::Seconds{}}),
+        shift::Exception);
+}
