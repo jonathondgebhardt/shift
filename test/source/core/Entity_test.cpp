@@ -45,7 +45,12 @@ TEST_CASE("Entity add_component", "[core][Entity]")
 
     SECTION("templated")
     {
-        CHECK(entity.add_component<shift::Component>());
+        struct TestComponent : shift::Component
+        {
+        };
+
+        auto* const component = entity.add_component<TestComponent>();
+        CHECK(component != nullptr);
     }
 }
 
