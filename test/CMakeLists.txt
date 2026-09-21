@@ -21,6 +21,7 @@ shift_add_test(
   source/core/SimulationRunner_test.cpp
   source/core/Systems_test.cpp
   source/core/UUID_test.cpp
+  source/core/UpdateResult_test.cpp
   source/core/UpdateScheduler_test.cpp
   source/core/World_test.cpp
   LINKS
