@@ -51,7 +51,7 @@ public:
     auto add_component(Args&&... args) -> T*
     {
         if (add_component(std::make_unique<T>(std::forward<Args>(args)...))) {
-            return components().back().get();
+            return dynamic_cast<T*>(m_components.back().get());
         }
 
         return {};
