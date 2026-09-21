@@ -67,9 +67,8 @@ struct TestSystem : public shift::System
 
 struct TestTelemetryRecorder : public shift::telemetry::TelemetryRecorder
 {
-    auto record(
-        [[maybe_unused]] const shift::telemetry::TelemetryRecord& record)
-        -> void override
+    auto record([[maybe_unused]] const shift::telemetry::TelemetryRecord&
+                    record) -> void override
     {
     }
 
