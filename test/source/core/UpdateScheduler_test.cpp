@@ -50,10 +50,12 @@ TEST_CASE("UpdateEvent operator<", "[core][UpdateEvent]")
 {
     constexpr auto lhs = shift::UpdateEvent{
         .uid = shift::SystemUID{},
-        .time = shift::time::SimulationTime{shift::time::Seconds{0}}};
+        .time = shift::time::SimulationTime{shift::time::Seconds{0}},
+    };
     constexpr auto rhs = shift::UpdateEvent{
         .uid = shift::SystemUID{},
-        .time = shift::time::SimulationTime{shift::time::Seconds{1}}};
+        .time = shift::time::SimulationTime{shift::time::Seconds{1}},
+    };
     CHECK(lhs < rhs);
     CHECK(rhs >= lhs);
 }
