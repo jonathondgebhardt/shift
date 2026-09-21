@@ -58,6 +58,8 @@ TEST_CASE("UpdateEvent operator<", "[core][UpdateEvent]")
     };
     CHECK(lhs < rhs);
     CHECK(rhs >= lhs);
+    CHECK(lhs == lhs);
+    CHECK(lhs <= lhs);
 }
 
 TEST_CASE("UpdateScheduler empty on ctor", "[core][UpdateScheduler]")
