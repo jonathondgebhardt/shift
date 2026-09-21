@@ -3,6 +3,7 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
+#include <catch2/matchers/catch_matchers_string.hpp>
 
 #include "shift/coordinate/EcefVector.hpp"
 
@@ -100,6 +101,13 @@ TEST_CASE("EcefPosition operator-=", "[coordinate][EcefPosition]")
     CHECK_THAT(position.x, Catch::Matchers::WithinRel(0.0));
     CHECK_THAT(position.y, Catch::Matchers::WithinRel(0.0));
     CHECK_THAT(position.z, Catch::Matchers::WithinRel(0.0));
+}
+
+TEST_CASE("EcefPosition to_string", "[coordinate][EcefPosition]")
+{
+    constexpr auto position = shift::coordinate::EcefPosition{1.0, 2.0, 3.0};
+    CHECK_THAT(position.to_string(),
+               Catch::Matchers::Equals("(1.00, 2.00, 3.00)"));
 }
 
 // NOLINTEND(cppcoreguidelines-avoid-magic-numbers, readability-magic-numbers)
