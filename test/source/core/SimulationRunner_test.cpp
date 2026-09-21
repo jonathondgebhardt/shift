@@ -29,6 +29,7 @@ struct TestSystem : public shift::System
 
     auto first_update() -> shift::UpdateResult override
     {
+        was_first_update_checked = true;
         return shift::UpdateResult::schedule_now();
     }
 
@@ -56,6 +57,7 @@ struct TestSystem : public shift::System
     }
 
     shift::time::Duration delta;
+    bool was_first_update_checked{};
     bool was_started_up{};
     bool was_shutdown{};
 };
@@ -106,6 +108,7 @@ TEST_CASE("SimulationRunner run", "[core][SimulationRunner]")
     CHECK(clock.time().get() == duration.get());
     CHECK(clock.delta() == duration);
 
+    CHECK(system->was_first_update_checked);
     CHECK(system->was_started_up);
     CHECK(system->was_shutdown);
 
