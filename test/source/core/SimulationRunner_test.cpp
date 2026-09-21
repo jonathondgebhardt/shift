@@ -37,6 +37,8 @@ struct TestSystem : public shift::System
                 [[maybe_unused]] shift::time::Clock::TimeStep time_step)
         -> shift::UpdateResult override
     {
+        was_update_called = true;
+
         static auto run_once = false;
         if (!run_once) {
             run_once = true;
@@ -58,6 +60,7 @@ struct TestSystem : public shift::System
 
     shift::time::Duration delta;
     bool was_first_update_checked{};
+    bool was_update_called{};
     bool was_started_up{};
     bool was_shutdown{};
 };
@@ -109,6 +112,7 @@ TEST_CASE("SimulationRunner run", "[core][SimulationRunner]")
     CHECK(clock.delta() == duration);
 
     CHECK(system->was_first_update_checked);
+    CHECK(system->was_update_called);
     CHECK(system->was_started_up);
     CHECK(system->was_shutdown);
 
