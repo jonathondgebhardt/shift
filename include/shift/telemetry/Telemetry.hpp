@@ -84,16 +84,26 @@ private:
                                           { return entity != nullptr; }))
             {
                 const auto value = m_definition.get(*entity);
+
+                if (!value) {
+                    continue;
+                }
+
+                // todo: should probably do this safely
                 recorder.record({.time = time,
                                  .uid = entity->uid(),
                                  .channel = m_definition.name(),
-                                 .value = TelemetryValue{value}});
+                                 .value = TelemetryValue{*value}});
             }
         }
 
     private:
         DataDefinition<Owner, Value> m_definition;
     };
+
+    // todo: may want to move these out into some other file or delegate to a
+    // class
+    // todo: TelemetryValue type erases, can we just use T?
 
     std::vector<std::unique_ptr<ObservationConcept>> m_observations;
     std::unique_ptr<TelemetryRecorder> m_recorder;
