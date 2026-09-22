@@ -79,9 +79,11 @@ private:
                     const World& world,
                     TelemetryRecorder& recorder) const -> void override
         {
-            for (const auto& entity : world.entities()
-                     | std::views::filter([](const auto& entity)
-                                          { return entity != nullptr; }))
+            for (const auto& entity :
+                 world.entities()
+                     | std::views::filter(
+                         [](const auto& potentially_null_entity)
+                         { return potentially_null_entity != nullptr; }))
             {
                 const auto value = m_definition.get(*entity);
 
