@@ -14,7 +14,8 @@ struct TestOwner
 constexpr auto test_definition =
     shift::telemetry::DataDefinition<TestOwner, int>{
         "test_definition",
-        [](const TestOwner& test_owner) { return test_owner.number; }};
+        [](const TestOwner& test_owner) -> std::optional<int>
+        { return test_owner.number; }};
 
 }  // namespace
 
