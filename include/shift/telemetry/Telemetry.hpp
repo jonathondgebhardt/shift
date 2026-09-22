@@ -89,7 +89,6 @@ private:
                     continue;
                 }
 
-                // todo: should probably do this safely
                 recorder.record({.time = time,
                                  .uid = entity->uid(),
                                  .channel = m_definition.name(),
