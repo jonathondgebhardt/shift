@@ -1,3 +1,4 @@
+#include <format>
 #include <string>
 
 #include "shift/math/DegreesAngle.hpp"
@@ -63,7 +64,7 @@ auto DegreesAngle::operator-=(const DegreesAngle& other) -> DegreesAngle&
 
 auto DegreesAngle::to_string() const -> std::string
 {
-    return std::to_string(m_angle);
+    return std::format("{:.2f}", m_angle);
 }
 
 }  // namespace shift::math
