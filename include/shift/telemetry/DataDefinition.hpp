@@ -3,6 +3,8 @@
 #include <optional>
 #include <string_view>
 
+#include "shift/core/Entity.hpp"
+
 namespace shift::telemetry
 {
 
@@ -31,5 +33,8 @@ private:
     std::string_view m_name;
     Getter m_getter;
 };
+
+template<typename Value>
+using EntityDataDefinition = DataDefinition<Entity, Value>;
 
 }  // namespace shift::telemetry
