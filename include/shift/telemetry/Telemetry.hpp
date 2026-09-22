@@ -89,10 +89,12 @@ private:
                     continue;
                 }
 
-                recorder.record({.time = time,
-                                 .uid = entity->uid(),
-                                 .channel = m_definition.name(),
-                                 .value = TelemetryValue{*value}});
+                recorder.record({
+                    .time = time,
+                    .uid = entity->uid(),
+                    .channel = m_definition.name(),
+                    .value = TelemetryValue{*value},
+                });
             }
         }
 
