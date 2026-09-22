@@ -1,3 +1,5 @@
+#include <memory>
+
 #include "shift/telemetry/Telemetry.hpp"
 
 #include <catch2/catch_test_macros.hpp>
