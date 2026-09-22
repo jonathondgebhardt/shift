@@ -25,6 +25,9 @@ auto SimulationRunner::run(Simulation& simulation,
     log::trace("starting up systems");
     simulation.systems().startup(simulation.world());
 
+    // todo: consider logging a warning if telemetry is set but there are no
+    // observerations
+
     log::trace("sampling initial world state");
     if (m_telemetry != nullptr) {
         m_telemetry->sample({}, simulation.world());
