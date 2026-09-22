@@ -16,6 +16,7 @@
 #include "shift/time/Duration.hpp"
 #include "shift/time/TimePoint.hpp"
 #include "shift/time/TimeTypes.hpp"
+#include "shift/utilities/Exception.hpp"
 
 namespace
 {
